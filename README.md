@@ -1,16 +1,19 @@
-# React + Vite
+# 🤖 AI入試採点アプリ
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+AIを活用して大学入試の記述解答を採点し、詳細なフィードバックを提供するアプリです。
 
-Currently, two official plugins are available:
+## 🤝 仲間との共同開発について
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+このプロジェクトは、プログラミングの知識がなくてもAIと協力して開発を進められるように設計されています。
 
-## React Compiler
+### 共同作業の進め方
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1.  **プレビューの確認**: (Vercelデプロイ後にここにURLを追記します)
+2.  **アイデアやフィードバックの共有**: プロジェクト内にある [IDEAS.md](IDEAS.md) ファイルに、追加したい機能や修正案を自由に書き込んでください。
+3.  **AIへの指示**: チャットで「IDEAS.mdの内容を反映して」と伝えていただければ、私が実装を担当します。
 
-## Expanding the ESLint configuration
+### 開発用セットアップ
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. `npm install`
+2. `.env.local` の設定
+3. `npm run dev`
