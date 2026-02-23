@@ -13,32 +13,29 @@ const genAI = new GoogleGenerativeAI(apiKey);
 
 async function listModels() {
     try {
-        // There isn't a direct listModels method on the client instance in the JS SDK easily accessible 
-        // in the same way as python, but we can try to just run a generation on a few likely candidates
-        // or use the model manager if exposed. 
-        // Actually, the JS SDK doesn't expose listModels directly in the main entry point easily in all versions.
-        // Let's try to just test a few models.
-
         const modelsToTest = [
             "gemini-2.0-flash",
             "gemini-1.5-flash",
-            "gemini-1.5-pro",
-            "gemini-pro"
+            "gemini-2.5-pro",
+            "gemini-2.5-flash-preview-09-2025"
         ];
 
-        console.log("Testing models...");
+        console.log("Testing models with key:", apiKey.substring(0, 10), "...");
 
         for (const modelName of modelsToTest) {
             try {
-                const model = genAI.getGenerativeModel({ model: modelName });
-                const result = await model.generateContent("Hello");
-                console.log(`✅ ${modelName} is AVAILABLE`);
-            } catch (error) {
-                if (error.message.includes("404")) {
-                    console.log(`❌ ${modelName} is NOT FOUND (404)`);
-                } else {
-                    console.log(`⚠️ ${modelName} error: ${error.message}`);
+                const model = genAI.getGenerativeModel({
+                    model: modelName,
+                    tools: [{ googleSearch: {} }]
+                });
+                const result = await model.generateContentStream("Hello! Tell me a joke.");
+                let text = "";
+                for await (const chunk of result.stream) {
+                    text += chunk.text();
                 }
+                console.log(`✅ ${modelName} with generateContentStream is AVAILABLE`);
+            } catch (error) {
+                console.log(`❌ ${modelName} with generateContentStream error: ${error.message}`);
             }
         }
 

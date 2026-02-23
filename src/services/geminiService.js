@@ -2,7 +2,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { gradeObjectively } from "../utils/gradingEngine";
 
 const MODELS = {
-    PRIMARY: "gemini-2.5-flash-preview-09-2025",
+    PRIMARY: "gemini-2.5-flash",
     FALLBACK: "gemini-1.5-flash"
 };
 
@@ -10,7 +10,7 @@ const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 const sanitizeJson = (text) => {
     // Remove markdown code blocks if present
-    let cleaned = text.replace(/```json/g, '').replace(/```/g, '').trim();
+    let cleaned = text.replace(/```json /g, '').replace(/```/g, '').trim();
 
     // Find the first { and last } to handle any stray text
     const firstBrace = cleaned.indexOf('{');

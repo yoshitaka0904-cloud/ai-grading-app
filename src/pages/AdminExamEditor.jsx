@@ -31,6 +31,7 @@ function AdminExamEditor() {
     // JSON Data
     const [examData, setExamData] = useState(null);
 
+
     useEffect(() => {
         if (!isNew) {
             fetchExam();
@@ -70,7 +71,9 @@ function AdminExamEditor() {
 
         setGenerating(true);
         try {
+            const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
             const result = await generateExamMasterData(
+                apiKey,
                 subjectEn,
                 questionFiles,
                 answerFiles,
@@ -142,6 +145,76 @@ function AdminExamEditor() {
         }
     };
 
+    const handleSaveAndPreview = async () => {
+        if (!examData || !examId) {
+            alert('保存するデータがありません。');
+            return;
+        }
+
+        setSaving(true);
+        let finalPdfPath = examData.pdf_path || '';
+
+        if (questionFiles && questionFiles.length > 0) {
+            try {
+                const { publicUrl, error: uploadError } = await uploadExamPdf(questionFiles[0], examId);
+                if (uploadError) throw uploadError;
+                if (publicUrl) {
+                    finalPdfPath = publicUrl;
+                }
+            } catch (err) {
+                alert('PDFのアップロードに失敗しました:\n' + err.message);
+                setSaving(false);
+                return;
+            }
+        }
+
+        const payload = {
+            id: examId,
+            university,
+            university_id: parseInt(universityId) || 0,
+            faculty,
+            faculty_id: facultyId,
+            year: parseInt(year),
+            subject,
+            subject_en: subjectEn,
+            type,
+            pdf_path: finalPdfPath,
+            max_score: parseInt(examData.max_score),
+            detailed_analysis: examData.detailed_analysis,
+            structure: examData.structure
+        };
+
+        const { error } = await saveAdminExam(payload);
+        setSaving(false);
+
+        if (error) {
+            alert('保存に失敗しました:\n' + error.message);
+        } else {
+            const formattedExam = {
+                id: payload.id,
+                university: payload.university,
+                universityId: payload.university_id,
+                faculty: payload.faculty,
+                facultyId: payload.faculty_id,
+                year: payload.year,
+                subject: payload.subject,
+                subjectEn: payload.subject_en,
+                type: payload.type,
+                pdfPath: payload.pdf_path,
+                maxScore: payload.max_score,
+                detailedAnalysis: payload.detailed_analysis,
+                structure: payload.structure
+            };
+            navigate(`/exam/${formattedExam.universityId}-${formattedExam.facultyId}-preview`, {
+                state: {
+                    exam: formattedExam,
+                    universityName: formattedExam.university,
+                    universityId: formattedExam.universityId
+                }
+            });
+        }
+    };
+
     const handleStructureChange = (sectionIdx, qIdx, field, value) => {
         const newStructure = [...examData.structure];
         if (qIdx === null) {
@@ -163,7 +236,13 @@ function AdminExamEditor() {
         handleStructureChange(sIdx, qIdx, 'explanation', '再生成中...');
 
         try {
-            const newExplanation = await regenerateQuestionExplanation(q, questionFiles, answerFiles);
+            const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+            const newExplanation = await regenerateQuestionExplanation(
+                apiKey,
+                q,
+                questionFiles,
+                answerFiles
+            );
             handleStructureChange(sIdx, qIdx, 'explanation', newExplanation);
         } catch (error) {
             alert('解説の再生成に失敗しました:\n' + error.message);
@@ -326,13 +405,22 @@ function AdminExamEditor() {
                         </div>
                         <div className="flex justify-between items-center border-b pb-2 mb-4">
                             <h2 className="text-xl font-bold">マスターデータ編集</h2>
-                            <button
-                                onClick={handleSave}
-                                disabled={saving}
-                                className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-8 rounded shadow transition-colors disabled:opacity-50"
-                            >
-                                {saving ? '保存中...' : 'データベースに保存'}
-                            </button>
+                            <div className="flex gap-4">
+                                <button
+                                    onClick={handleSaveAndPreview}
+                                    disabled={saving}
+                                    className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded shadow transition-colors disabled:opacity-50"
+                                >
+                                    {saving ? '保存中...' : '保存して解答プレビュー'}
+                                </button>
+                                <button
+                                    onClick={handleSave}
+                                    disabled={saving}
+                                    className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-8 rounded shadow transition-colors disabled:opacity-50"
+                                >
+                                    {saving ? '保存中...' : 'データベースに保存'}
+                                </button>
+                            </div>
                         </div>
 
                         <div className="mb-6 flex gap-6 items-end">

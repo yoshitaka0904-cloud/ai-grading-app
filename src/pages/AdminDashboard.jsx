@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getAdminExams, deleteAdminExam, importMockData } from '../services/adminExamService';
 
 function AdminDashboard() {
     const [exams, setExams] = useState([]);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchExams();
@@ -32,6 +33,32 @@ function AdminDashboard() {
                 fetchExams();
             }
         }
+    };
+
+    const handlePreview = (rawExam) => {
+        const formattedExam = {
+            id: rawExam.id,
+            university: rawExam.university,
+            universityId: rawExam.university_id,
+            faculty: rawExam.faculty,
+            facultyId: rawExam.faculty_id,
+            year: rawExam.year,
+            subject: rawExam.subject,
+            subjectEn: rawExam.subject_en,
+            type: rawExam.type,
+            pdfPath: rawExam.pdf_path,
+            maxScore: rawExam.max_score,
+            detailedAnalysis: rawExam.detailed_analysis,
+            structure: rawExam.structure
+        };
+
+        navigate(`/exam/${formattedExam.universityId}-${formattedExam.facultyId}-preview`, {
+            state: {
+                exam: formattedExam,
+                universityName: formattedExam.university,
+                universityId: formattedExam.universityId
+            }
+        });
     };
 
     const handleImport = async () => {
@@ -106,6 +133,9 @@ function AdminDashboard() {
                                                 {new Date(exam.created_at).toLocaleDateString('ja-JP')}
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                                <button onClick={() => handlePreview(exam)} className="text-green-600 hover:text-green-900 mr-4 font-bold">
+                                                    プレビュー
+                                                </button>
                                                 <Link to={`/admin/exam/${exam.id}`} className="text-indigo-600 hover:text-indigo-900 mr-4">
                                                     編集
                                                 </Link>

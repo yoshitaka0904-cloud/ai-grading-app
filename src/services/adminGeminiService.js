@@ -1,6 +1,59 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const HIGH_REF_MODEL = "gemini-2.5-pro";
+const MODELS = {
+  PRIMARY: "gemini-2.0-flash",
+  FALLBACK: "gemini-1.5-flash"
+};
+
+export const sanitizeJson = (jsonString) => {
+  if (!jsonString) return "";
+
+  let clean = jsonString.trim();
+
+  // Primary rescue: Find the first and last JSON-like characters to strip conversational filler
+  const firstBrace = clean.indexOf('{');
+  const firstBracket = clean.indexOf('[');
+  let startIndex = -1;
+
+  if (firstBrace !== -1 && (firstBracket === -1 || firstBrace < firstBracket)) {
+    startIndex = firstBrace;
+  } else if (firstBracket !== -1) {
+    startIndex = firstBracket;
+  }
+
+  if (startIndex !== -1) {
+    const lastBrace = clean.lastIndexOf('}');
+    const lastBracket = clean.lastIndexOf(']');
+    let endIndex = -1;
+    if (lastBrace > lastBracket) {
+      endIndex = lastBrace;
+    } else {
+      endIndex = lastBracket;
+    }
+
+    if (endIndex !== -1 && endIndex > startIndex) {
+      clean = clean.substring(startIndex, endIndex + 1);
+    }
+  }
+
+  // Remove markdown code blocks if present (legacy fallback)
+  clean = clean.replace(/```json/g, "").replace(/```/g, "").trim();
+
+  // Rescue for truncation: Add missing closing brackets/braces
+  const openBraces = (clean.match(/\{/g) || []).length;
+  const closeBraces = (clean.match(/\}/g) || []).length;
+  if (openBraces > closeBraces) {
+    clean += "}".repeat(openBraces - closeBraces);
+  }
+
+  const openBrackets = (clean.match(/\[/g) || []).length;
+  const closeBrackets = (clean.match(/\]/g) || []).length;
+  if (openBrackets > closeBrackets) {
+    clean += "]".repeat(openBrackets - closeBrackets);
+  }
+
+  return clean;
+};
 
 // Helper function to convert File to base64 and preserve mimeType
 // For images, we resize/compress them to avoid payload size errors
@@ -64,18 +117,34 @@ const fileToBase64 = (file) => {
   });
 };
 
-export const generateExamMasterData = async (subjectType, questionFiles, answerFiles, extraInfo) => {
+export const generateExamMasterData = async (apiKey, subjectType, questionFiles, answerFiles, extraInfo) => {
   try {
-    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+    console.log("[AdminGeminiService] Using model:", MODELS.PRIMARY);
+    console.log("[AdminGeminiService] API Key check:", apiKey ? "Set (length: " + apiKey.length + ")" : "Not found");
+
     if (!apiKey) {
-      throw new Error("Gemini API Key is not set in environment variables.");
+      console.error("[AdminGeminiService] CRITICAL: apiKey parameter is missing");
+      throw new Error("Gemini API Key is not set. Please check your .env file and restart the dev server.");
     }
 
-    const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({
-      model: HIGH_REF_MODEL,
-      tools: [{ googleSearch: {} }]
-    });
+    let genAI;
+    try {
+      genAI = new GoogleGenerativeAI(apiKey);
+    } catch (err) {
+      console.error("[AdminGeminiService] Failed to initialize GoogleGenerativeAI:", err);
+      throw new Error("Gemini APIの初期化に失敗しました。APIキーが正しくない可能性があります。");
+    }
+
+    let model;
+    try {
+      model = genAI.getGenerativeModel({
+        model: MODELS.PRIMARY,
+        // tools: [{ googleSearch: {} }]
+      });
+    } catch (err) {
+      console.error("[AdminGeminiService] Failed to get generative model:", err);
+      throw new Error(`モデル "${MODELS.PRIMARY}" の読み込みに失敗しました。`);
+    }
 
     const isEnglish = subjectType === 'english';
     const isSocial = subjectType === 'social';
@@ -108,65 +177,115 @@ E．論述問題（長・30字以上）：配点 最高
     const answerInlineData = answerFileDataArray.map(fd => ({ inlineData: { mimeType: fd.mimeType, data: fd.data } }));
     const outputId = extraInfo.id;
 
-    // --- STEP 1: STRUCTURE & ANSWER EXTRACTION ---
-    console.log(`[Step 1/2] Extracting structure and answers for ${outputId}...`);
-    const step1Prompt = `
+    // --- STEP 1a: OVERVIEW EXTRACTION ---
+    console.log(`[Step 1/3] Extracting high-level exam structure for ${outputId}...`);
+    const step1aPrompt = `
 あなたは大学入試のデータ解析エキスパートです。
-添付された「問題ファイル」と「解答ファイル」を厳密に分析し、試験の構造（大問・小問）、正解、配点のみを抽出してJSON形式で出力してください。
+添付されたファイルを分析し、試験の全体構造（大問のIDとラベルのみ）と、公表されている「満点」を抽出してください。
+また、各社の大手予備校の推測配点や一般的な配点配分に基づき、各大問に合計何点を配分すべきかを推測してください。
 
 【厳格ルール】
-1. Google検索を使用するか、または一般常識からこの試験（${outputId}）の「正確な配点情報」と「満点」を推測・調査してください。もし公式の配点が不明な場合は、満点を100点とし、問題の難易度や上記ルールに基づいて全ての小問に妥当な配点を割り振ってください。すべての小問の配点を足した合計値が必ず「満点」と完全に一致するように数学的な確認を行ってください。配点が0になったり空欄になることは絶対に避けてください。
-2. 客観式問題（選択肢、または単語1つで完結する解答）については、"gradingCriteria" を絶対に含めないでください。空オブジェクト {} も禁止です。
-3. 記述式問題（文を書かせる、または要素採点が必要なもの）に限り、"gradingCriteria" を作成してください。
-4. 解答のハルシネーション（読み間違い）に細心の注意を払ってください。設問番号と解答が1対1で対応しているか何度も確認してください。
-5. **重要：アスタリスク（*）記号を絶対に使用しないでください。** 太字やリスト表記が必要な場合は、他のマークダウン記法（# や - など）を使用するか、記号なしで表現してください。
-
-${subjectSpecificRules}
+1. JSON形式のみを出力してください。
+2. アスタリスク（*）記号を絶対に使用しないでください。
+3. 全ての大問の 推測配分 (allocatedPoints) の合計が、必ず 'maxScore' と一致するように調整してください。
 
 【出力構造】
 {
-  "maxScore": 100, // 推測でも良いので必ず数値を入れる
-  "structure": [
+  "maxScore": 100,
+  "sections": [
     {
-      "id": "大問ID",
-      "label": "大問ラベル",
-      "questions": [
-        {
-          "id": "小問ID",
-          "label": "小問ラベル",
-          "type": "selection | text",
-          "options": ["a", "b", "c", "d"],
-          "correctAnswer": "正解",
-          "points": 5, // 推測でも良いので必ず数値を入れる
-          "explanation": "解説（1〜2文の簡潔なもの。なぜ正解になるか、なぜ他の選択肢が間違いかを端的に説明せよ）",
-          "gradingCriteria": { // 記述式のみ
-            "keywords": ["必須語1"],
-            "elements": ["採点要素1"],
-            "elementCount": 1,
-            "description": "採点基準"
-          }
-        }
-      ]
+      "id": "I",
+      "label": "第1問（長文読解）",
+      "allocatedPoints": 40
     }
   ]
 }
-JSONのみを出力してください。
 `;
 
-    const result1Stream = await model.generateContentStream([
-      ...questionInlineData,
-      ...answerInlineData,
-      { text: step1Prompt }
-    ]);
+    const result1a = await model.generateContent({
+      contents: [{
+        role: 'user', parts: [
+          ...questionInlineData.map(d => ({ inlineData: d.inlineData })),
+          ...answerInlineData.map(d => ({ inlineData: d.inlineData })),
+          { text: step1aPrompt }
+        ]
+      }],
+      generationConfig: { responseMimeType: "application/json" }
+    });
 
-    let res1Text = "";
-    for await (const chunk of result1Stream.stream) {
-      res1Text += chunk.text();
+    const overviewText = result1a.response.text();
+    const overviewData = JSON.parse(sanitizeJson(overviewText));
+    console.log(`[Step 1a] Structure found: ${overviewData.sections.length} sections. Total points: ${overviewData.maxScore}`);
+
+    // --- STEP 1b: DETAILED SECTION-BY-SECTION EXTRACTION ---
+    const fullSections = [];
+    for (let i = 0; i < overviewData.sections.length; i++) {
+      const s = overviewData.sections[i];
+      console.log(`[Step 2/3] Extracting details for Section ${s.id} (${i + 1}/${overviewData.sections.length})...`);
+
+      const step1bPrompt = `
+添付されたファイルを再度分析し、「大問 ${s.id} （${s.label}）」に含まれるすべての小問について、正解、配点、簡潔な解説のみを抽出してください。
+
+【厳格ルール】
+1. この大問には「合計 ${s.allocatedPoints} 点」を割り振る必要があります。小問ごとの配点の合計が必ず ${s.allocatedPoints} になるように調整してください。
+2. 客観式問題には "gradingCriteria" を含めないでください。
+3. 記述式問題にのみ "gradingCriteria" を作成してください。
+4. アスタリスク（*）記号を絶対に使用しないでください。
+5. JSONの配列のみ（[ ... ]）を出力してください。
+
+【出力構造】
+[
+  {
+    "id": "小問ID",
+    "label": "小問ラベル",
+    "type": "selection | text",
+    "options": ["a", "b", "c", "d"],
+    "correctAnswer": "正解",
+    "points": 5,
+    "explanation": "簡潔な解説（1〜2文）",
+    "gradingCriteria": { // 記述式のみ
+      "keywords": ["必須語1"],
+      "elements": ["採点要素1"],
+      "elementCount": 1,
+      "description": "採点基準"
+    }
+  }
+]
+`;
+
+      const result1b = await model.generateContent({
+        contents: [{
+          role: 'user', parts: [
+            ...questionInlineData.map(d => ({ inlineData: d.inlineData })),
+            ...answerInlineData.map(d => ({ inlineData: d.inlineData })),
+            { text: step1bPrompt }
+          ]
+        }],
+        generationConfig: { responseMimeType: "application/json" }
+      });
+
+      const sectionDataRaw = result1b.response.text();
+      const sectionDataSanitized = sanitizeJson(sectionDataRaw);
+
+      let sectionQuestions;
+      try {
+        sectionQuestions = JSON.parse(sectionDataSanitized);
+      } catch (err) {
+        console.error(`[AdminGeminiService] Failed to parse questions for Section ${s.id}`);
+        console.error(`[AdminGeminiService] Sanitized Content:`, sectionDataSanitized);
+        throw new Error(`大問 ${s.id} の解析に失敗しました。AIの回答が正しくありません。`);
+      }
+
+      fullSections.push({
+        ...s,
+        questions: sectionQuestions
+      });
     }
 
-    const jsonMatch1 = res1Text.match(/\{[\s\S]*\}/);
-    if (!jsonMatch1) throw new Error("Step 1 content missing JSON.");
-    const structureData = JSON.parse(jsonMatch1[0]);
+    const structureData = {
+      maxScore: overviewData.maxScore,
+      structure: fullSections
+    };
 
     // --- STEP 1.5: MATH NORMALIZATION FOR POINTS ---
     // LLMs often fail to make a long list of numbers sum exactly to the max score.
@@ -226,10 +345,10 @@ JSONのみを出力してください。
       console.log(`[Step 1.5] Normalization complete. Points now exactly sum to ${targetTotal}.`);
     }
 
-    // --- STEP 2: DETAILED ANALYSIS GENERATION (OPTIONAL) ---
+    // --- STEP 3: DETAILED ANALYSIS GENERATION (OPTIONAL) ---
     let detailedAnalysis = "";
     if (extraInfo.generateDetailed !== false) {
-      console.log(`[Step 2/2] Writing high-quality detailed analysis for ${outputId}...`);
+      console.log(`[Step 3/3] Writing high-quality detailed analysis for ${outputId}...`);
       const step2Prompt = `
 あなたは、難関大学入試の専門講師です。
 以下の試験について、受験生が「なるほど、こう解けばいいのか」と感動し、完全に再現できるレベルの「詳細な思考プロセス解説」を執筆してください。
@@ -288,15 +407,12 @@ ${JSON.stringify(structureData, null, 2)}
 出力は解説の本文（マークダウン）のみにしてください。JSONなどのコードブロックは不要です。
 `;
 
-      const result2Stream = await model.generateContentStream([
+      const result2 = await model.generateContent([
         ...questionInlineData,
         { text: step2Prompt }
       ]);
 
-      for await (const chunk of result2Stream.stream) {
-        detailedAnalysis += chunk.text();
-      }
-      detailedAnalysis = detailedAnalysis.trim();
+      detailedAnalysis = result2.response.text().trim();
       if (!detailedAnalysis) throw new Error("Step 2 analysis content represents empty string.");
     } else {
       console.log(`[Step 2/2] Skipping detailed analysis as requested.`);
@@ -328,18 +444,30 @@ ${JSON.stringify(structureData, null, 2)}
   }
 };
 
-export const regenerateQuestionExplanation = async (questionData, questionFiles = [], answerFiles = []) => {
+export const regenerateQuestionExplanation = async (apiKey, questionData, questionFiles = [], answerFiles = []) => {
   try {
-    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+    console.log("[AdminGeminiService] Explanation - API Key check:", apiKey ? "Set" : "Not found");
+
     if (!apiKey) {
-      throw new Error("Gemini API Key is not set in environment variables.");
+      throw new Error("Gemini API Key is not set.");
     }
 
-    const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({
-      model: HIGH_REF_MODEL,
-      tools: [{ googleSearch: {} }] // Allow web search just in case
-    });
+    let genAI;
+    try {
+      genAI = new GoogleGenerativeAI(apiKey);
+    } catch (err) {
+      throw new Error("Gemini APIの初期化に失敗しました。");
+    }
+
+    let model;
+    try {
+      model = genAI.getGenerativeModel({
+        model: MODELS.PRIMARY,
+        // tools: [{ googleSearch: {} }] // Allow web search just in case
+      });
+    } catch (err) {
+      throw new Error(`モデル "${MODELS.PRIMARY}" の読み出しに失敗しました。`);
+    }
 
     const imageParts = [];
     if (questionFiles && questionFiles.length > 0) {
@@ -367,17 +495,18 @@ ${JSON.stringify(questionData, null, 2)}
 出力は解説の本文（マークダウン）のみにしてください。
 `;
 
-    const resultStream = await model.generateContentStream([
-      ...imageParts,
-      { text: prompt }
+    // Use non-streaming for better error reporting and to avoid stream parsing issues
+    const result = await model.generateContent([
+      prompt,
+      ...imageParts
     ]);
 
-    let explanation = "";
-    for await (const chunk of resultStream.stream) {
-      explanation += chunk.text();
-    }
+    const text = result.response.text();
+    console.log("[AdminGeminiService] Raw Explanation Response:", text.substring(0, 500) + "...");
 
-    return explanation.trim();
+    // Clean up response (remove markdown code blocks if present)
+    const cleanedText = text.replace(/```markdown\n?|```\n?|```/g, '').trim();
+    return cleanedText;
   } catch (error) {
     console.error("Error regenerating explanation:", error);
     throw error;
