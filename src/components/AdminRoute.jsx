@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import { isAdminEmail } from '../config/adminConfig';
 
 function AdminRoute() {
     const { user, profile, loading } = useAuth();
@@ -13,7 +14,11 @@ function AdminRoute() {
         );
     }
 
-    if (!user || profile?.role !== 'admin') {
+    // Checking if the user's email is explicitly allowed
+    const isEmailAllowed = isAdminEmail(user?.email);
+
+    // プロフィールのroleがadminであるか、またはメールアドレスが許可されている場合アクセス可
+    if (!user || (!isEmailAllowed && profile?.role !== 'admin')) {
         // Not logged in or not an admin, redirect to home
         return <Navigate to="/" replace />;
     }

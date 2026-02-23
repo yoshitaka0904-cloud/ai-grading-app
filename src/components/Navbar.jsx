@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import { isAdminEmail } from '../config/adminConfig';
 import { signOut } from '../services/authService';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
-    const { profile } = useAuth();
+    const { profile, user } = useAuth();
 
     const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -72,7 +73,7 @@ const Navbar = () => {
                     {profile && (
                         <Link to="/dashboard" style={{ fontWeight: '600', color: 'var(--color-text-primary)' }}>マイページ</Link>
                     )}
-                    {profile?.role === 'admin' && (
+                    {(profile?.role === 'admin' || isAdminEmail(user?.email)) && (
                         <Link to="/admin" style={{ fontWeight: '600', color: 'var(--color-accent-gold)' }}>管理者ページ</Link>
                     )}
 
@@ -160,7 +161,7 @@ const Navbar = () => {
                             <Link to="/weakness" onClick={toggleMenu} style={{ fontSize: '1.1rem', fontWeight: '600' }}>弱点分析</Link>
                         </>
                     )}
-                    {profile?.role === 'admin' && (
+                    {(profile?.role === 'admin' || isAdminEmail(user?.email)) && (
                         <Link to="/admin" onClick={toggleMenu} style={{ fontSize: '1.1rem', fontWeight: '600', color: 'var(--color-accent-gold)' }}>管理者ページ</Link>
                     )}
 
