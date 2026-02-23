@@ -55,6 +55,27 @@ export const sanitizeJson = (jsonString) => {
   return clean;
 };
 
+// --- RETRY UTILITY FOR 429 ERRORS ---
+const withRetry = async (fn, maxRetries = 3, initialDelay = 2000) => {
+  let attempt = 0;
+  while (attempt < maxRetries) {
+    try {
+      return await fn();
+    } catch (error) {
+      attempt++;
+      const isRateLimit = error.message?.includes("429") || error.message?.includes("Resource exhausted");
+
+      if (isRateLimit && attempt < maxRetries) {
+        const delay = initialDelay * Math.pow(2, attempt - 1);
+        console.warn(`[GeminiService] Rate limit hit (429). Retrying in ${delay}ms... (Attempt ${attempt}/${maxRetries})`);
+        await new Promise(resolve => setTimeout(resolve, delay));
+        continue;
+      }
+      throw error;
+    }
+  }
+};
+
 // Helper function to convert File to base64 and preserve mimeType
 // For images, we resize/compress them to avoid payload size errors
 const fileToBase64 = (file) => {
@@ -202,7 +223,7 @@ E．論述問題（長・30字以上）：配点 最高
 }
 `;
 
-    const result1a = await model.generateContent({
+    const result1a = await withRetry(() => model.generateContent({
       contents: [{
         role: 'user', parts: [
           ...questionInlineData.map(d => ({ inlineData: d.inlineData })),
@@ -211,7 +232,7 @@ E．論述問題（長・30字以上）：配点 最高
         ]
       }],
       generationConfig: { responseMimeType: "application/json" }
-    });
+    }));
 
     const overviewText = result1a.response.text();
     const overviewData = JSON.parse(sanitizeJson(overviewText));
@@ -253,7 +274,7 @@ E．論述問題（長・30字以上）：配点 最高
 ]
 `;
 
-      const result1b = await model.generateContent({
+      const result1b = await withRetry(() => model.generateContent({
         contents: [{
           role: 'user', parts: [
             ...questionInlineData.map(d => ({ inlineData: d.inlineData })),
@@ -262,7 +283,7 @@ E．論述問題（長・30字以上）：配点 最高
           ]
         }],
         generationConfig: { responseMimeType: "application/json" }
-      });
+      }));
 
       const sectionDataRaw = result1b.response.text();
       const sectionDataSanitized = sanitizeJson(sectionDataRaw);
@@ -407,10 +428,10 @@ ${JSON.stringify(structureData, null, 2)}
 出力は解説の本文（マークダウン）のみにしてください。JSONなどのコードブロックは不要です。
 `;
 
-      const result2 = await model.generateContent([
+      const result2 = await withRetry(() => model.generateContent([
         ...questionInlineData,
         { text: step2Prompt }
-      ]);
+      ]));
 
       detailedAnalysis = result2.response.text().trim();
       if (!detailedAnalysis) throw new Error("Step 2 analysis content represents empty string.");
@@ -496,10 +517,10 @@ ${JSON.stringify(questionData, null, 2)}
 `;
 
     // Use non-streaming for better error reporting and to avoid stream parsing issues
-    const result = await model.generateContent([
+    const result = await withRetry(() => model.generateContent([
       prompt,
       ...imageParts
-    ]);
+    ]));
 
     const text = result.response.text();
     console.log("[AdminGeminiService] Raw Explanation Response:", text.substring(0, 500) + "...");
