@@ -92,3 +92,38 @@ CREATE POLICY "Admins can update exams" ON exams FOR UPDATE USING (
 CREATE POLICY "Admins can delete exams" ON exams FOR DELETE USING (
     EXISTS (SELECT 1 FROM profiles WHERE id = auth.uid() AND role = 'admin')
 );
+
+-- ============================================
+-- STORAGE BUCKET CONFIGURATION
+-- ============================================
+
+-- Create a bucket for exam PDFs
+INSERT INTO storage.buckets (id, name, public) 
+VALUES ('exam-pdfs', 'exam-pdfs', true)
+ON CONFLICT (id) DO NOTHING;
+
+-- Storage Policies for 'exam-pdfs' bucket
+CREATE POLICY "Anyone can view exam PDFs"
+ON storage.objects FOR SELECT
+USING ( bucket_id = 'exam-pdfs' );
+
+CREATE POLICY "Admins can upload exam PDFs"
+ON storage.objects FOR INSERT
+WITH CHECK (
+    bucket_id = 'exam-pdfs' AND
+    EXISTS (SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role = 'admin')
+);
+
+CREATE POLICY "Admins can update exam PDFs"
+ON storage.objects FOR UPDATE
+USING (
+    bucket_id = 'exam-pdfs' AND
+    EXISTS (SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role = 'admin')
+);
+
+CREATE POLICY "Admins can delete exam PDFs"
+ON storage.objects FOR DELETE
+USING (
+    bucket_id = 'exam-pdfs' AND
+    EXISTS (SELECT 1 FROM public.profiles WHERE id = auth.uid() AND role = 'admin')
+);

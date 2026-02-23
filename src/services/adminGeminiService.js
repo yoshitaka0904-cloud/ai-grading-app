@@ -327,3 +327,59 @@ ${JSON.stringify(structureData, null, 2)}
     throw error;
   }
 };
+
+export const regenerateQuestionExplanation = async (questionData, questionFiles = [], answerFiles = []) => {
+  try {
+    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+    if (!apiKey) {
+      throw new Error("Gemini API Key is not set in environment variables.");
+    }
+
+    const genAI = new GoogleGenerativeAI(apiKey);
+    const model = genAI.getGenerativeModel({
+      model: HIGH_REF_MODEL,
+      tools: [{ googleSearch: {} }] // Allow web search just in case
+    });
+
+    const imageParts = [];
+    if (questionFiles && questionFiles.length > 0) {
+      const qDataArray = await Promise.all(questionFiles.map(file => fileToBase64(file)));
+      qDataArray.forEach(fd => imageParts.push({ inlineData: { mimeType: fd.mimeType, data: fd.data } }));
+    }
+    if (answerFiles && answerFiles.length > 0) {
+      const aDataArray = await Promise.all(answerFiles.map(file => fileToBase64(file)));
+      aDataArray.forEach(fd => imageParts.push({ inlineData: { mimeType: fd.mimeType, data: fd.data } }));
+    }
+
+    const prompt = `
+あなたは大学入試の専門講師です。
+以下の特定の問題について、受験生が納得できる詳細でわかりやすい解説を執筆してください。
+
+【対象の問題データ】
+${JSON.stringify(questionData, null, 2)}
+
+【要件】
+1. なぜその答えになるのか、論理的なプロセスを解説すること。
+2. 選択問題であれば、正解以外の選択肢がなぜ間違っているのかも明確にすること。
+3. 添付した問題画像・PDFの参照が必要な場合は、画像/PDFから該当箇所を探して解説に含めること。
+4. アスタリスク（*）記号は一切使用禁止。マークダウン（# など）は見やすく使って構いません。
+
+出力は解説の本文（マークダウン）のみにしてください。
+`;
+
+    const resultStream = await model.generateContentStream([
+      ...imageParts,
+      { text: prompt }
+    ]);
+
+    let explanation = "";
+    for await (const chunk of resultStream.stream) {
+      explanation += chunk.text();
+    }
+
+    return explanation.trim();
+  } catch (error) {
+    console.error("Error regenerating explanation:", error);
+    throw error;
+  }
+};

@@ -75,3 +75,25 @@ export const deleteAdminExam = async (id) => {
         .eq('id', id);
     return { error };
 };
+
+export const uploadExamPdf = async (file, examId) => {
+    // Unique filename using examId and timestamp to prevent collisions
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${examId}_${Date.now()}.${fileExt}`;
+    const filePath = `public/${fileName}`;
+
+    const { data, error } = await supabase.storage
+        .from('exam-pdfs')
+        .upload(filePath, file, { upsert: true });
+
+    if (error) {
+        console.error("Storage upload error:", error);
+        return { error };
+    }
+
+    const { data: { publicUrl } } = supabase.storage
+        .from('exam-pdfs')
+        .getPublicUrl(filePath);
+
+    return { publicUrl };
+};

@@ -16,9 +16,8 @@ export const gradeObjectively = (examData, userAnswers) => {
             maxScore += q.points || 0;
 
             // Only process objective types here
-            // Social: A (Selection 1), B (Selection 2), C (Term)
-            // English: selection, text (short terms)
-            const isObjective = q.type === 'selection' || (q.type === 'text' && !q.gradingCriteria);
+            // mixed and correction are always treated as subjective to allow AI evaluation of reasons/corrections
+            const isObjective = ['selection', 'complete', 'unordered'].includes(q.type) || (q.type === 'text' && !q.gradingCriteria);
 
             if (isObjective) {
                 const isCorrect = checkCorrectness(userAnswer, correctAnswer, q.type);
@@ -57,7 +56,7 @@ export const gradeObjectively = (examData, userAnswers) => {
 };
 
 const checkCorrectness = (userAnswer, correctAnswer, type) => {
-    if (!userAnswer) return false;
+    if (!userAnswer || !correctAnswer) return false;
 
     // Normalize for comparison
     const normalize = (val) => {
@@ -77,7 +76,14 @@ const checkCorrectness = (userAnswer, correctAnswer, type) => {
             : normUser.split(',').map(s => s.trim()).filter(Boolean);
 
         if (correctParts.length !== userParts.length) return false;
-        return correctParts.every(p => userParts.includes(p));
+
+        if (type === 'unordered') {
+            // Order does not matter
+            return correctParts.every(p => userParts.includes(p));
+        } else {
+            // Strict order match for 'complete' or default
+            return correctParts.every((p, i) => userParts[i] === p);
+        }
     }
 
     return normUser === normCorrect;

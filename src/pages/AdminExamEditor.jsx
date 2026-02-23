@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getAdminExamById, saveAdminExam } from '../services/adminExamService';
-import { generateExamMasterData } from '../services/adminGeminiService';
+import { getAdminExamById, saveAdminExam, uploadExamPdf } from '../services/adminExamService';
+import { generateExamMasterData, regenerateQuestionExplanation } from '../services/adminGeminiService';
 
 function AdminExamEditor() {
     const { id } = useParams();
@@ -98,6 +98,23 @@ function AdminExamEditor() {
         }
 
         setSaving(true);
+        let finalPdfPath = examData.pdf_path || '';
+
+        // If a new PDF file was selected, upload it to storage
+        if (questionFiles && questionFiles.length > 0) {
+            try {
+                const { publicUrl, error: uploadError } = await uploadExamPdf(questionFiles[0], examId);
+                if (uploadError) throw uploadError;
+                if (publicUrl) {
+                    finalPdfPath = publicUrl;
+                }
+            } catch (err) {
+                alert('PDFのアップロードに失敗しました:\n' + err.message);
+                setSaving(false);
+                return;
+            }
+        }
+
         const payload = {
             id: examId,
             university,
@@ -108,7 +125,7 @@ function AdminExamEditor() {
             subject,
             subject_en: subjectEn,
             type,
-            pdf_path: examData.pdf_path || '',
+            pdf_path: finalPdfPath,
             max_score: parseInt(examData.max_score),
             detailed_analysis: examData.detailed_analysis,
             structure: examData.structure
@@ -137,6 +154,21 @@ function AdminExamEditor() {
             }
         }
         setExamData({ ...examData, structure: newStructure });
+    };
+
+    const handleRegenerateExplanation = async (sIdx, qIdx, q) => {
+        if (!confirm(`問題 ${q.label || q.id} の解説を再生成しますか？\nGemini APIを呼び出します。`)) return;
+
+        let oldExplanation = q.explanation;
+        handleStructureChange(sIdx, qIdx, 'explanation', '再生成中...');
+
+        try {
+            const newExplanation = await regenerateQuestionExplanation(q, questionFiles, answerFiles);
+            handleStructureChange(sIdx, qIdx, 'explanation', newExplanation);
+        } catch (error) {
+            alert('解説の再生成に失敗しました:\n' + error.message);
+            handleStructureChange(sIdx, qIdx, 'explanation', oldExplanation || '');
+        }
     };
 
     const handleAddQuestion = (sectionIdx) => {
@@ -286,11 +318,10 @@ function AdminExamEditor() {
                 {/* データエディタ */}
                 {examData && (
                     <div className="bg-white rounded-xl shadow p-6">
-                        <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-6 rounded shadow-sm">
-                            <h3 className="text-sm font-bold text-red-800">⚠️ PDFファイルに関する注意</h3>
-                            <p className="mt-1 text-sm text-red-700">
-                                セキュリティおよびストレージの都合上、PDFファイルは自動でサーバーにアップロードされません。<br />
-                                生徒のテスト画面にPDFを表示するには、保存後、開発者に依頼して <code>public/exam_data/</code> フォルダ内に同じファイル名（例：<code>{questionFiles[0]?.name || 'ファイル名'}</code>）で手動配置する必要があります。
+                        <div className="bg-green-50 border-l-4 border-green-500 p-4 mb-6 rounded shadow-sm">
+                            <h3 className="text-sm font-bold text-green-800">✅ PDFの自動アップロード機能</h3>
+                            <p className="mt-1 text-sm text-green-700">
+                                保存ボタンを押すと、選択したPDF（問題用紙）が自動的にセキュアサーバー（Supabase Storage）にアップロードされ、生徒のテスト画面で表示されるようになります。
                             </p>
                         </div>
                         <div className="flex justify-between items-center border-b pb-2 mb-4">
@@ -366,10 +397,14 @@ function AdminExamEditor() {
                                                         <select value={q.type || 'text'} onChange={e => handleStructureChange(sIdx, qIdx, 'type', e.target.value)} className="w-full p-1 border rounded text-xs">
                                                             <option value="text">記述</option>
                                                             <option value="selection">選択</option>
+                                                            <option value="complete">完答</option>
+                                                            <option value="unordered">順不同</option>
+                                                            <option value="mixed">併用(マーク/記述)</option>
+                                                            <option value="correction">訂正</option>
                                                         </select>
                                                     </td>
                                                     <td className="px-2 py-2">
-                                                        <input type="text" value={q.options ? q.options.join(',') : ''} onChange={e => handleStructureChange(sIdx, qIdx, 'options', e.target.value)} disabled={q.type !== 'selection'} className="w-full p-1 border rounded text-xs disabled:bg-gray-200" placeholder="a,b,c,d" />
+                                                        <input type="text" value={q.options ? q.options.join(',') : ''} onChange={e => handleStructureChange(sIdx, qIdx, 'options', e.target.value)} disabled={!['selection', 'complete', 'unordered', 'mixed'].includes(q.type)} className="w-full p-1 border rounded text-xs disabled:bg-gray-200" placeholder="a,b,c,d" />
                                                     </td>
                                                     <td className="px-2 py-2">
                                                         <input type="number" value={q.points} onChange={e => handleStructureChange(sIdx, qIdx, 'points', parseInt(e.target.value))} className="w-full p-1 border rounded text-xs" />
@@ -378,7 +413,16 @@ function AdminExamEditor() {
                                                         <input type="text" value={q.correctAnswer} onChange={e => handleStructureChange(sIdx, qIdx, 'correctAnswer', e.target.value)} className="w-full p-1 border rounded text-xs" />
                                                     </td>
                                                     <td className="px-2 py-2">
-                                                        <textarea value={q.explanation || ''} onChange={e => handleStructureChange(sIdx, qIdx, 'explanation', e.target.value)} className="w-full p-1 border rounded text-xs h-10" />
+                                                        <div className="flex flex-col gap-1">
+                                                            <textarea value={q.explanation || ''} onChange={e => handleStructureChange(sIdx, qIdx, 'explanation', e.target.value)} className="w-full p-1 border rounded text-xs h-10" />
+                                                            <button
+                                                                onClick={() => handleRegenerateExplanation(sIdx, qIdx, q)}
+                                                                className="text-[10px] bg-blue-50 text-blue-600 hover:bg-blue-100 px-2 py-1 rounded border border-blue-200 text-center w-full"
+                                                                title="この問題の解説のみをAIで再生成する"
+                                                            >
+                                                                解説を再生成
+                                                            </button>
+                                                        </div>
                                                     </td>
                                                     <td className="px-2 py-2 text-center">
                                                         <button
