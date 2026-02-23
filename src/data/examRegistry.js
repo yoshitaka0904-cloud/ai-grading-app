@@ -1,48 +1,73 @@
-import { universities as staticUniversities } from './mockData';
-
-// Use Vite's import.meta.glob to load all generated JSON files
-const generatedExamsModules = import.meta.glob('./exams/*.json', { eager: true });
-
-const generatedExams = Object.values(generatedExamsModules).map(mod => mod.default || mod);
+import { supabase } from '../services/supabaseClient';
 
 /**
- * Merges static university data with generated exam data.
+ * Fetches exams from Supabase and builds the nested universities data structure.
  */
-export const getUniversities = () => {
-    // Deep clone static universities to avoid mutating the original mock data
-    const mergedUniversities = JSON.parse(JSON.stringify(staticUniversities));
+export const getUniversities = async () => {
+    try {
+        const { data: exams, error } = await supabase
+            .from('exams')
+            .select('*');
 
-    generatedExams.forEach(exam => {
-        let university = mergedUniversities.find(u => u.id === exam.universityId || u.name === exam.university);
+        if (error) {
+            console.error('Error fetching exams from Supabase:', error);
+            return [];
+        }
 
-        if (!university) {
-            // Create new university if it doesn't exist
-            university = {
-                id: exam.universityId || Date.now(),
-                name: exam.university,
-                type: "私立", // Default
-                faculties: []
+        const mergedUniversities = [];
+
+        exams.forEach(exam => {
+            let university = mergedUniversities.find(u => u.id === exam.university_id || u.name === exam.university);
+
+            if (!university) {
+                // Create new university if it doesn't exist
+                university = {
+                    id: exam.university_id || Date.now(),
+                    name: exam.university,
+                    type: "私立", // Default
+                    faculties: []
+                };
+                mergedUniversities.push(university);
+            }
+
+            let faculty = university.faculties.find(f => f.id === exam.faculty_id || f.name === exam.faculty);
+
+            if (!faculty) {
+                // Create new faculty if it doesn't exist
+                faculty = {
+                    id: exam.faculty_id || exam.faculty.toLowerCase(),
+                    name: exam.faculty,
+                    exams: []
+                };
+                university.faculties.push(faculty);
+            }
+
+            // Map DB fields back to the format components expect
+            const formattedExam = {
+                id: exam.id,
+                university: exam.university,
+                universityId: exam.university_id,
+                faculty: exam.faculty,
+                facultyId: exam.faculty_id,
+                year: exam.year,
+                subject: exam.subject,
+                subjectEn: exam.subject_en,
+                type: exam.type,
+                pdfPath: exam.pdf_path,
+                maxScore: exam.max_score,
+                detailedAnalysis: exam.detailed_analysis,
+                structure: exam.structure
             };
-            mergedUniversities.push(university);
-        }
 
-        let faculty = university.faculties.find(f => f.id === exam.facultyId || f.name === exam.faculty);
+            // Add exam if not already present
+            if (!faculty.exams.find(e => e.id === formattedExam.id)) {
+                faculty.exams.push(formattedExam);
+            }
+        });
 
-        if (!faculty) {
-            // Create new faculty if it doesn't exist
-            faculty = {
-                id: exam.facultyId || exam.faculty.toLowerCase(),
-                name: exam.faculty,
-                exams: []
-            };
-            university.faculties.push(faculty);
-        }
-
-        // Add exam if not already present
-        if (!faculty.exams.find(e => e.id === exam.id)) {
-            faculty.exams.push(exam);
-        }
-    });
-
-    return mergedUniversities;
+        return mergedUniversities;
+    } catch (err) {
+        console.error('Failed to fetch and process universities data:', err);
+        return [];
+    }
 };

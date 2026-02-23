@@ -1,4 +1,5 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { gradeObjectively } from "../utils/gradingEngine";
 
 const MODELS = {
     PRIMARY: "gemini-2.5-flash-preview-09-2025",
@@ -144,123 +145,109 @@ const createLightweightExamData = (examData) => {
 
 export const gradeExamWithGemini = async (apiKey, examData, userAnswers, imageParts) => {
     try {
+        // Step 1: Programmatic Grading for Objective Questions
+        const { score: objScore, questionFeedback: initialFeedback, pendingAiGrading } = gradeObjectively(examData, userAnswers);
+
+        // If no AI grading is needed, use simple programmatic weakness analysis
+        if (pendingAiGrading.length === 0) {
+            const simpleWeakness = generateSimpleWeakness(objScore, examData.maxScore, initialFeedback);
+            return {
+                score: objScore,
+                maxScore: examData.maxScore || 100,
+                passProbability: calculatePassProbability(objScore, examData.maxScore),
+                weaknessAnalysis: simpleWeakness,
+                questionFeedback: initialFeedback,
+                detailedAnalysis: examData.detailedAnalysis || ""
+            };
+        }
+
+        // Step 2: AI Grading for Subjective Questions (D, E, etc.)
         const genAI = new GoogleGenerativeAI(apiKey);
+        const isEnglish = examData.subjectEn === "english";
 
-        const isEnglish = examData.subject === "英語" || examData.subjectEn === "english";
-
-        const prompt = `
-        You are an expert university entrance exam grader and tutor.
-            ${isEnglish ? `
-        **SPECIAL ROLE: English Reading Comprehension Expert**
-        You are an expert in solving difficult university entrance exam (Waseda/Keio level) English reading passages.
-        Your goal is not just to provide "answers," but to verbalize the entire thought process of preparation, reading, and answering at a level that students can reproduce.
-
-        **CRITICAL RULES for English Passage Analysis:**
-        1. **Chronological Order**: Write the explanation in the order a student actually solves the problem.
-        2. **Sentence-by-Sentence**: Quote English sentences one by one and explain the mental judgment at that moment.
-        3. **Thought Updates**: Describe how the understanding is corrected or updated by the next sentence.
-        4. **Logical Markers**: Verbalize the meaning of "But," questions, paraphrases, and abstract-to-concrete transitions.
-        5. **Option Processing**: For multiple-choice questions, explain WHY wrong options are incorrect (e.g., overstatement, scope mismatch, subject-predicate mismatch, over-abstraction).
-        ` : ""
-            }
-
-        ** CRITICAL INSTRUCTIONS:**
-            1. OUTPUT MUST BE VALID JSON ONLY - NO OTHER TEXT
-        2. All text content within the JSON must be in Japanese
-        3. Use a supportive, encouraging tone(like a polite "juku" teacher)
-        4. NEVER use phrases like "As an AI", "Based on the data", or "I have graded..."
-        5. ** JSON SAFETY(EXTREMELY IMPORTANT) **:
-        - Escape ALL double quotes inside strings using \\".
-            - Use \\n for newlines.NEVER include literal newlines or tabs inside a JSON string.
-           - Ensure the JSON is complete and properly closed.
-           - For large fields like \`detailedAnalysis\`, ensure the JSON structure is not broken.
-
-        Grade the user's answers based on the provided Master Data.
-
-        **Master Data (Structure & Correct Answers):**
-        ${JSON.stringify(examData)}
+        const aiPrompt = `
+        You are an expert university entrance exam grader.
+        Grade the following SUBJECTIVE questions based on the Master Data criteria.
+        
+        **Master Data Criteria:**
+        ${JSON.stringify(pendingAiGrading.map(q => ({ id: q.id, criteria: q.gradingCriteria, correctAnswer: q.correctAnswer })))}
         
         **User Answers:**
-        ${JSON.stringify(userAnswers)}
+        ${JSON.stringify(pendingAiGrading.map(q => ({ id: q.id, answer: q.userAnswer })))}
         
-        **Grading Rules:**
-        1. **Calculate Score**: 
-           * Compare user answers to \`correctAnswer\` in Master Data.
-           * **Multiple Selection**: If the correct answer contains multiple values (e.g., "c, a"), the user answer must match ALL of them (order doesn't matter unless specified). Partial credit is allowed if specified in points, otherwise 0.
-           * **Text**: Evaluate if the user's answer matches the intent.
-           * **Unanswered**: If the user did not answer, score is 0.
-           * Sum up the points.
-        2. **Calculate Section Scores**:
-           * Group questions by their section (e.g., "I", "II", "A").
-           * Calculate the total score and max score for each section.
-        3. **Pass Probability**: Estimate based on the score percentage (e.g., >80% = A).
-        4. **Feedback**: Provide specific feedback for **EVERY QUESTION** in the Master Data.
-           * **For answered questions**: Explain WHY the correct answer is correct and WHY the user's answer is wrong (if applicable).
-           * **For unanswered questions**: Still provide the correct answer and a brief explanation of why it is correct.
+        **Rules:**
+        1. Social Studies (types D, E): Use "Element-Based Grading". Score proportionally to the number of elements satisfied.
+        2. English: Grade based on accuracy and keywords.
+        3. Output MUST be Japanese.
         
-
-
-        **IMPORTANT**: For EVERY question in the questionFeedback array, you MUST include:
-        - "userAnswer": The exact answer the user provided (from the User Answers data), or "(無回答)" if not answered
-        - "correctAnswer": The correct answer from the Master Data
-        - "explanation": Explanation in Japanese (even for unanswered questions)
-        
-        Return the response in the following JSON format:
+        Return JSON format:
         {
-            "score": number, // Calculated total score
-            "maxScore": number, // Sum of all points in Master Data
-            "passProbability": "A" | "B" | "C" | "D" | "E",
-            "sectionScores": [
-                {
-                    "sectionId": "string (e.g., 'I', 'II', 'A')",
-                    "score": number, // User's score for this section
-                    "maxScore": number // Max score for this section
-                }
+            "aiFeedback": [
+                { "id": "question_id", "score": number, "correct": boolean, "explanation": "feedback in Japanese" }
             ],
-            "weaknessAnalysis": "string (in Japanese, polite and encouraging)",
-            "questionFeedback": [
-                { 
-                    "id": "question_id", 
-                    "userAnswer": "string (the user's actual answer - REQUIRED)",
-                    "correctAnswer": "string (the correct answer from master data - REQUIRED)",
-                    "correct": boolean, 
-                    "explanation": "feedback string (in Japanese)" 
-                }
-            ]
+            "generalWeakness": "Brief overall advice"
         }
-        
-        IMPORTANT: Return ONLY the JSON string.
         `;
 
-        const text = await generateWithRetry(genAI, prompt, imageParts, {
-            generationConfig: {
-                responseMimeType: "application/json",
-                maxOutputTokens: isEnglish ? 4000 : 8000  // Lower limit for English to prevent truncation
-            }
+        const text = await generateWithRetry(genAI, aiPrompt, imageParts, {
+            generationConfig: { responseMimeType: "application/json" }
         });
-        const jsonString = sanitizeJson(text);
-        try {
-            return JSON.parse(jsonString);
-        } catch (parseError) {
-            console.error("JSON Parse Error (Grading).");
-            console.error("Error details:", parseError.message);
-            console.error("Raw string (first 1000 chars):", jsonString.substring(0, 1000));
-            console.error("Raw string (around error position):", jsonString.substring(Math.max(0, 23509 - 200), Math.min(jsonString.length, 23509 + 200)));
-            console.error("Raw string (last 1000 chars):", jsonString.substring(jsonString.length - 1000));
+        const aiResult = JSON.parse(sanitizeJson(text));
 
-            // Provide user-friendly error
-            throw new Error("AIの応答が正しい形式ではありませんでした。もう一度お試しください。（技術的な問題: JSON解析エラー）");
-        }
+        // Step 3: Merge Results
+        let totalScore = objScore;
+        const finalFeedback = initialFeedback.map(f => {
+            if (f.isSubjective) {
+                const aiItem = aiResult.aiFeedback.find(ai => ai.id === f.id);
+                if (aiItem) {
+                    totalScore += aiItem.score;
+                    return { ...f, score: aiItem.score, correct: aiItem.correct, explanation: aiItem.explanation };
+                }
+            }
+            return f;
+        });
+
+        const maxScore = examData.maxScore || initialFeedback.length * 5; // Fallback
+
+        return {
+            score: totalScore,
+            maxScore: maxScore,
+            passProbability: calculatePassProbability(totalScore, maxScore),
+            weaknessAnalysis: aiResult.generalWeakness,
+            questionFeedback: finalFeedback,
+            detailedAnalysis: examData.detailedAnalysis || ""
+        };
+
     } catch (error) {
-        console.error("Error grading exam with Gemini:", error);
-        // Re-throw user-friendly errors as-is
-        if (error.message.includes("AIの応答が") || error.message.includes("混み合って")) {
-            throw error;
-        }
-        // Wrap other errors
+        console.error("Error in Hybrid Grading:", error);
         throw new Error("採点中にエラーが発生しました: " + error.message);
     }
 };
+
+const calculatePassProbability = (score, max) => {
+    const ratio = score / max;
+    if (ratio >= 0.8) return "A";
+    if (ratio >= 0.7) return "B";
+    if (ratio >= 0.6) return "C";
+    if (ratio >= 0.4) return "D";
+    return "E";
+};
+
+// Simple programmatic weakness analysis (no AI call)
+const generateSimpleWeakness = (score, maxScore, feedback) => {
+    const percentage = Math.round((score / maxScore) * 100);
+    const wrongCount = feedback.filter(f => !f.correct).length;
+    const totalCount = feedback.length;
+
+    if (percentage >= 80) {
+        return `得点率${percentage}%、素晴らしい結果です。間違えた${wrongCount}問を復習し、完璧を目指しましょう。詳細な解説を参考に、理解を深めてください。`;
+    } else if (percentage >= 60) {
+        return `得点率${percentage}%、合格ラインです。間違えた${wrongCount}問（全${totalCount}問中）の解説を読み、理解を深めましょう。特に選択肢の消去法の思考プロセスを意識してください。`;
+    } else {
+        return `得点率${percentage}%、基礎固めが必要です。詳細解説を熟読し、なぜその答えになるのかを論理的に理解しましょう。類似問題で練習を重ねてください。`;
+    }
+};
+
 
 export const chatWithGemini = async (apiKey, userMessage, history, gradingResult) => {
     try {

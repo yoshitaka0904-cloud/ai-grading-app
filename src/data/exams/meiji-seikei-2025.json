@@ -1,0 +1,885 @@
+{
+  "id": "meiji-seikei-2025",
+  "university": "明治大学",
+  "universityId": 1001,
+  "faculty": "政治経済学部",
+  "facultyId": "seikei",
+  "year": 2025,
+  "subject": "英語",
+  "subjectEn": "english",
+  "type": "pdf",
+  "pdfPath": "/exam_data/aigradingapp meiji-seijikeizaigakubu-2025eigo.pdf",
+  "maxScore": 150,
+  "detailedAnalysis": "本年度の明治大学政治経済学部の英語は、長文読解問題が中心であり、文章の内容を正確に把握する能力が求められています。特に、内容一致問題や説明問題では、本文全体を理解した上で、選択肢を吟味する必要があります。また、空欄補充問題では、文脈に沿った適切な語句を選択する能力が重要となります。文法・語彙問題も出題されており、基本的な知識を習得しておくことが大切です。",
+  "structure": [
+    {
+      "id": "I",
+      "label": "I",
+      "questions": [
+        {
+          "id": "I-1",
+          "label": "1",
+          "type": "selection",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "correctAnswer": "2",
+          "points": 3,
+          "explanation": "dispute（紛争）に最も近い意味の単語はconflict（対立）です。"
+        },
+        {
+          "id": "I-2",
+          "label": "2",
+          "type": "selection",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "correctAnswer": "1",
+          "points": 3,
+          "explanation": "challenging（困難な）に最も近い意味の単語はdifficult（難しい）です。"
+        },
+        {
+          "id": "I-3",
+          "label": "3",
+          "type": "selection",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "correctAnswer": "1",
+          "points": 3,
+          "explanation": "prevalent（普及している）に最も近い意味の単語はcommon（一般的な）です。"
+        },
+        {
+          "id": "I-4",
+          "label": "4",
+          "type": "selection",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "correctAnswer": "3",
+          "points": 3,
+          "explanation": "immediate（即時の）に最も近い意味の単語はinstant（瞬時の）です。"
+        },
+        {
+          "id": "I-5",
+          "label": "5",
+          "type": "text",
+          "correctAnswer": "held",
+          "points": 5,
+          "explanation": "Nearly 20 percent of corn exports (held) by mexico"
+        },
+        {
+          "id": "I-6",
+          "label": "6",
+          "type": "text",
+          "correctAnswer": "changing",
+          "points": 5,
+          "explanation": "Climate (changing) by mexico"
+        },
+        {
+          "id": "I-7",
+          "label": "7",
+          "type": "text",
+          "correctAnswer": "concerned",
+          "points": 5,
+          "explanation": "Mexico is (concerned) by mexico"
+        },
+        {
+          "id": "I-8",
+          "label": "8",
+          "type": "text",
+          "correctAnswer": "buy",
+          "points": 5,
+          "explanation": "Corn (buy) by seed produced"
+        },
+        {
+          "id": "I-9",
+          "label": "9",
+          "type": "text",
+          "correctAnswer": "at",
+          "points": 5,
+          "explanation": "Corn (at) animal feed"
+        },
+        {
+          "id": "I-10",
+          "label": "10",
+          "type": "text",
+          "correctAnswer": "change",
+          "points": 5,
+          "explanation": "Mexico (change) the USMCA"
+        },
+        {
+          "id": "I-11",
+          "label": "11",
+          "type": "selection",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "correctAnswer": "3",
+          "points": 5,
+          "explanation": "Mexico is home to the most genetically diverse repository of corn."
+        },
+        {
+          "id": "I-12",
+          "label": "12",
+          "type": "selection",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "correctAnswer": "5",
+          "points": 5,
+          "explanation": "GM corn is used for animal feed or industry."
+        },
+        {
+          "id": "I-13",
+          "label": "13",
+          "type": "selection",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "correctAnswer": "2",
+          "points": 5,
+          "explanation": "Mexico is harmful to the USMCA."
+        },
+        {
+          "id": "I-14",
+          "label": "14",
+          "type": "selection",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "correctAnswer": "5",
+          "points": 5,
+          "explanation": "Seeds are used for a few corporations."
+        },
+        {
+          "id": "I-15",
+          "label": "15",
+          "type": "selection",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "7",
+            "8",
+            "9"
+          ],
+          "correctAnswer": "5",
+          "points": 5,
+          "explanation": "making (the specific conditions) (to) (them) (less) (suited) (for) (they) (were)"
+        },
+        {
+          "id": "I-16",
+          "label": "16",
+          "type": "selection",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "correctAnswer": "4",
+          "points": 5,
+          "explanation": "the risk (of) maize"
+        },
+        {
+          "id": "I-17",
+          "label": "17",
+          "type": "selection",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "correctAnswer": "4",
+          "points": 5,
+          "explanation": "Why Mexico Sees U.S. Corn as a Threat"
+        },
+        {
+          "id": "I-18",
+          "label": "18",
+          "type": "selection",
+          "options": [
+            "T",
+            "F"
+          ],
+          "correctAnswer": "F",
+          "points": 5,
+          "explanation": "Mexico's 2020 decree met objections from the U.S."
+        },
+        {
+          "id": "I-19",
+          "label": "19",
+          "type": "selection",
+          "options": [
+            "T",
+            "F"
+          ],
+          "correctAnswer": "F",
+          "points": 5,
+          "explanation": "Corn varieties in Mexico have been grown to be more genetically diverse."
+        },
+        {
+          "id": "I-20",
+          "label": "20",
+          "type": "selection",
+          "options": [
+            "T",
+            "F"
+          ],
+          "correctAnswer": "T",
+          "points": 5,
+          "explanation": "Diverse varieties of Mexican corn are the result of human innovations."
+        },
+        {
+          "id": "I-21",
+          "label": "21",
+          "type": "selection",
+          "options": [
+            "T",
+            "F"
+          ],
+          "correctAnswer": "F",
+          "points": 5,
+          "explanation": "The US is worried that the ban on GM corn for animals could be the beginning of further restrictions."
+        },
+        {
+          "id": "I-22",
+          "label": "22",
+          "type": "selection",
+          "options": [
+            "T",
+            "F"
+          ],
+          "correctAnswer": "F",
+          "points": 5,
+          "explanation": "The USMCA does not claim no health risks."
+        },
+        {
+          "id": "I-23",
+          "label": "23",
+          "type": "selection",
+          "options": [
+            "T",
+            "F"
+          ],
+          "correctAnswer": "F",
+          "points": 5,
+          "explanation": "Ross-Ibarra thinks banning GM corn won't preserve Mexico's native corn."
+        },
+        {
+          "id": "I-24",
+          "label": "24",
+          "type": "selection",
+          "options": [
+            "T",
+            "F"
+          ],
+          "correctAnswer": "F",
+          "points": 5,
+          "explanation": "The U.S. is not comparable in diversity to Mexico's."
+        },
+        {
+          "id": "I-25",
+          "label": "25",
+          "type": "selection",
+          "options": [
+            "T",
+            "F"
+          ],
+          "correctAnswer": "F",
+          "points": 5,
+          "explanation": "Bellon does not suggest storing seeds is as effective as traditional farming."
+        }
+      ]
+    },
+    {
+      "id": "II",
+      "label": "II",
+      "questions": [
+        {
+          "id": "II-1",
+          "label": "1",
+          "type": "selection",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "correctAnswer": "2",
+          "points": 5,
+          "explanation": "intersect to make (in)"
+        },
+        {
+          "id": "II-2",
+          "label": "2",
+          "type": "selection",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "correctAnswer": "2",
+          "points": 5,
+          "explanation": "enough to stand (on)"
+        },
+        {
+          "id": "II-3",
+          "label": "3",
+          "type": "selection",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "correctAnswer": "3",
+          "points": 5,
+          "explanation": "She has always pointed (on)"
+        },
+        {
+          "id": "II-4",
+          "label": "4",
+          "type": "selection",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "correctAnswer": "4",
+          "points": 5,
+          "explanation": "I live my own life (with)"
+        },
+        {
+          "id": "II-5",
+          "label": "5",
+          "type": "selection",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "correctAnswer": "2",
+          "points": 3,
+          "explanation": "perceived is (embraced)"
+        },
+        {
+          "id": "II-6",
+          "label": "6",
+          "type": "selection",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "correctAnswer": "3",
+          "points": 3,
+          "explanation": "possessions is (property)"
+        },
+        {
+          "id": "II-7",
+          "label": "7",
+          "type": "selection",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "correctAnswer": "2",
+          "points": 3,
+          "explanation": "block is (protect)"
+        },
+        {
+          "id": "II-8",
+          "label": "8",
+          "type": "selection",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "correctAnswer": "2",
+          "points": 3,
+          "explanation": "perpetuating is (maintaining)"
+        },
+        {
+          "id": "II-9",
+          "label": "9",
+          "type": "selection",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "correctAnswer": "1",
+          "points": 3,
+          "explanation": "establishment is (authorities)"
+        },
+        {
+          "id": "II-10",
+          "label": "10",
+          "type": "selection",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "correctAnswer": "3",
+          "points": 3,
+          "explanation": "(if), nonetheless, (so), (while)"
+        },
+        {
+          "id": "II-11",
+          "label": "11",
+          "type": "selection",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "correctAnswer": "1",
+          "points": 3,
+          "explanation": "(Although), (As), (But), (So)"
+        },
+        {
+          "id": "II-12",
+          "label": "12",
+          "type": "selection",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "correctAnswer": "3",
+          "points": 3,
+          "explanation": "(Because), (But), (Since), (So)"
+        },
+        {
+          "id": "II-13",
+          "label": "13",
+          "type": "selection",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "correctAnswer": "1",
+          "points": 3,
+          "explanation": "(how), (what), (which), (who)"
+        },
+        {
+          "id": "II-14",
+          "label": "14",
+          "type": "selection",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "correctAnswer": "2",
+          "points": 5,
+          "explanation": "(interesting) (indispensable) (plausible) (unavoidable) (unnecessary)"
+        },
+        {
+          "id": "II-15",
+          "label": "15",
+          "type": "selection",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "correctAnswer": "1",
+          "points": 5,
+          "explanation": "(easy) (fruitful) (hard) (just) (wise)"
+        },
+        {
+          "id": "II-16",
+          "label": "16",
+          "type": "text",
+          "correctAnswer": "家父長制",
+          "points": 5,
+          "explanation": "家父長制"
+        },
+        {
+          "id": "II-17",
+          "label": "17",
+          "type": "selection",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ],
+          "correctAnswer": "4",
+          "points": 5,
+          "explanation": "The achievements of female artists are judged by their relationship with male artists."
+        },
+        {
+          "id": "II-18",
+          "label": "18",
+          "type": "selection",
+          "options": [
+            "T",
+            "F"
+          ],
+          "correctAnswer": "T",
+          "points": 5,
+          "explanation": "Gilot's art often has themes that challenge society's view of women."
+        },
+        {
+          "id": "II-19",
+          "label": "19",
+          "type": "selection",
+          "options": [
+            "T",
+            "F"
+          ],
+          "correctAnswer": "T",
+          "points": 5,
+          "explanation": "Famous museums own paintings by Gilot."
+        },
+        {
+          "id": "II-20",
+          "label": "20",
+          "type": "selection",
+          "options": [
+            "T",
+            "F"
+          ],
+          "correctAnswer": "F",
+          "points": 5,
+          "explanation": "Gilot studied in university and received a degree in art."
+        },
+        {
+          "id": "II-21",
+          "label": "21",
+          "type": "selection",
+          "options": [
+            "T",
+            "F"
+          ],
+          "correctAnswer": "T",
+          "points": 5,
+          "explanation": "Gilot's family lost many of their things in an accident."
+        },
+        {
+          "id": "II-22",
+          "label": "22",
+          "type": "selection",
+          "options": [
+            "T",
+            "F"
+          ],
+          "correctAnswer": "F",
+          "points": 5,
+          "explanation": "Gilot had written her first book by the time she was 22 years old."
+        },
+        {
+          "id": "II-23",
+          "label": "23",
+          "type": "selection",
+          "options": [
+            "T",
+            "F"
+          ],
+          "correctAnswer": "F",
+          "points": 5,
+          "explanation": "Picasso was not happy with Gilot's first book."
+        },
+        {
+          "id": "II-24",
+          "label": "24",
+          "type": "selection",
+          "options": [
+            "T",
+            "F"
+          ],
+          "correctAnswer": "F",
+          "points": 5,
+          "explanation": "Gilot was a shy, quiet person."
+        },
+        {
+          "id": "II-25",
+          "label": "25",
+          "type": "selection",
+          "options": [
+            "T",
+            "F"
+          ],
+          "correctAnswer": "F",
+          "points": 5,
+          "explanation": "The writer believes that people have little interest in important female artists."
+        }
+      ]
+    },
+    {
+      "id": "III",
+      "label": "III",
+      "questions": [
+        {
+          "id": "III-1",
+          "label": "1",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "correctAnswer": "B",
+          "points": 3,
+          "explanation": "I saw you (at) the hospital."
+        },
+        {
+          "id": "III-2",
+          "label": "2",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "correctAnswer": "C",
+          "points": 3,
+          "explanation": "Don't sound to sounds"
+        },
+        {
+          "id": "III-3",
+          "label": "3",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "correctAnswer": "A",
+          "points": 3,
+          "explanation": "Are you (at) Jae Yong Lee."
+        },
+        {
+          "id": "III-4",
+          "label": "4",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "correctAnswer": "D",
+          "points": 3,
+          "explanation": "Cancelled (was cancelled) obviously."
+        },
+        {
+          "id": "III-5",
+          "label": "5",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "correctAnswer": "C",
+          "points": 3,
+          "explanation": "You hearing about (was happening)"
+        },
+        {
+          "id": "III-6",
+          "label": "6",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "correctAnswer": "A",
+          "points": 3,
+          "explanation": "Keep him in (long) obviously."
+        },
+        {
+          "id": "III-7",
+          "label": "7",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "correctAnswer": "A",
+          "points": 3,
+          "explanation": "Everyone calling (call) me."
+        },
+        {
+          "id": "III-8",
+          "label": "8",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "correctAnswer": "A",
+          "points": 3,
+          "explanation": "We moved here (into), I was four."
+        },
+        {
+          "id": "III-9",
+          "label": "9",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "correctAnswer": "B",
+          "points": 3,
+          "explanation": "Isn't modern (is it)"
+        },
+        {
+          "id": "III-10",
+          "label": "10",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "correctAnswer": "A",
+          "points": 3,
+          "explanation": "So, you has (plan) to attend"
+        },
+        {
+          "id": "III-11",
+          "label": "11",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "correctAnswer": "A",
+          "points": 3,
+          "explanation": "Familar (at) his work"
+        },
+        {
+          "id": "III-12",
+          "label": "12",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "correctAnswer": "B",
+          "points": 3,
+          "explanation": "Interested (over) architecture"
+        },
+        {
+          "id": "III-13",
+          "label": "13",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "correctAnswer": "A",
+          "points": 3,
+          "explanation": "Most people don't (have) idea"
+        },
+        {
+          "id": "III-14",
+          "label": "14",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "correctAnswer": "A",
+          "points": 3,
+          "explanation": "You'd surprised (are surprised) how people little"
+        },
+        {
+          "id": "III-15",
+          "label": "15",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "correctAnswer": "A",
+          "points": 3,
+          "explanation": "Maybe if you (grow) up in town."
+        }
+      ]
+    }
+  ]
+}

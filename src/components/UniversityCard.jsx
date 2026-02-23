@@ -26,7 +26,7 @@ const UniversityCard = ({ university }) => {
 
             <div style={{ marginTop: 'auto' }}>
                 <button
-                    className="btn btn-primary"
+                    className="btn btn-primary btn-mobile-full"
                     style={{ width: '100%' }}
                     onClick={() => navigate(`/university/${university.id}`)}
                 >

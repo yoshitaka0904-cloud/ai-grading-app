@@ -9,6 +9,10 @@ import UniversityPage from './pages/UniversityPage';
 import FacultyPage from './pages/FacultyPage';
 import WeaknessPage from './pages/WeaknessPage';
 import AuthModal from './components/AuthModal';
+import Navbar from './components/Navbar';
+import AdminRoute from './components/AdminRoute';
+import AdminDashboard from './pages/AdminDashboard';
+import AdminExamEditor from './pages/AdminExamEditor';
 
 function App() {
   const [showAuthModal, setShowAuthModal] = useState(false);
@@ -22,6 +26,7 @@ function App() {
   return (
     <AuthProvider>
       <Router>
+        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/university/:universityId" element={<UniversityPage />} />
@@ -30,6 +35,12 @@ function App() {
           <Route path="/result" element={<ResultPage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/weakness" element={<WeaknessPage />} />
+
+          {/* Admin Routes */}
+          <Route element={<AdminRoute />}>
+            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin/exam/:id" element={<AdminExamEditor />} />
+          </Route>
         </Routes>
         <AuthModal isOpen={showAuthModal} onClose={() => setShowAuthModal(false)} />
       </Router>

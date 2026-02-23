@@ -12,8 +12,17 @@ export const AuthProvider = ({ children }) => {
 
     const fetchProfile = async (userId) => {
         try {
-            const { data } = await getUserProfile(userId)
-            if (data) setProfile(data)
+            const { data, error } = await getUserProfile(userId)
+            if (error) {
+                if (error.code === 'PGRST116' || error.message.includes('406')) {
+                    console.log('Profile does not exist yet. Using guest profile.')
+                    setProfile({ username: 'ゲストユーザー', first_choice_university: '', grade: '' })
+                } else {
+                    console.error('Error fetching profile:', error)
+                }
+            } else if (data) {
+                setProfile(data)
+            }
         } catch (err) {
             console.error('Error fetching profile:', err)
         }

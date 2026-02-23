@@ -1,0 +1,929 @@
+{
+  "id": "meiji-pse-2025",
+  "university": "明治大学",
+  "universityId": 1001,
+  "faculty": "政治経済学部",
+  "facultyId": "seikei",
+  "year": 2025,
+  "subject": "英語",
+  "subjectEn": "english",
+  "type": "pdf",
+  "pdfPath": "/exam_data/aigradingapp meiji-seijikeizaigakubu-2025eigo.pdf",
+  "maxScore": 150,
+  "detailedAnalysis": "### 明治大学 政治経済学部 英語 2025年度 解答解説\n\n皆さん、こんにちは。今回は2025年度の明治大学政治経済学部の英語の問題を解説します。社会的なテーマを扱った長文読解と、文脈把握が鍵となる会話文問題で構成されており、学部系統の特色が表れた出題です。それでは、大問ごとに思考プロセスを追いながら、解法の神髄に迫っていきましょう。\n\n---\n\n### 大問 I 読解問題 (遺伝子組み換えトウモロコシ)\n\nこの問題は、メキシコとアメリカの間で起こっている「遺伝子組み換え（GM）トウモロコシ」を巡る貿易摩擦をテーマとした長文です。政治経済学部らしい、時事的な内容を含んだ文章と言えるでしょう。\n\n#### 文章全体の流れを掴む\n\nまず、文章全体を読み進めながら、対立の構造を把握します。\n\n第1パラグラフでは、トウモロコシがメキシコ発祥であり、「centerpiece of Mexican culture, cuisine, and identity（メキシコの文化、料理、アイデンティティの中心）」であるという、歴史的・文化的な重要性が語られます。この導入は、単なる食料問題ではないことを示唆しており、後のメキシコの主張の伏線となっています。\n\n第2、3パラグラフで、対立の構図が明確になります。メキシコは、この「legacy（遺産）」を守るため、アメリカ産のGMトウモロコシを排除しようとしています。これに対し、アメリカは「strong objections（強い反対）」を示します。なぜなら、メキシコはアメリカにとって最大の輸出相手国であり、経済的な利害が絡むからです。この論争（dispute）が公式な交渉にまで発展したとあり、ここで**問1(あ) `dispute`** の意味が問われます。「論争、紛争」という意味に最も近いのは (2) `conflict`（対立）です。\n\n第3パラグラフでは、アメリカ側の主張として、メキシコの禁止措置は科学的根拠がなく、貿易協定（USMCA）違反だという点が挙げられます。この時点で、科学的・法的な論点と、経済的な利害が対立の軸であることが見えてきます。\n\n#### メキシコの主張の深掘り\n\n第4パラグラフは、再びメキシコ側の主張に焦点を当てます。「Mexico, however, insists...」の `however` が切り替えの合図です。メキシコは、GMトウモロコシが「国民の健康」と「農業の伝統・文化的アイデンティティ」を脅かすと主張します。「sin maíz no hay país（トウモロコシなくして国なし）」という言葉が引用され、問題の根深さが強調されます。\n\nここで**問3[A]**の空所補充です。「Mexico is [ A ] the most genetically diverse repository of corn...」という文脈から、メキシコが多様なトウモロコシの「本拠地である」という意味の (3) `home to` が最適だと判断できます。\n\n最終文では、在来種が「a changing climate（変動する気候）」に適応してきた点が述べられます。空所 **問2(イ)** には、`change` を形容詞的に用いる `changing` が入ります。\n\n#### 遺伝子汚染と農業形態の対比\n\n第5パラグラフは、メキシコが懸念する「genetic contamination（遺伝子汚染）」の具体的なリスクについて説明します。GM作物の花粉が在来種と交配し、遺伝子構成を変化させてしまうという懸念です。この部分の日本語訳を完成させるのが**問4**の語順整序問題です。「それらが品種改良された目的である特定の条件に適さないものにしてしまう」は、「making them less suited to the specific conditions (that) they were bred for」と構成できます。与えられた語句を並べると `making (6)them (3)less (4)suited (8)to (5)the specific conditions (7)they (9)were (1)bred (2)for.` となり、7番目は (9) `were` です。\n\n続けて、アメリカとメキシコの農業形態が対比されます。アメリカは「large corporations」による画一的な大規模農業、一方メキシコは「seed-sharing *milpas」による多様性のある農業です。この対比構造を理解することが重要です。\n\n#### 専門家の見解と結論\n\n第8パラグラフ以降は、専門家の見解が導入され、議論が多角的に展開されます。ロス-イバラ氏は、GMトウモロコシの禁止自体が在来種保護につながるとは考えておらず、むしろ「a decline in small-scale farms（小規模農家の減少）」こそが大きな脅威だと指摘します。この記述から、**問7(6)**の「ロス-イバラ氏は禁止が保護に役立つと考えている」という選択肢は誤り（F）だと分かります。\n\n最終パラグラフでは、ベロン氏がジーンバンクでの種子保存を静的な「snapshot（スナップショット）」に例え、農家の畑で進化し続けることの重要性を説きます。これにより、**問7(8)**の「ジーンバンクでの保存は伝統農法と同等に効果的だ」という選択肢も誤り（F）と判断できます。\n\n#### タイトル問題の考察\n\n最後に**問6**のタイトル問題です。本文全体を振り返ると、メキシコがアメリカ産GMトウモロコシを「なぜ脅威と見なすのか」を、健康、文化、遺伝的多様性といった複数の観点から解説した文章でした。したがって、(4) `Why Mexico Sees U.S. Corn as a Threat` が、この多角的な議論を最も的確に要約しています。\n\n(1)はGM擁護の視点、(2)と(3)は本文の一側面に過ぎず、全体を代表するには不十分です。\n\n---\n\n### 大問 II 読解問題 (芸術家フランソワーズ・ジロー)\n\nこの文章は、フランスの画家フランソワーズ・ジローの死をきっかけに、メディアが偉大な女性芸術家をどのように報じるべきか、というジェンダーの視点から問題を提起する評論です。筆者の批判的な視点を正確に読み取ることが解答の鍵となります。\n\n#### ジローの功績とメディアの報道の対比\n\n文章の前半（第1〜6パラグラフ）は、ジローがいかに偉大な芸術家であったかを読者に印象づける構成になっています。101歳までの長いキャリア、多数の作品、ベストセラー作家としての顔、そして作品が持つ社会的なテーマ性（女性の描かれ方への挑戦など）が紹介されます。\n\nしかし、**第7パラグラフ**で筆致は一変します。「But when it came to the headlines..., the media had other concerns.」この `But` が転換点です。メディアの関心事は、彼女自身の功績ではなく、彼女を「ピカソの影」「ピカソのミューズ」といった、著名な男性との関係性の中で位置づけることでした。これが、**問5**で問われている下線部(X) `other concerns` の具体的な内容、「ピカソとの関係で彼女を報じたこと。」です。\n\n#### 筆者の問題提起と主張\n\n第8パラグラフ以降、筆者の主張が明確になります。「does his name really have to be mentioned?（彼の名前は本当に言及される必要があるのか？）」という問いかけは、女性の功績が男性を介さなければ評価されない社会構造への批判です。この構造を、筆者は「obvious sexism（明白な性差別）」と断じています。\n\n**第9パラグラフ**で、「in her own right（彼女自身の力で）」という表現が取り上げられます。一見、女性を称賛する言葉に見えますが、筆者はこれを「体制（establishment）が当然と見なしていること」に対する「例外」を強調する言葉だと分析します。ここで言う「体制」とは、文脈から「家父長制（patriarchy）」を指します。この体制が当然と見なしていること、それは**問6**の正解である (4) `The achievements of female artists are judged by their relationship with male artists.`（女性芸術家の功績は、男性芸術家との関係によって判断される）という考え方です。女性が自力で何かを成し遂げた際に、わざわざ「自力で」と付け加えること自体が、その考え方の裏返しである、という鋭い指摘です。\n\n#### 細部の読解と選択肢の吟味\n\n**問2**の語彙問題は、文脈から判断します。(a) `perceived` は「認識される、理解される」なので (4) `understood`。(c) `block` は「妨害する」なので (1) `prevent` など、文脈に沿った単語を選びます。\n\n**問3**の接続詞問題も文脈判断が鍵です。(う)は、ジローの功績とメディアの報道を対比させる逆接の (2) `But` が入ります。(え)は「be respectful to」の目的語として「life」や「what they achieved」と並列される部分で、「彼らが『どのように』生きたか」を意味する (1) `how` が適切です。\n\n**問7**の内容一致問題では、細部の記述に注意が必要です。(3)は、彼女が哲学と英文学の学位は取得したものの、「美術の学位（a degree in art）」を取得したとは書かれていないため、Fとなります。(5)は、最初の本を出版したのは1964年であり、22歳の時ではないためF。このように、本文の記述と選択肢を丁寧に対照させることが求められます。\n\n最終パラグラフで筆者は、「読者はもっと知的で、扇情的な見出しがなくても優れた芸術家の記事に興味を持つはずだ」と述べ、メディアの姿勢を変えるよう促します。ジロー自身の「私は私のやり方で、私自身の人生を生きる」という言葉で締めくくられ、文章全体のテーマである「女性の自立した評価」が力強く印象付けられます。\n\n---\n\n### 大問 III 会話文完成問題\n\n映画の一場面を題材とした会話文の空所補充問題です。基本的な文法・語法知識に加え、会話の流れを自然につなぐ表現を選ぶ力が試されます。場面設定（インディアナ州コロンバス、建築、父の見舞い）を頭に入れながら読み進めましょう。\n\n(1) 「病院『で』」という場所を示すのは (B) `at` the hospital です。\n\n(2) 「これを失礼に響かせたくないのですが」と丁寧に切り出す表現。`want O to do` の構文から (D) `to sound` を選びます。\n\n(3) 「〜と血縁関係がある」は `be related to`。よって (C) `to`。\n\n(4) 「講演会が中止になった」。主語の `it`（lecture）は中止「される」側なので、受動態の `was cancelled` (D) が正解です。\n\n(5) 「何が起こったのか聞きました」。間接疑問文 `what happened` の形。(B) `happened`。\n\n(6) 「もう少しの間」。`a little while longer` という決まった言い方です。(B) `longer`。\n\n(7) 「みんなが私をケイシーと呼びます」。主語の `everyone` は三人称単数扱いなので、動詞に-sが付きます。(C) `calls`。\n\n(8) 「私が4歳の『時』」。時を表す接続詞 (D) `when`。\n\n(9) 付加疑問文の問題。前の文 `isn't very modern` が否定文なので、後ろは肯定形の `is it?` (B) となります。\n\n(10) ケイシーの「I was planning to...」という発言を受けて、「それで、行く予定だったのですね？」と確認する場面。主語が `you` なので、過去進行形は `were planning` (D) です。\n\n(11) 「〜をよく知っている」はイディオム `be familiar with`。(D) `with`。\n\n(12) 「〜に興味がある」は `be interested in`。(B) `in`。\n\n(13) 「全くわからない」。`don't have any idea` という否定文を強調する表現です。(A) `any`。\n\n(14) 「あなたは驚くでしょう」。`you'd` は `you would` の短縮形。助動詞の後なので動詞の原形が続きます。`be surprised` (B)。\n\n(15) 「もし〜の周りで育つと」。条件を表す `if` 節の中なので、動詞は原形の `grow` (A) を使います。`grow up` で「育つ」。\n\n会話の流れと基本的な文法知識を組み合わせれば、確実に得点できる問題です。一つ一つ丁寧に取り組みましょう。\n\n以上で全問の解説を終わります。明治大学政治経済学部の英語は、社会的なテーマへの関心と、それを英語で読み解くための着実な読解力・語彙力が求められます。日頃から様々なジャンルの英文に触れ、背景知識を広げておくことが合格への近道となるでしょう。",
+  "structure": [
+    {
+      "id": "I",
+      "label": "読解問題 (遺伝子組み換えトウモロコシ)",
+      "questions": [
+        {
+          "id": "I-1-あ",
+          "label": "1-(あ)",
+          "type": "selection",
+          "options": [
+            "agreement",
+            "conflict",
+            "criticism",
+            "doubt"
+          ],
+          "correctAnswer": "conflict",
+          "points": 2,
+          "explanation": "下線部(あ)の dispute は「論争、紛争」を意味し、選択肢の中で最も意味が近いのは (2) conflict 「対立、紛争」である。"
+        },
+        {
+          "id": "I-1-い",
+          "label": "1-(い)",
+          "type": "selection",
+          "options": [
+            "ambitious",
+            "daring",
+            "difficult",
+            "intriguing"
+          ],
+          "correctAnswer": "difficult",
+          "points": 2,
+          "explanation": "下線部(い)の challenging は「困難な、やりがいのある」を意味し、文脈上「困難な環境」を指しているため、最も意味が近いのは (3) difficult 「難しい」である。"
+        },
+        {
+          "id": "I-1-う",
+          "label": "1-(う)",
+          "type": "selection",
+          "options": [
+            "common",
+            "established",
+            "favorite",
+            "rare"
+          ],
+          "correctAnswer": "common",
+          "points": 2,
+          "explanation": "下線部(う)の prevalent は「普及している、一般的な」を意味し、メキシコの食生活で「一般的に食べられている」白トウモロコシを指すため、最も意味が近いのは (1) common 「一般的な」である。"
+        },
+        {
+          "id": "I-1-え",
+          "label": "1-(え)",
+          "type": "selection",
+          "options": [
+            "gradual",
+            "important",
+            "instant",
+            "intense"
+          ],
+          "correctAnswer": "instant",
+          "points": 2,
+          "explanation": "下線部(え)の immediate は「即時の」を意味し、文脈上「即時発効」を表すため、最も意味が近いのは (3) instant 「即時の」である。"
+        },
+        {
+          "id": "I-2-ア",
+          "label": "2-(ア)",
+          "type": "text",
+          "correctAnswer": "bought",
+          "points": 2,
+          "explanation": "空欄(ア)を含む文は「2018年から2020年の間に、メキシコは米国の全トウモロコシ輸出の約20%を(購入した)」という意味になる。与えられた単語 buy を過去形 bought にする必要がある。"
+        },
+        {
+          "id": "I-2-イ",
+          "label": "2-(イ)",
+          "type": "text",
+          "correctAnswer": "changing",
+          "points": 2,
+          "explanation": "空欄(イ)を含む文は「(変化する)気候に直面して」という意味になる。気候変動の文脈であるため、与えられた単語 change を現在分詞 changing として形容詞的に用いるのが適切である。"
+        },
+        {
+          "id": "I-2-ウ",
+          "label": "2-(ウ)",
+          "type": "text",
+          "correctAnswer": "concerned",
+          "points": 2,
+          "explanation": "空欄(ウ)を含む文は「メキシコはGMトウモロコシが遺伝子汚染のリスクをもたらすことを(懸念している)」という意味になる。「be concerned that節」で「〜を懸念している」を表すため、concern を過去分詞 concerned にする必要がある。"
+        },
+        {
+          "id": "I-2-エ",
+          "label": "2-(エ)",
+          "type": "text",
+          "correctAnswer": "held",
+          "points": 2,
+          "explanation": "空欄(エ)を含む文は「米国では種子は少数の企業によって(保有されている)」という意味になる。受動態の文であるため、与えられた単語 hold を過去分詞 held にする必要がある。"
+        },
+        {
+          "id": "I-3-A",
+          "label": "3-[A]",
+          "type": "selection",
+          "options": [
+            "grown with",
+            "harmful to",
+            "home to",
+            "similar to",
+            "used for"
+          ],
+          "correctAnswer": "home to",
+          "points": 2,
+          "explanation": "空欄[A]を含む文は「メキシコは世界で最も遺伝的に多様なトウモロコシの宝庫(の本拠地)である」という意味。「be home to」で「〜の本拠地である、〜がある」という意味になるため、(3) home to が適切である。"
+        },
+        {
+          "id": "I-3-B",
+          "label": "3-[B]",
+          "type": "selection",
+          "options": [
+            "grown with",
+            "harmful to",
+            "home to",
+            "similar to",
+            "used for"
+          ],
+          "correctAnswer": "grown with",
+          "points": 2,
+          "explanation": "空欄[B]を含む文は、米国のトウモロコシの状況を説明している。文法的に難解な設問だが、文脈上「大企業によって生産された種子(と共に栽培されている)」というニュアンスを考えると (1) grown with が最も意図に近い選択肢と考えられる。"
+        },
+        {
+          "id": "I-3-C",
+          "label": "3-[C]",
+          "type": "selection",
+          "options": [
+            "grown with",
+            "harmful to",
+            "home to",
+            "similar to",
+            "used for"
+          ],
+          "correctAnswer": "used for",
+          "points": 2,
+          "explanation": "空欄[C]を含む文は「そのトウモロコシのほとんどは動物の飼料や工業(用に使われる)」という意味。「be used for」で「〜のために使われる」という意味になるため、(5) used for が適切である。"
+        },
+        {
+          "id": "I-3-D",
+          "label": "3-[D]",
+          "type": "selection",
+          "options": [
+            "grown with",
+            "harmful to",
+            "home to",
+            "similar to",
+            "used for"
+          ],
+          "correctAnswer": "harmful to",
+          "points": 2,
+          "explanation": "空欄[D]を含む文は「GMトウモロコシが健康と環境に(有害である)という科学的証拠がない」という米国の主張を述べている。「be harmful to」で「〜に有害である」という意味になるため、(2) harmful to が適切である。"
+        },
+        {
+          "id": "I-4",
+          "label": "4",
+          "type": "selection",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ],
+          "correctAnswer": "9",
+          "points": 2,
+          "explanation": "下線部(X)の日本語を英訳すると \"making them less suited to the specific conditions they were bred for.\" となる。与えられた語句を並べ替えると \"making (6. them) (3. less) (4. suited) (8. to) (5. the specific conditions) (7. they) (9. were) (1. bred) (2. for).\" となる。前から7番目のカッコに入る語句は (9) were である。"
+        },
+        {
+          "id": "I-5-a",
+          "label": "5-(a)",
+          "type": "selection",
+          "options": [
+            "as",
+            "at",
+            "in",
+            "of",
+            "on",
+            "up"
+          ],
+          "correctAnswer": "in",
+          "points": 2,
+          "explanation": "空欄(a)を含む句は「色と大きさの点で幅広く及ぶ」という意味。「range in ...」で「(範囲などが)〜に及ぶ」という意味を表すため、(3) in が適切である。"
+        },
+        {
+          "id": "I-5-b",
+          "label": "5-(b)",
+          "type": "selection",
+          "options": [
+            "as",
+            "at",
+            "in",
+            "of",
+            "on",
+            "up"
+          ],
+          "correctAnswer": "up",
+          "points": 2,
+          "explanation": "空欄(b)を含む句は「アメリカのトウモロコシ生産のわずか1パーセントを(構成する)」という意味。「make up」で「〜を構成する」という意味を表すため、(6) up が適切である。"
+        },
+        {
+          "id": "I-5-c",
+          "label": "5-(c)",
+          "type": "selection",
+          "options": [
+            "as",
+            "at",
+            "in",
+            "of",
+            "on",
+            "up"
+          ],
+          "correctAnswer": "of",
+          "points": 2,
+          "explanation": "空欄(c)を含む句は「メキシコがUSMCAに違反していると(非難した)」という意味。「accuse A of B」で「AをBのことで非難する」という意味を表すため、(4) of が適切である。"
+        },
+        {
+          "id": "I-5-d",
+          "label": "5-(d)",
+          "type": "selection",
+          "options": [
+            "as",
+            "at",
+            "in",
+            "of",
+            "on",
+            "up"
+          ],
+          "correctAnswer": "on",
+          "points": 2,
+          "explanation": "空欄(d)を含む句は「経済政策はトウモロコシの多様性のリスクに(対して)はるかに大きな影響を与える」という意味。「impact on ...」で「〜に対する影響」という意味を表すため、(5) on が適切である。"
+        },
+        {
+          "id": "I-6",
+          "label": "6",
+          "type": "selection",
+          "options": [
+            "A Case for Genetically Modified Corn",
+            "Genetically Modified Foods and Human Health",
+            "Mexico's Traditional Food Culture is in Trouble",
+            "Why Mexico Sees U.S. Corn as a Threat"
+          ],
+          "correctAnswer": "Why Mexico Sees U.S. Corn as a Threat",
+          "points": 3,
+          "explanation": "本文は、メキシコが米国のGMトウモロコシを、国民の健康、伝統的な農業、文化、そして固有種の遺伝的多様性への脅威と見なしている理由を多角的に説明している。したがって、(4)が最も包括的で適切なタイトルである。"
+        },
+        {
+          "id": "I-7-1",
+          "label": "7-(1)",
+          "type": "selection",
+          "options": [
+            "T",
+            "F"
+          ],
+          "correctAnswer": "F",
+          "points": 3,
+          "explanation": "第3段落に「the announcement provoked strong objections from the U.S.」とあり、米国から強い反対があったと述べられているため、本文の内容と合致しない。"
+        },
+        {
+          "id": "I-7-2",
+          "label": "7-(2)",
+          "type": "selection",
+          "options": [
+            "T",
+            "F"
+          ],
+          "correctAnswer": "F",
+          "points": 3,
+          "explanation": "第4段落に「Mexico is... the most genetically diverse repository of corn in the world」とあり、メキシコには世界で最も多様なトウモロコシがあると述べられているため、本文の内容と合致しない。"
+        },
+        {
+          "id": "I-7-3",
+          "label": "7-(3)",
+          "type": "selection",
+          "options": [
+            "T",
+            "F"
+          ],
+          "correctAnswer": "T",
+          "points": 3,
+          "explanation": "第4段落に「evolved through millennia of domestication and selective breeding」とあり、家畜化や選択育種といった人間の革新によって進化したと述べられているため、本文の内容と合致する。"
+        },
+        {
+          "id": "I-7-4",
+          "label": "7-(4)",
+          "type": "selection",
+          "options": [
+            "T",
+            "F"
+          ],
+          "correctAnswer": "F",
+          "points": 3,
+          "explanation": "第6段落で禁止されたのは「for human consumption（人間が消費するための）」GMトウモロコシであり、動物用ではない。米国が懸念しているのは、この禁止が「further restrictions（さらなる規制）」につながる可能性である。したがって、本文の内容と合致しない。"
+        },
+        {
+          "id": "I-7-5",
+          "label": "7-(5)",
+          "type": "selection",
+          "options": [
+            "T",
+            "F"
+          ],
+          "correctAnswer": "F",
+          "points": 3,
+          "explanation": "第3段落に「with the U.S. claiming that...」とあり、健康リスクがないと主張しているのはUSMCA(協定)自体ではなく、米国である。本文の内容と合致しない。"
+        },
+        {
+          "id": "I-7-6",
+          "label": "7-(6)",
+          "type": "selection",
+          "options": [
+            "T",
+            "F"
+          ],
+          "correctAnswer": "F",
+          "points": 3,
+          "explanation": "第8段落でロス-イバラ氏は「he doesn't think banning GM corn will help preserve these varieties」と述べており、GMトウモロコシの禁止が固有種の保護に役立つとは考えていない。本文の内容と合致しない。"
+        },
+        {
+          "id": "I-7-7",
+          "label": "7-(7)",
+          "type": "selection",
+          "options": [
+            "T",
+            "F"
+          ],
+          "correctAnswer": "F",
+          "points": 3,
+          "explanation": "第5段落のロス-イバラ氏の発言に「There's probably more variety in Mexico than all of the U.S.」とあり、メキシコの方が米国より多様性が高いことが示唆されているため、本文の内容と合致しない。"
+        },
+        {
+          "id": "I-7-8",
+          "label": "7-(8)",
+          "type": "selection",
+          "options": [
+            "T",
+            "F"
+          ],
+          "correctAnswer": "F",
+          "points": 3,
+          "explanation": "最終段落でベロン氏は、ジーンバンクでの保存を「a photo, a snapshot」と静的なものに例え、農家の畑での継続的な進化の方が重要であると述べているため、同等に効果的とは考えていない。本文の内容と合致しない。"
+        }
+      ]
+    },
+    {
+      "id": "II",
+      "label": "読解問題 (芸術家フランソワーズ・ジロー)",
+      "questions": [
+        {
+          "id": "II-1-A",
+          "label": "1-[A]",
+          "type": "selection",
+          "options": [
+            "at",
+            "in",
+            "on",
+            "up"
+          ],
+          "correctAnswer": "up",
+          "points": 2,
+          "explanation": "空欄[A]を含む文は「交差して、ビーチの風景、街の風景、...を(構成する)」という意味。「make up」で「〜を構成する」という句動詞になるため、(4) up が適切である。"
+        },
+        {
+          "id": "II-1-B",
+          "label": "1-[B]",
+          "type": "selection",
+          "options": [
+            "in",
+            "for",
+            "on",
+            "up"
+          ],
+          "correctAnswer": "on",
+          "points": 2,
+          "explanation": "空欄[B]を含む文は「彼女のキャリア、功績、名前は、それら自身で(自立する)のに十分ではないのか？」という意味。「stand on one's own」で「自立する」というイディオムになるため、(3) on が適切である。"
+        },
+        {
+          "id": "II-1-C",
+          "label": "1-[C]",
+          "type": "selection",
+          "options": [
+            "at",
+            "off",
+            "on",
+            "out"
+          ],
+          "correctAnswer": "out",
+          "points": 2,
+          "explanation": "空欄[C]を含む文は「彼女は常に、...と特定されることは...大きな不利益をもたらすと(指摘してきた)」という意味。「point out」で「〜を指摘する」という句動詞になるため、(4) out が適切である。"
+        },
+        {
+          "id": "II-1-D",
+          "label": "1-[D]",
+          "type": "selection",
+          "options": [
+            "at",
+            "in",
+            "on",
+            "with"
+          ],
+          "correctAnswer": "in",
+          "points": 2,
+          "explanation": "空欄[D]を含む文は、ジロー自身の言葉「私は自分自身の人生を、私自身のやり方(で)生きる」を引用している。「in one's own way」で「〜自身のやり方で」という意味になるため、(2) in が適切である。"
+        },
+        {
+          "id": "II-2-a",
+          "label": "2-(a)",
+          "type": "selection",
+          "options": [
+            "criticized",
+            "embraced",
+            "supported",
+            "understood"
+          ],
+          "correctAnswer": "understood",
+          "points": 2,
+          "explanation": "下線部(a)の perceived は「認識される、理解される」という意味。文脈は「女性が認識される多様なあり方に異議を唱えた」という内容であり、最も意味が近いのは (4) understood 「理解される」である。"
+        },
+        {
+          "id": "II-2-b",
+          "label": "2-(b)",
+          "type": "selection",
+          "options": [
+            "occupation",
+            "positions",
+            "property",
+            "storage"
+          ],
+          "correctAnswer": "property",
+          "points": 2,
+          "explanation": "下線部(b)の possessions は「所有物」という意味。文脈は「家族の全所有物を運んでいた荷車」という内容であり、最も意味が近いのは (3) property 「財産、所有物」である。"
+        },
+        {
+          "id": "II-2-c",
+          "label": "2-(c)",
+          "type": "selection",
+          "options": [
+            "prevent",
+            "protect",
+            "save",
+            "withstand"
+          ],
+          "correctAnswer": "prevent",
+          "points": 2,
+          "explanation": "下線部(c)の block は「妨害する、阻止する」という意味。文脈は「元パートナーが出版を阻止しようとした」という内容であり、最も意味が近いのは (1) prevent 「妨げる」である。"
+        },
+        {
+          "id": "II-2-d",
+          "label": "2-(d)",
+          "type": "selection",
+          "options": [
+            "confounding",
+            "maintaining",
+            "producing",
+            "stopping"
+          ],
+          "correctAnswer": "maintaining",
+          "points": 2,
+          "explanation": "下線部(d)の perpetuating は「永続させる」という意味。文脈は「この明白な性差別を永続させること」という内容であり、最も意味が近いのは (2) maintaining 「維持する」である。"
+        },
+        {
+          "id": "II-2-e",
+          "label": "2-(e)",
+          "type": "selection",
+          "options": [
+            "authorities",
+            "buildings",
+            "foundation",
+            "men"
+          ],
+          "correctAnswer": "authorities",
+          "points": 2,
+          "explanation": "下線部(e)の establishment は「体制、権威筋」という意味。文脈は「体制側が当然と見なしていること」という内容であり、家父長制の文脈から最も意味が近いのは (1) authorities 「当局、権威」である。"
+        },
+        {
+          "id": "II-3-あ",
+          "label": "3-(あ)",
+          "type": "selection",
+          "options": [
+            "if",
+            "nonetheless",
+            "so",
+            "while"
+          ],
+          "correctAnswer": "while",
+          "points": 2,
+          "explanation": "空欄(あ)は、1994年の作品が女性の認識に挑戦したことと、1946年の作品が別のテーマに焦点を当てたことを対比的に繋いでいる。したがって、「〜である一方」を意味する (4) while が適切である。"
+        },
+        {
+          "id": "II-3-い",
+          "label": "3-(い)",
+          "type": "selection",
+          "options": [
+            "Although",
+            "As",
+            "But",
+            "So"
+          ],
+          "correctAnswer": "Although",
+          "points": 2,
+          "explanation": "空欄(い)は「最初は法律に興味があった」ことと「芸術に転向した」という逆接の関係を結んでいる。「〜だけれども」を意味する (1) Although が文頭に置くのに適切である。"
+        },
+        {
+          "id": "II-3-う",
+          "label": "3-(う)",
+          "type": "selection",
+          "options": [
+            "Because",
+            "But",
+            "Since",
+            "So"
+          ],
+          "correctAnswer": "But",
+          "points": 2,
+          "explanation": "空欄(う)は、筆者がジローの功績を称えるべきだと考えているのに対し、「メディアには他の関心事があった」という逆の内容を導入している。したがって、逆接の (2) But が適切である。"
+        },
+        {
+          "id": "II-3-え",
+          "label": "3-(え)",
+          "type": "selection",
+          "options": [
+            "how",
+            "what",
+            "which",
+            "who"
+          ],
+          "correctAnswer": "how",
+          "points": 2,
+          "explanation": "空欄(え)は and によって「someone's life」と並列され、be respectful to の目的語となっている。「彼らが(どのように)それを生きたか」という意味にするため、(1) how が適切である。"
+        },
+        {
+          "id": "II-4-ア",
+          "label": "4-[ア]",
+          "type": "selection",
+          "options": [
+            "interesting",
+            "indispensable",
+            "plausible",
+            "unavoidable",
+            "unnecessary"
+          ],
+          "correctAnswer": "unnecessary",
+          "points": 2,
+          "explanation": "空欄[ア]は、筆者が批判的に見ている「in her own right」という4つの単語を修飾している。文脈上、これらの言葉は女性の業績を男性社会の基準で測るものであり「(不必要に)」頻繁に使われる、というニュアンスから (5) unnecessary が最も適切である。"
+        },
+        {
+          "id": "II-4-イ",
+          "label": "4-[イ]",
+          "type": "selection",
+          "options": [
+            "easy",
+            "fruitful",
+            "hard",
+            "just",
+            "wise"
+          ],
+          "correctAnswer": "hard",
+          "points": 2,
+          "explanation": "空欄[イ]を含む文は、敬意をもって人の人生を称えることは「(難しく)ない」と主張している。筆者がメディアにもっと配慮を求めている文脈から、「そんなことは難しいことではない」という意味にする (3) hard が適切である。"
+        },
+        {
+          "id": "II-5",
+          "label": "5",
+          "type": "text",
+          "correctAnswer": "ピカソとの関係で彼女を報じたこと。",
+          "points": 2,
+          "explanation": "下線部(X)「other concerns」の具体的な内容は、メディアがジローの死を報じる際に、彼女自身の芸術家としての功績ではなく、ピカソの「影」「ミューズ」「恋人」といった関係性に焦点を当てたことを指す。",
+          "gradingCriteria": {
+            "keywords": [
+              "ピカソ",
+              "関係",
+              "報じた"
+            ],
+            "elements": [
+              "ジローをピカソとの関係性の中で報道した点を指摘しているか"
+            ],
+            "elementCount": 1,
+            "description": "フランソワーズ・ジローの死が、彼女自身の功績ではなく、ピカソとの関係性（「ピカソの影」「ピカソのミューズ」など）に焦点を当てて報道されたことを15字以内で指摘できていれば正解とする。"
+          }
+        },
+        {
+          "id": "II-6",
+          "label": "6",
+          "type": "selection",
+          "options": [
+            "Female artists' achievements are praised when they criticize the male-centered concept of art.",
+            "Female artists are less self-reliant than male ones.",
+            "Female artists should have romantic relationship with great male artists.",
+            "The achievements of female artists are judged by their relationship with male artists.",
+            "The presence of women in artists' circles has inspired male artists to experiment with new methods and styles in their artistic activities.",
+            "Women should be excluded from the world of art."
+          ],
+          "correctAnswer": "The achievements of female artists are judged by their relationship with male artists.",
+          "points": 3,
+          "explanation": "下線部(Y)の直後で、この状況は「家父長制(*patriarchy)の一例だ」と述べられている。家父長制において体制側(establishment)が当然と見なしているのは、女性の価値や功績が、男性との関係性によって判断されることである。したがって、(4)が最も適切である。"
+        },
+        {
+          "id": "II-7-1",
+          "label": "7-(1)",
+          "type": "selection",
+          "options": [
+            "T",
+            "F"
+          ],
+          "correctAnswer": "T",
+          "points": 3,
+          "explanation": "第4段落に「her 1994 Aspects of Femininity challenged the multiple ways women are perceived」とあり、彼女の芸術が社会の女性観に挑戦するテーマを持っていたことがわかるため、本文の内容と合致する。"
+        },
+        {
+          "id": "II-7-2",
+          "label": "7-(2)",
+          "type": "selection",
+          "options": [
+            "T",
+            "F"
+          ],
+          "correctAnswer": "T",
+          "points": 3,
+          "explanation": "第4段落に「Her work now features in the collections of the *Met and MoMA in New York, as well as the *Centre Pompidou in Paris.」とあり、有名な美術館が彼女の絵を所蔵しているため、本文の内容と合致する。"
+        },
+        {
+          "id": "II-7-3",
+          "label": "7-(3)",
+          "type": "selection",
+          "options": [
+            "T",
+            "F"
+          ],
+          "correctAnswer": "F",
+          "points": 3,
+          "explanation": "第5段落によると、彼女は哲学と英文学の学位は受けたが、美術の学位を受けたとは書かれていない。「switched to art full time」とあるが、学位取得の記述はないため、本文の内容と合致しない。"
+        },
+        {
+          "id": "II-7-4",
+          "label": "7-(4)",
+          "type": "selection",
+          "options": [
+            "T",
+            "F"
+          ],
+          "correctAnswer": "T",
+          "points": 3,
+          "explanation": "第5段落の終わりに「a cart carrying all her family's possessions crashed during the war」とあり、事故で家族の所有物の多くを失ったことがわかるため、本文の内容と合致する。"
+        },
+        {
+          "id": "II-7-5",
+          "label": "7-(5)",
+          "type": "selection",
+          "options": [
+            "T",
+            "F"
+          ],
+          "correctAnswer": "F",
+          "points": 3,
+          "explanation": "第6段落によると、最初の展覧会を開いたのが22歳(1943年)で、最初の本を出版したのは1964年である。彼女は1921年生まれなので、本を出版したのは40代であり、22歳ではない。本文の内容と合致しない。"
+        },
+        {
+          "id": "II-7-6",
+          "label": "7-(6)",
+          "type": "selection",
+          "options": [
+            "T",
+            "F"
+          ],
+          "correctAnswer": "T",
+          "points": 3,
+          "explanation": "第6段落に「despite the former partner trying to block it on multiple occasions」とあり、元パートナー（ピカソ）が彼女の最初の本の出版を妨害しようとしたことから、彼がその本を快く思っていなかったことがわかる。本文の内容と合致する。"
+        },
+        {
+          "id": "II-7-7",
+          "label": "7-(7)",
+          "type": "selection",
+          "options": [
+            "T",
+            "F"
+          ],
+          "correctAnswer": "F",
+          "points": 3,
+          "explanation": "第6段落に「Gilot was sharp and formidable」や「fierce and uncompromising」とあり、彼女が鋭く、手強く、激しく、妥協しない人物だったと述べられているため、本文の内容と合致しない。"
+        },
+        {
+          "id": "II-7-8",
+          "label": "7-(8)",
+          "type": "selection",
+          "options": [
+            "T",
+            "F"
+          ],
+          "correctAnswer": "F",
+          "points": 3,
+          "explanation": "最終段落で筆者は「We must also assume that the reader is intelligent and interested enough to click on the article without such headlines」と述べており、読者は重要な女性芸術家に興味を持っていると考えている。本文の内容と合致しない。"
+        }
+      ]
+    },
+    {
+      "id": "III",
+      "label": "会話文完成問題",
+      "questions": [
+        {
+          "id": "III-1",
+          "label": "(1)",
+          "type": "selection",
+          "options": [
+            "A. about",
+            "B. at",
+            "C. of",
+            "D. on"
+          ],
+          "correctAnswer": "B. at",
+          "points": 2,
+          "explanation": "「病院であなたを見かけました」という文。「〜で」という場所を示す前置詞として at が最も適切である。"
+        },
+        {
+          "id": "III-2",
+          "label": "(2)",
+          "type": "selection",
+          "options": [
+            "A. sound",
+            "B. sounding",
+            "C. sounds",
+            "D. to sound"
+          ],
+          "correctAnswer": "D. to sound",
+          "points": 2,
+          "explanation": "「I don't want this to sound offensive」で「これを失礼に響かせたくないのですが」という丁寧な前置きの表現になる。"
+        },
+        {
+          "id": "III-3",
+          "label": "(3)",
+          "type": "selection",
+          "options": [
+            "A. at",
+            "B. in",
+            "C. to",
+            "D. with"
+          ],
+          "correctAnswer": "C. to",
+          "points": 2,
+          "explanation": "「be related to 〜」で「〜と血縁関係がある」という意味になる。"
+        },
+        {
+          "id": "III-4",
+          "label": "(4)",
+          "type": "selection",
+          "options": [
+            "A. been cancelled",
+            "B. cancelled",
+            "C. has cancelled",
+            "D. was cancelled"
+          ],
+          "correctAnswer": "D. was cancelled",
+          "points": 2,
+          "explanation": "「彼の講演会に行くつもりでしたが、それは中止になりました」という文。講演会(it)が中止に「された」ので、受動態の過去形 was cancelled が適切である。"
+        },
+        {
+          "id": "III-5",
+          "label": "(5)",
+          "type": "selection",
+          "options": [
+            "A. happen",
+            "B. happened",
+            "C. happening",
+            "D. happens"
+          ],
+          "correctAnswer": "B. happened",
+          "points": 2,
+          "explanation": "「何が起こったのか聞きました」という文。「I heard」に続く名詞節を作る間接疑問文で、時制の一致から過去形の happened が適切である。"
+        },
+        {
+          "id": "III-6",
+          "label": "(6)",
+          "type": "selection",
+          "options": [
+            "A. long",
+            "B. longer",
+            "C. longest",
+            "D. longing"
+          ],
+          "correctAnswer": "B. longer",
+          "points": 2,
+          "explanation": "「もう少し長く彼を病院に置いておきたい」という文脈。「a little while longer」で「もうしばらくの間」という意味になる。"
+        },
+        {
+          "id": "III-7",
+          "label": "(7)",
+          "type": "selection",
+          "options": [
+            "A. call",
+            "B. calling",
+            "C. calls",
+            "D. is call"
+          ],
+          "correctAnswer": "C. calls",
+          "points": 2,
+          "explanation": "「みんな私をケイシーと呼びます」という文。「everyone」は三人称単数扱いなので、動詞には -s がつく。"
+        },
+        {
+          "id": "III-8",
+          "label": "(8)",
+          "type": "selection",
+          "options": [
+            "A. into",
+            "B. over",
+            "C. unless",
+            "D. when"
+          ],
+          "correctAnswer": "D. when",
+          "points": 2,
+          "explanation": "「私が4歳の時にここに引っ越してきました」という文。「〜の時」を表す接続詞 when が適切である。"
+        },
+        {
+          "id": "III-9",
+          "label": "(9)",
+          "type": "selection",
+          "options": [
+            "A. is",
+            "B. is it",
+            "C. isn't",
+            "D. it's"
+          ],
+          "correctAnswer": "B. is it",
+          "points": 2,
+          "explanation": "前の文「The architecture isn't very modern」が否定文なので、付加疑問文は肯定形の is it? となる。"
+        },
+        {
+          "id": "III-10",
+          "label": "(10)",
+          "type": "selection",
+          "options": [
+            "A. has plan",
+            "B. is planning",
+            "C. was planning",
+            "D. were planning"
+          ],
+          "correctAnswer": "D. were planning",
+          "points": 2,
+          "explanation": "前のケイシーの発言「I was planning to go to his lecture」を受けて、「それで、父の講演会に行く予定だったのですね？」と確認する文。主語が you なので、過去進行形の were planning が適切。"
+        },
+        {
+          "id": "III-11",
+          "label": "(11)",
+          "type": "selection",
+          "options": [
+            "A. at",
+            "B. over",
+            "C. to",
+            "D. with"
+          ],
+          "correctAnswer": "D. with",
+          "points": 2,
+          "explanation": "「be familiar with 〜」で「〜をよく知っている」という意味になる。"
+        },
+        {
+          "id": "III-12",
+          "label": "(12)",
+          "type": "selection",
+          "options": [
+            "A. at",
+            "B. in",
+            "C. of",
+            "D. on"
+          ],
+          "correctAnswer": "B. in",
+          "points": 2,
+          "explanation": "「be interested in 〜」で「〜に興味がある」という意味になる。"
+        },
+        {
+          "id": "III-13",
+          "label": "(13)",
+          "type": "selection",
+          "options": [
+            "A. any",
+            "B. many",
+            "C. none",
+            "D. some"
+          ],
+          "correctAnswer": "A. any",
+          "points": 2,
+          "explanation": "「ほとんどの人は全くわかっていません」という文。否定文の中で「全く〜ない」を強調する any を用いて「don't really have any idea」とするのが自然である。"
+        },
+        {
+          "id": "III-14",
+          "label": "(14)",
+          "type": "selection",
+          "options": [
+            "A. are surprised",
+            "B. be surprised",
+            "C. surprised",
+            "D. surprising"
+          ],
+          "correctAnswer": "B. be surprised",
+          "points": 2,
+          "explanation": "「you'd」は you would の短縮形。助動詞 would の後なので、動詞の原形 be が続く「you'd be surprised」で「あなたは驚くでしょう」という意味になる。"
+        },
+        {
+          "id": "III-15",
+          "label": "(15)",
+          "type": "selection",
+          "options": [
+            "A. grow",
+            "B. growing",
+            "C. have growing",
+            "D. is grown"
+          ],
+          "correctAnswer": "A. grow",
+          "points": 2,
+          "explanation": "「もし何かの周りで育つと」という条件節。接続詞 if の後、主語が you なので動詞の原形 grow を用いる。「grow up around something」で「何かに囲まれて育つ」という意味。"
+        }
+      ]
+    }
+  ]
+}

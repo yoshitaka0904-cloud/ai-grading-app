@@ -228,3 +228,153 @@ a {
   border-color: var(--color-accent-primary);
   box-shadow: 0 0 0 3px var(--color-accent-glow);
 }
+
+/* --- Responsive Breakpoints & Utilities --- */
+
+/* Mobile (Tablet and below) */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Typography Scaling */
+  h1 {
+    font-size: 2.2rem !important;
+  }
+
+  h2 {
+    font-size: 1.6rem !important;
+  }
+
+  h3 {
+    font-size: 1.3rem !important;
+  }
+
+  .hero-title {
+    font-size: 2.2rem !important;
+  }
+
+  /* Responsive Grids */
+  .grid-responsive {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+
+  /* Academic Card Style for Mobile */
+  .mobile-card {
+    background: var(--color-bg-primary);
+    border: 1px solid var(--color-silver-light);
+    border-radius: 8px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow-card);
+  }
+
+  .mobile-card-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--color-accent-primary);
+  }
+
+  .mobile-card-meta {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 1rem;
+  }
+
+  /* Compact Header for Exam Page */
+  .exam-header-compact {
+    padding: 0.75rem 1rem !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--color-bg-glass);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--color-silver-light);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  /* Layout Utilities */
+  .hide-on-mobile {
+    display: none !important;
+  }
+
+  .show-on-mobile {
+    display: block !important;
+  }
+
+  .mobile-stack {
+    flex-direction: column !important;
+  }
+
+  .mobile-grid-1 {
+    grid-template-columns: 1fr !important;
+  }
+
+  .mobile-padding-sm {
+    padding: 1rem !important;
+  }
+
+  /* Glass Panel overrides for small screens */
+  .glass-panel {
+    padding: 1.25rem !important;
+  }
+
+  /* Button full width on mobile */
+  .btn-mobile-full {
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  .mobile-only {
+    display: grid !important;
+  }
+
+  .pdf-container,
+  .answer-container {
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
+/* Spinner Animation */
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (min-width: 769px) {
+  .pdf-container {
+    display: block !important;
+  }
+
+  .answer-container {
+    display: flex !important;
+  }
+}
+
+/* Small Smartphone */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.8rem !important;
+  }
+
+  .hero-title {
+    font-size: 2rem !important;
+  }
+}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UniversityCard from '../components/UniversityCard';
 import { getUniversities } from '../data/examRegistry';
@@ -9,7 +9,17 @@ import RecruitmentBanner from '../components/RecruitmentBanner';
 const Home = () => {
     const { user, loading } = useAuth();
     const navigate = useNavigate();
-    const universities = getUniversities();
+    const [universities, setUniversities] = useState([]);
+    const [loadingUniversities, setLoadingUniversities] = useState(true);
+
+    useEffect(() => {
+        const fetchUniversities = async () => {
+            const data = await getUniversities();
+            setUniversities(data);
+            setLoadingUniversities(false);
+        };
+        fetchUniversities();
+    }, []);
 
     const openAuthModal = () => {
         document.dispatchEvent(new CustomEvent('openAuthModal'));
@@ -17,42 +27,9 @@ const Home = () => {
 
     return (
         <div className="container">
-            <header style={{ marginBottom: '3rem' }}>
-                {/* Auth UI */}
-                <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '2rem' }}>
-                    {loading ? (
-                        <div style={{ color: '#888' }}>読み込み中...</div>
-                    ) : user ? (
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                            <button
-                                className="btn btn-primary"
-                                onClick={() => navigate('/dashboard')}
-                                style={{ padding: '0.5rem 1rem', fontSize: '0.9rem' }}
-                            >
-                                マイページ
-                            </button>
-                            <button
-                                className="btn btn-secondary"
-                                onClick={signOut}
-                                style={{ padding: '0.5rem 1rem', fontSize: '0.9rem' }}
-                            >
-                                ログアウト
-                            </button>
-                        </div>
-                    ) : (
-                        <button
-                            className="btn btn-primary"
-                            onClick={openAuthModal}
-                            style={{ padding: '0.5rem 1.5rem', fontSize: '0.9rem' }}
-                        >
-                            ログイン / 登録
-                        </button>
-                    )}
-                </div>
-
-                {/* Title */}
-                <div style={{ textAlign: 'center', marginBottom: '6rem', position: 'relative' }}>
-                    <div style={{
+            <header className="mobile-padding-sm" style={{ paddingTop: '2rem' }}>
+                <div style={{ textAlign: 'center', marginBottom: '4rem', position: 'relative' }}>
+                    <div className="hide-on-mobile" style={{
                         position: 'absolute',
                         top: '50%',
                         left: '50%',
@@ -70,7 +47,7 @@ const Home = () => {
                         background: 'var(--color-accent-primary)',
                         color: 'white',
                         borderRadius: '4px',
-                        fontSize: '0.9rem',
+                        fontSize: '0.8rem',
                         fontWeight: '700',
                         marginBottom: '1rem',
                         letterSpacing: '0.1em'
@@ -78,10 +55,9 @@ const Home = () => {
                         私大の英語・社会の採点に特化
                     </div>
                     <br />
-                    <h1 className="animate-slide-up" style={{
-                        fontSize: '4rem',
+                    <h1 className="animate-slide-up hero-title" style={{
                         color: 'var(--color-accent-primary)',
-                        marginBottom: '1.5rem',
+                        marginBottom: '1rem',
                         fontWeight: '900',
                         letterSpacing: '0.05em',
                         fontFamily: 'var(--font-heading)',
@@ -93,50 +69,63 @@ const Home = () => {
                     </h1>
                     <p className="animate-slide-up delay-100" style={{
                         color: 'var(--color-text-secondary)',
-                        fontSize: '1.4rem',
-                        marginBottom: '2rem',
+                        fontSize: '1.1rem',
+                        marginBottom: '2.5rem',
                         maxWidth: '800px',
                         marginLeft: 'auto',
                         marginRight: 'auto',
-                        lineHeight: '1.8'
+                        lineHeight: '1.7',
+                        padding: '0 1rem'
                     }}>
-                        志望校の過去問をAIが即座に採点・分析。<br />
+                        志望校の過去問をAIが即座に採点・分析。<br className="hide-on-mobile" />
                         あなたの専属コーチとして、合格への最短ルートをサポートします。
                     </p>
+
+                    <div className="animate-slide-up delay-200" style={{ display: 'flex', justifyContent: 'center', gap: '1rem', padding: '0 1rem' }}>
+                        <button
+                            className="btn btn-primary btn-mobile-full"
+                            style={{ padding: '1rem 2.5rem', fontSize: '1.1rem', borderRadius: '50px' }}
+                            onClick={() => {
+                                const el = document.getElementById('university-list');
+                                if (el) el.scrollIntoView({ behavior: 'smooth' });
+                            }}
+                        >
+                            大学を選択して開始
+                        </button>
+                    </div>
                 </div>
 
-                {/* Features */}
-                <div style={{
+                <div className="grid-responsive" style={{
                     display: 'grid',
                     gridTemplateColumns: 'repeat(4, 1fr)',
-                    gap: '2rem',
-                    marginBottom: '8rem'
+                    gap: '1.5rem',
+                    marginBottom: '6rem'
                 }}>
-                    <div className="glass-panel animate-fade-in delay-100" style={{ padding: '2.5rem 2rem', textAlign: 'center' }}>
-                        <div style={{ fontSize: '3rem', marginBottom: '1.5rem' }}>📝</div>
-                        <h3 style={{ fontSize: '1.3rem', marginBottom: '1rem', color: 'var(--color-text-primary)' }}>1. 過去問を解く</h3>
-                        <p style={{ color: 'var(--color-text-secondary)', fontSize: '1rem', lineHeight: '1.6' }}>
+                    <div className="glass-panel animate-fade-in delay-100" style={{ padding: '2rem 1.5rem', textAlign: 'center' }}>
+                        <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>📝</div>
+                        <h3 style={{ fontSize: '1.1rem', marginBottom: '1rem', color: 'var(--color-text-primary)' }}>1. 過去問を解く</h3>
+                        <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.9rem', lineHeight: '1.6' }}>
                             志望校の過去問を選択し、実際の試験と同じ形式で解答します。
                         </p>
                     </div>
-                    <div className="glass-panel animate-fade-in delay-200" style={{ padding: '2.5rem 2rem', textAlign: 'center' }}>
-                        <div style={{ fontSize: '3rem', marginBottom: '1.5rem' }}>🤖</div>
-                        <h3 style={{ fontSize: '1.3rem', marginBottom: '1rem', color: 'var(--color-text-primary)' }}>2. AIが即座に採点</h3>
-                        <p style={{ color: 'var(--color-text-secondary)', fontSize: '1rem', lineHeight: '1.6' }}>
+                    <div className="glass-panel animate-fade-in delay-200" style={{ padding: '2rem 1.5rem', textAlign: 'center' }}>
+                        <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>🤖</div>
+                        <h3 style={{ fontSize: '1.1rem', marginBottom: '1rem', color: 'var(--color-text-primary)' }}>2. AIが即座に採点</h3>
+                        <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.9rem', lineHeight: '1.6' }}>
                             AIが解答を分析し、数秒で採点結果と詳細なフィードバックを提供します。
                         </p>
                     </div>
-                    <div className="glass-panel animate-fade-in delay-300" style={{ padding: '2.5rem 2rem', textAlign: 'center' }}>
-                        <div style={{ fontSize: '3rem', marginBottom: '1.5rem' }}>💬</div>
-                        <h3 style={{ fontSize: '1.3rem', marginBottom: '1rem', color: 'var(--color-text-primary)' }}>3. AI先生に質問</h3>
-                        <p style={{ color: 'var(--color-text-secondary)', fontSize: '1rem', lineHeight: '1.6' }}>
+                    <div className="glass-panel animate-fade-in delay-300" style={{ padding: '2rem 1.5rem', textAlign: 'center' }}>
+                        <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>💬</div>
+                        <h3 style={{ fontSize: '1.1rem', marginBottom: '1rem', color: 'var(--color-text-primary)' }}>3. AI先生に質問</h3>
+                        <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.9rem', lineHeight: '1.6' }}>
                             解説でわからなかった点は、チャットでAI先生に何度でも質問できます。
                         </p>
                     </div>
-                    <div className="glass-panel animate-fade-in delay-300" style={{ padding: '2.5rem 2rem', textAlign: 'center' }}>
-                        <div style={{ fontSize: '3rem', marginBottom: '1.5rem' }}>📊</div>
-                        <h3 style={{ fontSize: '1.3rem', marginBottom: '1rem', color: 'var(--color-text-primary)' }}>4. 弱点を克服</h3>
-                        <p style={{ color: 'var(--color-text-secondary)', fontSize: '1rem', lineHeight: '1.6' }}>
+                    <div className="glass-panel animate-fade-in delay-300" style={{ padding: '2rem 1.5rem', textAlign: 'center' }}>
+                        <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>📊</div>
+                        <h3 style={{ fontSize: '1.1rem', marginBottom: '1rem', color: 'var(--color-text-primary)' }}>4. 弱点を克服</h3>
+                        <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.9rem', lineHeight: '1.6' }}>
                             苦手分野を特定し、あなただけの対策アドバイスで得点アップを狙います。
                         </p>
                     </div>
@@ -144,8 +133,8 @@ const Home = () => {
 
                 {/* Registration CTA */}
                 {!user && (
-                    <div className="glass-panel" style={{
-                        padding: '4rem',
+                    <div className="glass-panel mobile-padding-sm" style={{
+                        padding: '4rem 2rem',
                         textAlign: 'center',
                         marginBottom: '6rem',
                         background: '#ffffff',
@@ -153,19 +142,19 @@ const Home = () => {
                         boxShadow: '0 10px 30px rgba(0, 0, 0, 0.05)'
                     }}>
                         <h2 style={{ fontSize: '2.2rem', marginBottom: '1.5rem', color: 'var(--color-accent-primary)' }}>
-                            学習データを保存して、<span style={{ borderBottom: '2px solid var(--color-accent-primary)' }}>成長を可視化</span>しよう
+                            学習データを保存して、<span className="hide-on-mobile" style={{ borderBottom: '2px solid var(--color-accent-primary)' }}>成長を可視化</span>しよう
                         </h2>
                         <p style={{ fontSize: '1.2rem', color: '#94a3b8', marginBottom: '3rem', maxWidth: '700px', margin: '0 auto 3rem', lineHeight: '1.8' }}>
-                            無料の会員登録をすると、採点結果が自動で保存され、<br />
+                            無料の会員登録をすると、採点結果が自動で保存され、<br className="hide-on-mobile" />
                             過去の成績推移や詳細な分析レポートをいつでも確認できます。
                         </p>
                         <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
                             <button
-                                className="btn btn-primary"
+                                className="btn btn-primary btn-mobile-full"
                                 onClick={openAuthModal}
                                 style={{ padding: '1.2rem 3rem', fontSize: '1.2rem', borderRadius: '50px' }}
                             >
-                                メールアドレスで登録（無料）
+                                無料で会員登録
                             </button>
                         </div>
                     </div>
@@ -175,15 +164,27 @@ const Home = () => {
             {/* Sticky Recruitment Banner */}
             <RecruitmentBanner sticky={true} />
 
-            <h2 style={{ fontSize: '1.8rem', marginBottom: '1.5rem', textAlign: 'center', marginTop: '5rem' }}>対応大学一覧</h2>
-            <div style={{
+            <h2 id="university-list" style={{ fontSize: '1.6rem', marginBottom: '2rem', textAlign: 'center', marginTop: '6rem' }}>
+                対応大学一覧
+            </h2>
+            <div className="grid-responsive" style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))',
-                gap: '2rem'
+                gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+                gap: '1.5rem'
             }}>
-                {universities.map(uni => (
-                    <UniversityCard key={uni.id} university={uni} />
-                ))}
+                {loadingUniversities ? (
+                    <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '2rem', color: '#888' }}>
+                        読み込み中...
+                    </div>
+                ) : universities.length === 0 ? (
+                    <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '2rem', color: '#888' }}>
+                        大学データが見つかりません。
+                    </div>
+                ) : (
+                    universities.map(uni => (
+                        <UniversityCard key={uni.id} university={uni} />
+                    ))
+                )}
             </div>
         </div>
     );

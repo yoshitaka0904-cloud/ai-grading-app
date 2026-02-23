@@ -139,24 +139,24 @@ const ResultPage = () => {
             </header>
 
             <div className="glass-panel" style={{ padding: '2rem', marginBottom: '2rem', textAlign: 'center' }}>
-                <div style={{ display: 'flex', justifyContent: 'center', gap: '4rem', marginBottom: '2rem' }}>
-                    <div>
+                <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
+                    <div style={{ flex: '1 1 120px' }}>
                         <div style={{ fontSize: '0.9rem', color: 'var(--color-text-secondary)', marginBottom: '0.5rem' }}>得点</div>
-                        <div style={{ fontSize: '3.5rem', fontWeight: '700', color: 'var(--color-accent-primary)' }}>
-                            {result.score}<span style={{ fontSize: '1.5rem', color: 'var(--color-text-secondary)' }}>/{result.maxScore}</span>
+                        <div style={{ fontSize: '3rem', fontWeight: '700', color: 'var(--color-accent-primary)' }}>
+                            {result.score}<span style={{ fontSize: '1.2rem', color: 'var(--color-text-secondary)' }}>/{result.maxScore}</span>
                         </div>
                     </div>
-                    <div>
+                    <div style={{ flex: '1 1 120px' }}>
                         <div style={{ fontSize: '0.9rem', color: 'var(--color-text-secondary)', marginBottom: '0.5rem' }}>合格可能性</div>
-                        <div style={{ fontSize: '3.5rem', fontWeight: '700', color: getProbabilityColor(result.passProbability) }}>
+                        <div style={{ fontSize: '3rem', fontWeight: '700', color: getProbabilityColor(result.passProbability) }}>
                             {result.passProbability}
                         </div>
                     </div>
                 </div>
 
-                <div style={{ textAlign: 'left', background: 'rgba(255,255,255,0.5)', padding: '1.5rem', borderRadius: '12px' }}>
-                    <h3 style={{ fontSize: '1.1rem', marginBottom: '0.5rem', color: 'var(--color-text-primary)' }}>弱点分析・アドバイス</h3>
-                    <p style={{ lineHeight: '1.6', color: 'var(--color-text-secondary)' }}>
+                <div style={{ textAlign: 'left', background: 'rgba(255,255,255,0.5)', padding: '1.25rem', borderRadius: '12px' }}>
+                    <h3 style={{ fontSize: '1rem', marginBottom: '0.5rem', color: 'var(--color-text-primary)' }}>弱点分析・アドバイス</h3>
+                    <p style={{ lineHeight: '1.6', color: 'var(--color-text-secondary)', fontSize: '0.9rem' }}>
                         {result.weaknessAnalysis}
                     </p>
                 </div>

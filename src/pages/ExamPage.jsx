@@ -25,6 +25,11 @@ const ExamPage = () => {
     const [timeRemaining, setTimeRemaining] = useState(60 * 60); // 60 minutes in seconds
     const [timerExpired, setTimerExpired] = useState(false);
 
+    // Mobile Tab State (pdf or answer)
+    const [activeTab, setActiveTab] = useState('pdf');
+    // Submission Confirmation
+    const [showConfirmModal, setShowConfirmModal] = useState(false);
+
     const addLog = React.useCallback((msg) => {
         console.log(msg);
         setLogs(prev => [...prev, msg]);
@@ -91,6 +96,8 @@ const ExamPage = () => {
             return;
         }
 
+        setShowConfirmModal(false); // Close modal
+
         try {
             setGrading(true);
             setLogs(['採点を開始します...']);
@@ -147,46 +154,151 @@ const ExamPage = () => {
         }
     };
 
+    const confirmSubmit = () => {
+        setShowConfirmModal(true);
+    };
+
     return (
-        <div style={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
-            <header style={{
-                padding: '1rem 2rem',
-                background: 'var(--color-bg-glass)',
-                borderBottom: 'var(--border-glass)',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center'
-            }}>
-                <div>
-                    <h1 style={{ fontSize: '1.2rem', margin: 0 }}>{universityName} - {exam.subject}</h1>
-                    <span style={{ fontSize: '0.9rem', color: 'var(--color-text-secondary)' }}>{exam.year}年度</span>
+        <div style={{
+            height: '100vh',
+            display: 'flex',
+            flexDirection: 'column',
+            background: 'var(--color-bg-secondary)',
+            position: 'relative'
+        }}>
+            {/* Compact Header for Mobile & Desktop */}
+            <div className="exam-header-compact">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                    <button
+                        onClick={() => navigate(`/university/${universityId || ''}`)}
+                        style={{
+                            background: 'none',
+                            border: 'none',
+                            cursor: 'pointer',
+                            color: 'var(--color-text-secondary)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            fontSize: '1.2rem',
+                            padding: '0.25rem'
+                        }}
+                    >
+                        ←
+                    </button>
+                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                        <h2 style={{ fontSize: '0.95rem', color: 'var(--color-accent-primary)', lineHeight: 1.2, margin: 0 }}>
+                            {universityName || '大学'}
+                        </h2>
+                        <div style={{ fontSize: '0.75rem', color: 'var(--color-text-secondary)' }}>
+                            {exam.year}年 {exam.subject}
+                        </div>
+                    </div>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                     {timerStarted && (
                         <div style={{
-                            fontSize: '1.5rem',
-                            fontWeight: 'bold',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '0.4rem',
+                            color: timerExpired ? '#ef4444' : (timeRemaining < 300 ? '#f59e0b' : 'var(--color-text-primary)'),
+                            fontWeight: '700',
                             fontFamily: 'monospace',
-                            color: timerExpired ? '#ef4444' : (timeRemaining < 300 ? '#f59e0b' : '#10b981'),
-                            padding: '0.5rem 1rem',
-                            background: 'rgba(255,255,255,0.9)',
-                            borderRadius: '8px',
-                            border: `2px solid ${timerExpired ? '#ef4444' : (timeRemaining < 300 ? '#f59e0b' : '#10b981')}`
+                            fontSize: '1.1rem',
+                            padding: '0.2rem 0.6rem',
+                            borderRadius: '20px',
+                            background: 'rgba(255,255,255,0.6)',
+                            border: '1px solid currentColor'
                         }}>
-                            {timerExpired ? '時間切れ' : formatTime(timeRemaining)}
+                            {formatTime(timeRemaining)}
                         </div>
                     )}
-                    <button className="btn btn-secondary" onClick={() => navigate('/')}>
-                        終了する
+                    <button
+                        className="btn btn-secondary"
+                        style={{ padding: '0.4rem 0.8rem', fontSize: '0.8rem' }}
+                        onClick={() => navigate('/')}
+                    >
+                        終了
+                    </button>
+                    {timerStarted && !grading && (
+                        <button
+                            className="btn btn-primary"
+                            style={{
+                                padding: '0.4rem 0.8rem',
+                                fontSize: '0.8rem',
+                                boxShadow: 'none'
+                            }}
+                            onClick={confirmSubmit}
+                        >
+                            採点
+                        </button>
+                    )}
+                </div>
+            </div>
+
+            {/* Mobile Tab Switcher - Segmented Control Style */}
+            <div className="show-on-mobile" style={{
+                display: 'none',
+                padding: '0.6rem 1rem',
+                background: 'white',
+                borderBottom: '1px solid var(--color-silver-light)'
+            }}>
+                <div style={{
+                    display: 'flex',
+                    background: '#f1f5f9',
+                    padding: '2px',
+                    borderRadius: '8px'
+                }}>
+                    <button
+                        onClick={() => setActiveTab('pdf')}
+                        className="btn-mobile-full"
+                        style={{
+                            flex: 1,
+                            padding: '0.5rem',
+                            border: 'none',
+                            borderRadius: '6px',
+                            background: activeTab === 'pdf' ? 'white' : 'transparent',
+                            color: activeTab === 'pdf' ? 'var(--color-accent-primary)' : 'var(--color-text-secondary)',
+                            fontWeight: activeTab === 'pdf' ? '700' : '500',
+                            fontSize: '0.85rem',
+                            cursor: 'pointer',
+                            boxShadow: activeTab === 'pdf' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none',
+                            transition: 'all 0.2s',
+                            width: 'auto'
+                        }}
+                    >
+                        問題を見る
+                    </button>
+                    <button
+                        onClick={() => setActiveTab('answer')}
+                        className="btn-mobile-full"
+                        style={{
+                            flex: 1,
+                            padding: '0.5rem',
+                            border: 'none',
+                            borderRadius: '6px',
+                            background: activeTab === 'answer' ? 'white' : 'transparent',
+                            color: activeTab === 'answer' ? 'var(--color-accent-primary)' : 'var(--color-text-secondary)',
+                            fontWeight: activeTab === 'answer' ? '700' : '500',
+                            fontSize: '0.85rem',
+                            cursor: 'pointer',
+                            boxShadow: activeTab === 'answer' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none',
+                            transition: 'all 0.2s',
+                            width: 'auto'
+                        }}
+                    >
+                        解答を入力
                     </button>
                 </div>
-            </header>
+            </div>
 
-
-
-            <div style={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
+            <div className="mobile-stack" style={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
                 {/* PDF Viewer Area */}
-                <div style={{ flex: 1, borderRight: 'var(--border-glass)', background: '#525659' }}>
+                <div style={{
+                    flex: 1,
+                    borderRight: 'var(--border-glass)',
+                    background: '#525659',
+                    display: activeTab === 'pdf' ? 'block' : 'none'
+                }} className="pdf-container">
                     {exam.type === 'pdf' ? (
                         <iframe
                             src={exam.pdfPath}
@@ -201,7 +313,13 @@ const ExamPage = () => {
                 </div>
 
                 {/* Answer Sheet Area */}
-                <div style={{ width: '400px', background: 'var(--color-bg-primary)', display: 'flex', flexDirection: 'column', position: 'relative' }}>
+                <div style={{
+                    width: '400px',
+                    background: 'var(--color-bg-primary)',
+                    display: activeTab === 'answer' ? 'flex' : 'none',
+                    flexDirection: 'column',
+                    position: 'relative'
+                }} className="answer-container">
                     {/* Start Screen Overlay */}
                     {!timerStarted && (
                         <div style={{
@@ -350,14 +468,61 @@ const ExamPage = () => {
                     <div style={{ padding: '1.5rem', borderTop: 'var(--border-glass)', background: 'var(--color-bg-glass)' }}>
                         <button
                             className="btn btn-primary"
-                            style={{ width: '100%' }}
-                            onClick={handleSubmit}
+                            style={{
+                                width: '100%',
+                                opacity: grading ? 0.7 : 1,
+                                cursor: grading ? 'not-allowed' : 'pointer',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                gap: '0.5rem'
+                            }}
+                            onClick={confirmSubmit}
+                            disabled={grading}
                         >
-                            AIで採点する
+                            {grading ? (
+                                <>
+                                    <span className="spinner"></span>
+                                    <span>採点中...</span>
+                                </>
+                            ) : (
+                                "AIで採点する"
+                            )}
                         </button>
                     </div>
                 </div>
             </div>
+
+            {/* Confirmation Modal */}
+            {showConfirmModal && (
+                <div style={{
+                    position: 'fixed',
+                    top: 0, left: 0, right: 0, bottom: 0,
+                    background: 'rgba(0,0,0,0.5)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    zIndex: 2000,
+                    padding: '1rem'
+                }}>
+                    <div className="glass-panel" style={{ background: 'white', padding: '2rem', maxWidth: '400px', width: '100%', textAlign: 'center' }}>
+                        <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>📤</div>
+                        <h3 style={{ marginBottom: '1rem' }}>試験を終了して採点しますか？</h3>
+                        <p style={{ color: 'var(--color-text-secondary)', marginBottom: '2rem', fontSize: '0.9rem' }}>
+                            一度提出すると、解答を修正することはできません。<br />
+                            AI先生が採点と詳細な分析を開始します。
+                        </p>
+                        <div style={{ display: 'flex', gap: '1rem' }}>
+                            <button className="btn btn-secondary" style={{ flex: 1 }} onClick={() => setShowConfirmModal(false)}>
+                                まだ続ける
+                            </button>
+                            <button className="btn btn-primary" style={{ flex: 1 }} onClick={handleSubmit}>
+                                提出する
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
             {/* Log Overlay */}
             {logs.length > 0 && (
                 <div style={{

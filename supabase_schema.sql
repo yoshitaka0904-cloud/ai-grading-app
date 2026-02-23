@@ -53,3 +53,42 @@ CREATE POLICY "Users can insert own results" ON exam_results FOR INSERT WITH CHE
 
 CREATE POLICY "Users can view own reports" ON grading_reports FOR SELECT USING (auth.uid() = user_id);
 CREATE POLICY "Users can insert own reports" ON grading_reports FOR INSERT WITH CHECK (auth.uid() = user_id);
+
+-- 4. Exams table (マスターデータ)
+CREATE TABLE IF NOT EXISTS exams (
+    id TEXT PRIMARY KEY,
+    university TEXT NOT NULL,
+    university_id INTEGER NOT NULL,
+    faculty TEXT NOT NULL,
+    faculty_id TEXT NOT NULL,
+    year INTEGER NOT NULL,
+    subject TEXT NOT NULL,
+    subject_en TEXT NOT NULL,
+    type TEXT NOT NULL,
+    pdf_path TEXT,
+    max_score INTEGER NOT NULL,
+    detailed_analysis TEXT,
+    structure JSONB NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
+);
+
+-- Profiles table に role 列を追加 (すでに存在する場合はスキップ)
+ALTER TABLE profiles ADD COLUMN IF NOT EXISTS role TEXT DEFAULT 'user';
+
+-- Exams テーブルの RLS を有効化
+ALTER TABLE exams ENABLE ROW LEVEL SECURITY;
+
+-- 誰でも(未ログイン含む) exams の SELECT が可能
+CREATE POLICY "Anyone can view exams" ON exams FOR SELECT USING (true);
+
+-- 管理者のみが exams の INSERT/UPDATE/DELETE を可能にする
+CREATE POLICY "Admins can insert exams" ON exams FOR INSERT WITH CHECK (
+    EXISTS (SELECT 1 FROM profiles WHERE id = auth.uid() AND role = 'admin')
+);
+CREATE POLICY "Admins can update exams" ON exams FOR UPDATE USING (
+    EXISTS (SELECT 1 FROM profiles WHERE id = auth.uid() AND role = 'admin')
+);
+CREATE POLICY "Admins can delete exams" ON exams FOR DELETE USING (
+    EXISTS (SELECT 1 FROM profiles WHERE id = auth.uid() AND role = 'admin')
+);

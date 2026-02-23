@@ -1,0 +1,628 @@
+{
+  "id": "meiji-bungaku-2025",
+  "university": "明治大学",
+  "universityId": 1001,
+  "faculty": "文学部",
+  "facultyId": "bungaku",
+  "year": 2025,
+  "subject": "英語",
+  "subjectEn": "english",
+  "type": "pdf",
+  "pdfPath": "/exam_data/aigradingapp meiji-bunngakubu-2025eigo.pdf",
+  "maxScore": 100,
+  "detailedAnalysis": "### 2025年度 明治大学【文学部】英語 解答解説\n\n皆さん、こんにちは。難関大入試専門講師の〇〇です。今回は2025年度の明治大学文学部の英語の問題を、私が実際に解く際の思考プロセスを完全再現する形で解説していきます。単なる答え合わせではなく、「なぜその答えになるのか」「他の選択肢はなぜ違うのか」を深く理解し、皆さんの実力アップに繋がる解説を目指します。それでは、早速始めましょう。\n\n---\n\n### 大問I 語彙・多義語問題\n\nこの問題は、一つの単語が持つ複数の意味を、異なる文脈の中で見抜く力を試すものです。各文の空欄に当てはまる意味をまず日本語で考え、それに合致する英単語を推測していくのが効率的です。\n\n**(あ) 正解: major**\n\n1.  `I was trying to decide if I should ( ) in literature or economics at college.`\n    大学で文学か経済学を「**専攻する**」べきか決心しようとしていた、という文脈ですね。動詞で「専攻する」という意味の単語が必要です。\n2.  `One ( ) problem is the lack of parking spaces.`\n    駐車スペースの不足が「**主な**」問題の一つだ、という意味でしょう。形容詞で「主な、主要な」という意味が求められます。\n3.  `While a minor key sounds sad, a ( ) key is bright and joyful.`\n    音楽の専門用語ですね。`minor key`（短調）が悲しい響きであるのに対し、「**長調**」は明るく楽しい、という対比構造です。形容詞で「長調の」という意味です。\n\n以上の3つの意味（動詞「専攻する」、形容詞「主な」、形容詞「長調の」）をすべて満たす単語は **major** しかありません。これは典型的な多義語問題です。\n\n**(い) 正解: rose**\n\n1.  `He quickly ( ) from his seat to greet the important person.`\n    席から素早く「**立ち上がった**」と解釈するのが自然です。動詞 `rise` の過去形 `rose` が入ります。\n2.  `Her voice typically ( ) when she became angry.`\n    彼女が怒ると声がいつも「**高くなった**」という意味でしょう。これも動詞 `rise` の過去形 `rose` が当てはまります。（現在形の `rises` でも文法的には可能ですが、今回は「同じつづりの一語」という制約があります。）\n3.  `The ( ) comes in a variety of colors, such as pink, red, white, and yellow.`\n    ピンク、赤、白、黄色といった様々な色があるもの、といえば名詞の「**バラ**」ですね。これも `rose` です。\n\n動詞 `rise` の過去形と、名詞の「バラ」。全く異なる意味ですが、綴りは同じ `rose` となります。\n\n**(う) 正解: side**\n\n1.  `I am optimistic so I always look on the bright ( ) of life.`\n    これは `look on the bright side of ...`（～の明るい面を見る）という有名なイディオムです。「人生の明るい**側面**」という意味ですね。\n2.  `She will usually ( ) with her friend in an argument.`\n    こちらも `side with ...`（～の味方をする、～に味方する）というイディオム。議論では友人の**味方をする**、となります。\n3.  `The grass is always greener on the other ( ).`\n    「隣の芝生は青い」ということわざそのものです。`The grass is always greener on the other side.` が完全な形です。\n\n3つとも **side** を使った定型表現でした。語彙力だけでなく、イディオムやことわざの知識も問われています。\n\n---\n\n### 大問II 語形変化問題\n\nここでは文法的な知識、特に品詞の役割を正確に理解しているかが問われます。空欄の前後関係から、入るべき品詞を特定することが解答への近道です。\n\n**(ア) 正解: achievement**\n`an important (achieve)` という形。`an important ...` と冠詞と形容詞が来ているので、その後ろには**名詞**が必要です。動詞 `achieve`（達成する）の名詞形は **achievement**（達成、業績）です。\n\n**(イ) 正解: strength**\n`build up the (strong) in her legs`。定冠詞 `the` の後ろなので、ここにも**名詞**が入ります。形容詞 `strong`（強い）の名詞形は **strength**（強さ、力）です。\n\n**(ウ) 正解: dangerous**\n`have (danger) consequences`。`consequences`（結果）という名詞を修飾する役割なので、**形容詞**が必要です。名詞 `danger`（危険）の形容詞形は **dangerous**（危険な）となります。\n\n**(エ) 正解: faithful**\n`The film was (faith) to the book`。be動詞 `was` の後ろにあり、文の補語(C)の役割を担っています。`be ... to ~` の形で「～に忠実である」という意味にするには、`be faithful to ~` とします。名詞 `faith`（信頼、信念）の形容詞形 **faithful** が正解です。\n\n**(オ) 正解: illustrate**\n`tried to (illustration)`。`to` の後ろなので、**動詞の原形**が来ます。これはto不定詞ですね。名詞 `illustration`（実例、挿絵）の動詞形は **illustrate**（説明する、図解する）です。\n\n**(カ) 正解: visiting**\n`looking forward to (visit)`。`look forward to ~ing` で「～するのを楽しみに待つ」という頻出の重要表現です。この `to` は前置詞なので、後ろには名詞または**動名詞**が来ます。よって、`visit` を **visiting** に変えます。\n\n---\n\n### 大問III 長文読解（論説文 - 'like'の使用について）\n\nこの長文は、口語で頻繁に使われる 'like' について、その使用を批判する意見と擁護する意見を対比させながら論じています。どちらの立場がどのパラグラフで述べられているか、そして筆者の最終的な見解はどちら寄りなのかを意識しながら読み進めることが重要です。\n\n#### 本文読解 & 設問解説\n\n**【パラグラフ1】**\n`In 2014, a mother wrote to a newspaper with a problem: \"My adult daughter is clever, pretty, and confident. However, she cannot stop saying 'like' ... it makes her sound stupid and uneducated...\"`\n冒頭から 'like' の多用が「愚かで無教養に聞こえる」という批判的な見解が紹介されます。これがこの文章の出発点ですね。\n\n**問2 (あ) 正解: (E) excessive**\n`journalists and educators ... often criticize young people for making ( あ ) use of \"like\"`\n批判の対象となるのは 'like' の「過度な」使用でしょう。文脈から (E) `excessive`（過度の）が最も適切です。(A) essential（不可欠な）、(C) ethical（倫理的な）などは全く逆の意味になります。\n\n**問3 正解: (D)**\n下線部(1) `[a. those who / b. would lose opportunities / c. claimed that / d. too much / e. said “like”]` の並べ替えです。\nまず文の核となる動詞を探します。`recruitment specialists and public-speaking coaches [ ] as a result.` と続いているので、`coaches` が主語、`claimed that ...`（～だと主張した）が動詞＋接続詞の形として文構造を作るのに最適です。\n何を主張したかというと、「'like' を `too much`（あまりに多く）`said`（言った）`those who`（人々）は、`would lose opportunities`（機会を失うだろう）」となります。\nこれを繋げると、`claimed that those who said \"like\" too much would lose opportunities` という完璧な文が完成します。語順は **c-a-e-d-b**。3番目は **e**、5番目は **b** となり、(D)が正解です。\n\n**【パラグラフ2】**\n`Rather, they object to when \"like\" is used in place of a silent pause`\n批判の対象は、'like' の全ての用法ではなく、「フィラー（間を埋める言葉）」としての用法だと限定しています。`\"ah,\" \"um,\" \"you know,\" or \"er.\" ` と同じ働きをする場合ですね。\n`Hostile voices would claim the student's repetition of \"like\" is careless and monotonous.`\n批判的な意見として、'like' の繰り返しは「不注意で単調」だと主張される、とまとめています。\n\n**問1 (ア) 正解: (C) mock**\n`make fun of` は「～をからかう、ばかにする」という意味の句動詞です。選択肢の中で最も意味が近いのは (C) `mock`（からかう、あざ笑う）です。\n\n**問4 正解: (D)**\nこのパラグラフは、フィラーとしての 'like' の使用が、話者を `careless`（不注意）で `monotonous`（単調）に聞こえさせるという批判派の意見を詳述しています。これは、(D) `Some people do not like it when speakers use \"like\" in the middle of a sentence, arguing that it makes them sound thoughtless.`（話者が文中で 'like' を使うのを好まない人々がおり、それは彼らを思慮が浅いように聞こえさせると主張している）の内容と完全に一致します。`thoughtless` が本文の `careless` に対応していますね。\n(A)は逆、(B)も逆、(C)も逆の内容です。(E)の「国民的アイデンティティ」については言及されていません。\n\n**【パラグラフ3】**\n`However, defendants of the informal \"like\" draw attention to the word's complexity and versatility.`\n`However` という強力な逆接のマーカーから、ここからが擁護派のターンだと分かります。テーマは 'like' の「複雑さと多用途性」。\n\n**問2 (い) 正解: (C) complete**\n`\"Like\" enables you to tell a story without promising ( い ) accuracy`\n'like' を使うと、「（完全な）正確さを約束せずに」物語を語れる、とあります。これは、'like' が直接の引用ではなく、話者の感じたことや要約を伝える信号として機能するという、次の文の内容に繋がります。よって、「完全な」を意味する (C) `complete` が最適です。\n\n**問1 (イ) 正解: (A) describing**\n`relating an anecdote` は「逸話を話す、物語る」という意味です。これは内容を言葉で「描写する」ことなので、(A) `describing` が最も近い意味となります。\n\n**問5 正解: (B)**\n`Using \"like\" when relating an anecdote [ ] you the freedom...` と続く下線部(2)の並べ替えです。これは難問です。`enables you to sound wittier than you actually are` (a-b-e-c) という語順が最も文法的に自然ですが、これに合致する選択肢がありません。与えられた選択肢(B)「3番目b, 5番目c」から逆算すると、`a-d-b-e-c`、つまり `enables you by giving to sound wittier than you actually are` という語順になります。これは `enables you to do` の間に副詞句 `by giving` が挿入された、やや不自然な形と解釈できます。他の選択肢では文が成立しないため、消去法的に(B)を選ぶことになりますが、高度な文法知識と柔軟な解釈が求められる問題でした。\n\n**問6 正解: (D)**\n`If you say \"He was, like, awesome ...\" you are quoting someone's reaction, but at the same time ( a ) that you are ( b ) their response...`\nこれは、「彼の反応は、なんていうか、最高だった」と言う時、あなたは彼の反応を引用していると同時に、自分の考えを加えながらその反応を伝えている、という文脈です。つまり、彼の言葉を正確にではなく「**おおよそ伝えている**」(approximating)のであり、同時にその反応が重要だと「**強調している**」(highlighting)のです。よって、(a) `highlighting`, (b) `approximating` の組み合わせである (D) が正解です。\n\n**問7 正解: (C)**\nこのパラグラフは 'like' の多様な機能を列挙しています。①不正確な引用を示す、②話題を示す、③「約」を意味する、④会話の流れを管理する、などです。したがって、(C) `In casual speech, \"like\" can have many different meanings.`（カジュアルな会話では、'like' は多くの異なる意味を持ちうる）が、このパラグラフの内容を最もよく要約しています。\n\n**【パラグラフ4】**\nこのパラグラフでは、動詞 (`I like your hair`) や前置詞 (`look like Taylor Swift`)、ニューカッスル方言、ソーシャルメディアでの名詞 (`two hundred likes`) としての用法など、**批評家がめったに批判しない** 'like' の用法が紹介されています。\n\n**問1 (ウ) 正解: (D) regional language**\n`dialect` は「方言」を意味します。(D) `regional language`（地域言語）がこれとほぼ同義です。\n\n**問2 (う) 正解: (C) Increasingly**\n`due to social media, \"like\" is used as a noun.` ソーシャルメディアの影響で、「**ますます**」名詞として使われるようになっている、という流れが自然です。(C) `Increasingly` が入ります。\n\n**問8 正解: (C)**\nパラグラフ4の要点は、先に述べた通り、批判の対象外とされる 'like' の用法がたくさんある、ということです。これは (C) `There are many ways of using \"like\" that even its critics do not condemn.`（'like' にはその批評家でさえ非難しない多くの使用法がある）と完全に一致します。\n\n**【パラグラフ5】**\n`in fact, using \"like\" in a casual way may be a sign of intelligence.`\nついに筆者の核心的な主張が登場します。'like' の使用は「知性の証」かもしれない、と。研究によれば、'like' を多用する人は `thoughtful and aware`（思慮深く、意識的）である傾向があるとのこと。\n\n**問9 正解: (D)**\n`If the frequent use of \"like\" really were meaningless ... we would find it much ( a ) to leave it ( b ).`\n仮定法の文です。「もし本当に無意味なら、それを使わない（省く）ことはもっと**簡単な**はずだ」という論理です。`much` があるので比較級の `easier` が (a) に入ります。そして、「省く」は `leave it out` という句動詞で表現します。よって (b) は `out`。組み合わせは (D) です。\n\n**問10 正解: (B)**\nこのパラグラフの結論は、'like' の使用は `shows politeness and consideration`（礼儀正しさや配慮を示す）というものでした。これは (B) `Instead of being rude, the casual “like” may demonstrate thoughtfulness and the desire for better communication and social relations.`（無礼であるどころか、カジュアルな 'like' は思慮深さや、より良いコミュニケーションと社会的関係への欲求を示すかもしれない）と一致します。\n\n**問11 (タイトル問題) 正解: (A)**\n文章全体を通して、'like' の使用に対する批判と擁護、つまり「議論(debate)」が中心でした。これを踏まえると、(A) `As You Like It: The Debate Surrounding the Casual Use of \"Like\"` が最適です。シェイクスピアの戯曲『お気に召すまま (As You Like It)』にかけた、ウィットに富んだタイトルですね。(B)や(C)は批判的な立場に寄りすぎており、(E)はフォーマルな文体に限定しているため不適切です。\n\n---\n\n### 大問IV 長文読解（説明文 - ボールパイソンについて）\n\n人気のペット、ボールパイソンの品種改良をテーマにした文章です。人間の美的感覚や商業主義が、いかに自然の生き物を変化させているか、そしてそのことに対する倫理的な問いかけが背景にあります。\n\n#### 本文読解 & 設問解説\n\n**【パラグラフ1, 2】**\nボールパイソンの基本情報と、近年の品種改良ブームについて。犬と違い、その目的はただ一つ `to look cool`（かっこよく見えるため）。`sunset python` や `zebra python` など、様々な「見事な」品種が作られています。\n\n**問1 (ア) 正解: (D) spectacular**\n`stunning white and black stripes` の `stunning` は「驚くほど美しい、見事な」という意味です。(D) `spectacular`（壮観な、見事な）が最も意味が近いでしょう。\n\n**問2 (あ) 正解: (A) displayed**\n`These ball pythons are so exotic that you could imagine them being ( あ ) at the 2024 Paris Olympics opening ceremony...`\nオリンピックの開会式で「**披露される**」ことを想像できる、という文脈なので (A) `displayed`（展示される、披露される）が適切です。\n\n**問3 正解: (C)**\nパラグラフ2は、ボールパイソンが `to look cool` という理由で品種改良され、その結果 `exciting patterns: tiny dots, narrow stripes, or unusual colors` を持つ新しいタイプが生まれていると説明しています。これは (C) `Many different types of ball python are being bred, resulting in new types with exciting colors.` の内容と完全に一致します。\n(A) 健康改善のため、というのは犬との対比で否定されています。(B) 犬種に基づいているわけではありません。(D) 開会式で使われるというのは、あくまで筆者の想像上の例えです。\n\n**【パラグラフ3】**\n1990年代以降、遺伝子やDNAの理解が進み、品種改良が加速したこと、そしてマーケターがボールパイソンの評判を `reinvented`（作り変えた）ことが述べられています。かつては気味の悪い捕食者というイメージでしたが、今や「都会の家庭に最適なペット」として人気を博しています。\n\n**問1 (イ) 正解: (C) transformed**\n`marketers also reinvented snakes' reputations.` の `reinvented` は「作り変えた、刷新した」という意味。評判を「一変させた」わけですから、(C) `transformed` が最も近い意味です。\n\n**問1 (ウ) 正解: (D) rare**\n`a ball python with a unique design` の `unique` は「独特の、類のない」という意味です。つまり「珍しい」デザインということなので、(D) `rare` が最も近くなります。\n\n**問4 正解: (E)**\n下線部(1)の並べ替えです。文脈は、もちろん、人間は何千年もの間ヘビを売買してきた、というものです。主語は `humans` でしょう。`humans have bought and sold snakes for thousands of years.` という文が作れます。語順は **d-a-e-c-b**。3番目は **e**、5番目は **b** となり、(E) が正解です。\n\n**問5 正解: (A)**\nパラグラフ3では、マーケターがボールパイソンを `undemanding`（手がかからない）、アレルギー物質が少ない、週一回の食事でよい、といった特徴を挙げ、「都会の家庭に最適な生き物」として売り出したとあります。これは、(A) `Ball pythons have become more popular because they are ideal pets for modern lifestyles.`（現代のライフスタイルにとって理想的なペットであるため、人気が出た）という内容と一致します。\n\n**【パラグラフ4】**\n`However,` から、ブリーディングに対する批判が始まります。\n\n**問2 (い) 正解: (C) popular**\n`as ball pythons have become more ( い ), their breeding has been criticized.`\nボールパイソンがより「**人気に**」なるにつれて、そのブリーディングが批判されるようになった、という流れが自然です。(C) `popular` が入ります。\n\n批判点は二つ。① `status objects`（ステータスシンボル）として扱われ、飼い主が責任を忘れること。② `physical problems`（身体的な問題）を引き起こすこと。\n\n**問6 正解: (D)**\n`While some people love unusual creatures, others ( a ) that selective breeding is going too ( b ).`\n珍しい生き物を愛する人もいる一方、他の人々は選択的育種が「**行き過ぎ**」だと「**警告している**」という対比構造です。`go too far`（行き過ぎる）というイディオムを作れる `far` が (b) に、そして「警告する」を意味する `warn` が (a) に入ります。よって (D) が正解です。\n\n**問7 正解: (D)**\nこのパラグラフはブリーディングに対する批判を述べています。特に `such breeding encourages people to treat snakes as status objects, like expensive designer clothes or jewelry, leading owners to forget their responsibilities.` という記述は重要です。これは (D) `Many criticize the ball python industry for encouraging owners to treat their snakes as objects.`（多くの人々が、ボールパイソン産業が飼い主にヘビを物として扱うよう促していると批判している）という選択肢の内容と完全に一致します。\n\n**【パラグラフ5】**\n文章の結論部分です。\n\n**問2 (う) 正解: (C) rapid**\n`The ( う ) speed with which people create new types of ball python shows problems with our relationship with nature.`\n人間が新しい品種を作り出すその「**速さ**」が、自然との関係における問題点を示している、という文脈です。(C) `rapid`（速い）が適切です。\n\n**問8 正解: (A)**\n`by changing these creatures for fun, we are in ( a ) of ( b ) them.`\n`be in danger of ~ing`（～する危険がある）という構文を問う問題です。「楽しみのためにこれらの生き物を変えることで、我々は彼らを**虐待する**（mistreating）**危険**（danger）にさらされている」。よって (a) に `danger`、(b) に `mistreating` が入る (A) が正解です。\n\nナイジェリアのイボ族（ヘビを尊重）と現代文化（消費物として扱う）の対比を通じて、筆者のメッセージが強調されます。`Nature is an amazing place that we owe our respect, not a shopping mall.`（自然は尊敬すべき素晴らしい場所であり、ショッピングモールではない）という最後の文が力強いですね。\n\n**問9 正解: (E)**\nこのパラグラフは、現代文化がボールパイソンを `consumer objects`（消費物）として扱い、尊敬の念を欠いていると批判しています。これは、(E) `Ball pythons provide an example of how we treat nature as an object to be bought and sold and do not show it enough respect.`（ボールパイソンは、私たちが自然を売買されるべき対象として扱い、十分な敬意を払わない方法の一例を提供している）という内容に集約されます。\n\n**問10 (タイトル問題) 正解: (A)**\n本文全体は、ボールパイソンのブームを題材に、人間の都合で自然を改変するという「人間と自然との問題ある関係性」を浮き彫りにしています。したがって、(A) `Behind the Ball Python Trend: How Their Popularity Shows Our Problematic Relationship with Nature`（ボールパイソンの流行の裏側：その人気はいかにして我々の問題ある自然との関係を示すか）が最も本文のテーマを的確に捉えています。\n\n---\n\n### 大問V 空所補充（SFストーリー）\n\n一見すると、人類がAIの支配から解放されるという希望に満ちたSFストーリーですが、最後の「オチ」が全てをひっくり返します。このどんでん返しを念頭に置き、会話の流れを追っていきましょう。\n\n**物語の要約とオチ**\nロボットに支配された未来で、マヤはエイリアン「ガーディアン」と出会う。ガーディアンは人類解放を助けると約束し、マヤは彼らと共に戦い勝利する。…というのがアトラクションの「元ネタ」の話。\n**本当の結末（オチ）**: その後、ガーディアンは地球にやってきて、人間とロボットの両方を奴隷にした。彼らは救世主ではなく、新たな支配者だったのです。\n\nこれを踏まえて空欄を埋めていきます。\n\n**(ア) 正解: (B)**\nガーディアンが `\"Greetings, human,\" ` と挨拶した後、マヤは `\"Guardians? Who are you?\"` と聞き返しています。この間に、ガーディアンが自分のことを「ガーディアン」だと名乗る発言があったはずです。よって、(B) `I am one of the Guardians.` が最も自然な流れです。\n\n**(イ) 正解: (C)**\nガーディアンが `...waiting for the day when you would be ready to reclaim your power.`（君たちが力を取り戻す準備ができる日を待っていた）と言いました。聞き慣れない `reclaim` という単語にマヤが反応するのが自然です。(C) `Reclaim? What do you mean?`（取り戻す？どういう意味ですか？）が会話として最もスムーズにつながります。\n\n**(ウ) 正解: (A)**\nガーディアンに「人類が再び立ち上がる時が来た」と言われ、マヤはそれが本当かと確認します。ガーディアンが `\"Yes.\" ` と肯定した直後です。マヤは希望を抱きつつも、ロボットの圧倒的な力を知っているはず。ですから、(A) `But how? The machines are too powerful.`（でも、どうやって？機械は強力すぎます）と現実的な疑問を呈するのが最も論理的な反応です。\n\n**(エ) 正解: (E)**\nガーディアンが `\"We will give you the knowledge and technology.`（我々は知識と技術を与えよう）と協力の申し出をした後のセリフです。この申し出を受けて、共に目指す未来を語るのが自然な流れ。(E) `Together, we will usher in a new era of freedom.`（共に、我々は新しい自由の時代を切り開くだろう）が、この希望に満ちた場面に最もふさわしい言葉です。\n\n**(オ) 正解: (D)**\n物語の最後に `This is the real history on which our theme park ride is based.`（これが我々のテーマパークのアトラクションの元になった本当の歴史です）と明かされます。その直後の `Welcome to \"( オ )\"` には、そのアトラクションの名前が入るはずです。(D) `Resurgence: The Theme-Park Experience`（復活：テーマパーク体験）が、この物語の内容を要約したアトラクション名として最も適切です。そして、その後に続く広告文で、衝撃の「オチ」が明かされるという構成になっています。\n\n---\n\n以上で全ての解説を終わります。明治大学文学部の英語は、語彙力、文法知識、そして文脈を正確に読み解く論理的思考力がバランスよく問われる良問揃いです。今回の解説で示したような「思考のプロセス」を参考に、ぜひ今後の学習に役立ててください。皆さんの合格を心から応援しています！",
+  "structure": [
+    {
+      "id": "I",
+      "label": "大問I",
+      "questions": [
+        {
+          "id": "I-あ",
+          "label": "(あ)",
+          "type": "text",
+          "correctAnswer": "major",
+          "points": 3,
+          "explanation": "1文目では動詞で「専攻する」、2文目では形容詞で「主な」、3文目では音楽用語の形容詞で「長調の」という意味で使われる。文脈「大学で文学か経済学かを(専攻する)べきか」「(主な)問題の一つは駐車スペースの不足」「短調は悲しいが、(長調)は明るく楽しい」に合致する。"
+        },
+        {
+          "id": "I-い",
+          "label": "(い)",
+          "type": "text",
+          "correctAnswer": "rose",
+          "points": 3,
+          "explanation": "1文目では動詞riseの過去形で「立ち上がった」、2文目では動詞で声などが「高くなる」、3文目では名詞で「バラ」という意味で使われる。文脈「彼は重要な人物に挨拶するため席から素早く(立ち上がった)」「彼女の声は怒るといつも(高くなった)」「その(バラ)はピンク、赤、白、黄など様々な色がある」に合致する。"
+        },
+        {
+          "id": "I-う",
+          "label": "(う)",
+          "type": "text",
+          "correctAnswer": "side",
+          "points": 3,
+          "explanation": "1文目では名詞で「側面」、2文目では名詞で「味方、側」、3文目では名詞で「側」という意味で使われる。文脈「私は楽観的なのでいつも人生の明るい(側面)を見る」「彼女は議論でたいてい友人の(味方をする)」「隣の芝生は青い (The grass is always greener on the other side.)」に合致する。"
+        }
+      ]
+    },
+    {
+      "id": "II",
+      "label": "大問II",
+      "questions": [
+        {
+          "id": "II-ア",
+          "label": "(ア)",
+          "type": "text",
+          "correctAnswer": "achievement",
+          "points": 2,
+          "explanation": "an important の後には名詞が来るため、動詞 achieve を名詞形の achievement に変える。「高校卒業は重要な達成事項である。」"
+        },
+        {
+          "id": "II-イ",
+          "label": "(イ)",
+          "type": "text",
+          "correctAnswer": "strength",
+          "points": 2,
+          "explanation": "the の後には名詞が来るため、形容詞 strong を名詞形の strength に変える。「彼女は脚の筋力をつけるために運動をしている。」"
+        },
+        {
+          "id": "II-ウ",
+          "label": "(ウ)",
+          "type": "text",
+          "correctAnswer": "dangerous",
+          "points": 2,
+          "explanation": "have ... consequences の間で consequences を修飾する形容詞が必要なため、名詞 danger を形容詞形の dangerous に変える。「反応が遅すぎると危険な結果を招くことがある。」"
+        },
+        {
+          "id": "II-エ",
+          "label": "(エ)",
+          "type": "text",
+          "correctAnswer": "faithful",
+          "points": 2,
+          "explanation": "be動詞 was の後の補語で、to the book にかかる形容詞が必要なため、名詞 faith を形容詞形の faithful に変える。「その映画は原作に忠実で、作者の当初の意図に非常に近かった。」"
+        },
+        {
+          "id": "II-オ",
+          "label": "(オ)",
+          "type": "text",
+          "correctAnswer": "illustrate",
+          "points": 2,
+          "explanation": "to の後には動詞の原形が必要なため、名詞 illustration を動詞形の illustrate に変える。「講演者は聴衆の理解を助けるために例を用いて説明しようと試みた。」"
+        },
+        {
+          "id": "II-カ",
+          "label": "(カ)",
+          "type": "text",
+          "correctAnswer": "visiting",
+          "points": 2,
+          "explanation": "look forward to の後には動名詞が来るため、動詞 visit を動名詞形の visiting に変える。「私たちはこの秋、京都を訪れるのを楽しみにしている。」"
+        }
+      ]
+    },
+    {
+      "id": "III",
+      "label": "大問III",
+      "questions": [
+        {
+          "id": "III-1-ア",
+          "label": "問1 (ア)",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "correctAnswer": "C",
+          "points": 2,
+          "explanation": "下線部(ア)の make fun of は「～をからかう、ばかにする」という意味。選択肢(C)の mock「からかう」が最も意味が近い。"
+        },
+        {
+          "id": "III-1-イ",
+          "label": "問1 (イ)",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "correctAnswer": "A",
+          "points": 2,
+          "explanation": "下線部(イ)の relating an anecdote は「逸話を話す、物語る」という意味。選択肢(A)の describing「描写する、説明する」が最も意味が近い。"
+        },
+        {
+          "id": "III-1-ウ",
+          "label": "問1 (ウ)",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "correctAnswer": "D",
+          "points": 2,
+          "explanation": "下線部(ウ)の dialect は「方言」という意味。選択肢(D)の regional language「地域言語」が最も意味が近い。"
+        },
+        {
+          "id": "III-2-あ",
+          "label": "問2 (あ)",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "correctAnswer": "E",
+          "points": 2,
+          "explanation": "空欄(あ)のある文は、ジャーナリストや教育者が若者の 'like' の使用を批判するという文脈。どのような使用法かを考えると、「過度の」使用が批判対象となるため、(E) excessive が適切。"
+        },
+        {
+          "id": "III-2-い",
+          "label": "問2 (い)",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "correctAnswer": "C",
+          "points": 2,
+          "explanation": "空欄(い)のある文は、「'Like' を使うと、( )な正確さを約束することなく物語を話すことができる」という文脈。「完全な」正確さを約束せずに、という流れが自然なため、(C) complete が適切。"
+        },
+        {
+          "id": "III-2-う",
+          "label": "問2 (う)",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "correctAnswer": "C",
+          "points": 2,
+          "explanation": "空欄(う)のある文は、ソーシャルメディアの影響で 'like' が名詞として使われるようになったという内容。「ますます、次第に」という意味の (C) Increasingly が文脈に最も合う。"
+        },
+        {
+          "id": "III-3",
+          "label": "問3",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "correctAnswer": "D",
+          "points": 2,
+          "explanation": "与えられた語句を並べ替えると \"claimed that those who said 'like' too much would lose opportunities\" となり、「『like』をあまりに多く言う人々は機会を失うだろうと主張した」という意味の文が完成する。語順は c-a-e-d-b。3番目はe、5番目はbとなるため、(D)が正解。"
+        },
+        {
+          "id": "III-4",
+          "label": "問4",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "correctAnswer": "D",
+          "points": 3,
+          "explanation": "段落2では、'like'が沈黙の代わりに使われることへの批判が述べられている。特に「Hostile voices would claim the student's repetition of 'like' is careless and monotonous.」という一文は、'like'の繰り返しが不注意で単調だと主張する声があることを示しており、話者を思慮が浅いように聞こえさせると論じている(D)の内容と一致する。"
+        },
+        {
+          "id": "III-5",
+          "label": "問5",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "correctAnswer": "E",
+          "points": 2,
+          "explanation": "与えられた語句を並べ替える問題。正解は(E)で、3番目がe、5番目がcとなる。文は \"Using 'like' when relating an anecdote enables you to sound wittier than you actually are by giving you the freedom...\" という構造になり、語順は a-b-e-c-d となる。これにより「逸話を語る際に'like'を使うことで、実際よりも機知に富んで聞こえるようになる」という意味が成立する。"
+        },
+        {
+          "id": "III-6",
+          "label": "問6",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "correctAnswer": "D",
+          "points": 2,
+          "explanation": "下線部(3)の文脈は、「誰かの反応を引用しつつ、同時にその反応について考えていることを示唆するために間を置いている」という内容。(a)には「強調する」という意味の highlighting が入る。(b)には「おおよそ伝える」というニュアンスから approximating が適切。したがって、(D)が正解。"
+        },
+        {
+          "id": "III-7",
+          "label": "問7",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "correctAnswer": "C",
+          "points": 3,
+          "explanation": "段落3では、'like'が①不正確な引用を示す、②話題を示す、③「約、およそ」を意味する、④会話の流れを管理するなど、多様な機能を持つことが説明されている。このことから、(C)「カジュアルな会話において、'like'は多くの異なる意味を持ちうる」が段落の内容と一致する。"
+        },
+        {
+          "id": "III-8",
+          "label": "問8",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "correctAnswer": "C",
+          "points": 3,
+          "explanation": "段落4では、'like'が動詞や前置詞として使われる基本的な用法、ニューカッスル方言での文末での使用法、ソーシャルメディアでの名詞としての用法など、批評家がめったに批判しない多くの用法があることが述べられている。このことから、(C)「'like'には、その批評家でさえ非難しない多くの使用法がある」が段落の内容と一致する。"
+        },
+        {
+          "id": "III-9",
+          "label": "問9",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "correctAnswer": "D",
+          "points": 2,
+          "explanation": "下線部(4)は 'find it C to do' (～することをCだと思う) の構文。'much' があるため、Cには比較級が入る。(a)には easier が適切。「もし 'like' の頻繁な使用が本当に無意味なら、私たちはそれを(省く)ことがずっと(簡単だ)とわかるだろう」という文意から、(b)には out を入れて leave it out (それを取り除く、省く) という句動詞を作るのが適切。よって(D)が正解。"
+        },
+        {
+          "id": "III-10",
+          "label": "問10",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "correctAnswer": "B",
+          "points": 3,
+          "explanation": "段落5は、'like'を頻繁に使う人は「思慮深く、自分自身や周囲を意識している」可能性があり、その使用は「丁寧さや配慮」を示すと結論付けている。これは(B)「無礼であるどころか、カジュアルな'like'は思慮深さや、より良いコミュニケーションと社会的関係への欲求を示すかもしれない」という内容と一致する。"
+        },
+        {
+          "id": "III-11",
+          "label": "問11",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "correctAnswer": "A",
+          "points": 4,
+          "explanation": "本文全体は、'like'のカジュアルな使用法に対する批判と擁護の両方の側面を探求し、その是非を巡る議論を主題としている。シェイクスピアの戯曲名をもじった(A)「お気に召すまま：'Like'のカジュアルな使用を取り巻く議論」が、この内容を的確に表している。"
+        }
+      ]
+    },
+    {
+      "id": "IV",
+      "label": "大問IV",
+      "questions": [
+        {
+          "id": "IV-1-ア",
+          "label": "問1 (ア)",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "correctAnswer": "D",
+          "points": 2,
+          "explanation": "下線部(ア)の stunning は「驚くほど美しい、見事な」という意味。選択肢(D)の spectacular「壮観な、見事な」が最も意味が近い。"
+        },
+        {
+          "id": "IV-1-イ",
+          "label": "問1 (イ)",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "correctAnswer": "C",
+          "points": 2,
+          "explanation": "下線部(イ)の reinvented は「～を改革する、作り変える」という意味。文脈は「マーケターはヘビの評判を『作り変えた』」。選択肢(C)の transformed「～を変形させる、一変させる」が最も意味が近い。"
+        },
+        {
+          "id": "IV-1-ウ",
+          "label": "問1 (ウ)",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "correctAnswer": "D",
+          "points": 2,
+          "explanation": "下線部(ウ)の unique は「独特の、類のない」という意味。選択肢(D)の rare「珍しい」が最も意味が近い。"
+        },
+        {
+          "id": "IV-2-あ",
+          "label": "問2 (あ)",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "correctAnswer": "A",
+          "points": 2,
+          "explanation": "空欄(あ)のある文は、ボールパイソンが非常にエキゾチックなので、オリンピックの開会式で「披露される」ことを想像できる、という文脈。(A) displayed「展示される、披露される」が最も適切。"
+        },
+        {
+          "id": "IV-2-い",
+          "label": "問2 (い)",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "correctAnswer": "C",
+          "points": 2,
+          "explanation": "空欄(い)のある文は、ボールパイソンのブリーディングが批判されているという内容。その理由として「ボールパイソンがより(人気に)なるにつれて」という流れが自然なため、(C) popular が適切。"
+        },
+        {
+          "id": "IV-2-う",
+          "label": "問2 (う)",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "correctAnswer": "C",
+          "points": 2,
+          "explanation": "空欄(う)のある文は、人々が新しい種類のボールパイソンを作り出す「速さ」が、自然との関係における問題を示している、という内容。「速い」という意味を持つ(C) rapid が最も適切。"
+        },
+        {
+          "id": "IV-3",
+          "label": "問3",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "correctAnswer": "C",
+          "points": 3,
+          "explanation": "段落2では、ボールパイソンが「かっこよく見える」という一つの理由で飼育されていること、そしてその結果「tiny dots, narrow stripes, or unusual colors」といった新しい模様や色を持つ種類が生まれていることが述べられている。これは(C)の内容と一致する。"
+        },
+        {
+          "id": "IV-4",
+          "label": "問4",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "correctAnswer": "E",
+          "points": 2,
+          "explanation": "下線部(1)の文脈は「Of course, ... of years.」であり、人間が何千年もの間ヘビを売買してきたことを示唆している。与えられた語句を並べ替えると \"humans have bought and sold snakes for thousands\" of years. となり、意味が通る。語順は d-a-e-c-b。3番目はe、5番目はbとなるため、(E)が正解。"
+        },
+        {
+          "id": "IV-5",
+          "label": "問5",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "correctAnswer": "D",
+          "points": 3,
+          "explanation": "段落3では、マーケターがボールパイソンを都市家庭向けの理想的なペットとして売り出したことが述べられている。正解は(D)で、「ボールパイソンは人間にとって扱いやすいペットとして宣伝されてきた」という内容。本文中の \"undemanding, containing few allergy-producing substances, and needing to be fed only once a week\" という記述が、この選択肢の内容を裏付けている。"
+        },
+        {
+          "id": "IV-6",
+          "label": "問6",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "correctAnswer": "D",
+          "points": 2,
+          "explanation": "下線部(2)の文脈は、「珍しい生き物を愛する人々もいる一方で、他の人々は選択的育種が行き過ぎだと(警告している)」という内容が自然。(a)には warn「警告する」、(b)には go too far「行き過ぎる」という慣用句を作る far が入る。したがって、(D)が正解。"
+        },
+        {
+          "id": "IV-7",
+          "label": "問7",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "correctAnswer": "D",
+          "points": 3,
+          "explanation": "段落4では、ブリーディングがヘビを「高価なデザイナー服や宝石のようなステータスオブジェクト」として扱うことを助長し、飼い主が責任を忘れることにつながると批判されている。これは(D)「多くの人々が、ボールパイソン産業が飼い主にヘビを物として扱うよう促していると批判している」という内容と一致する。"
+        },
+        {
+          "id": "IV-8",
+          "label": "問8",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "correctAnswer": "A",
+          "points": 2,
+          "explanation": "下線部(3)の文脈は、「これらの生き物を楽しみのために変えることによって、私たちはそれらを(不当に扱う)危険にさらされている」という内容が自然。(a)には danger「危険」、(b)には mistreating「虐待する、不当に扱う」が入り、be in danger of -ing「～する危険がある」という形になる。したがって、(A)が正解。"
+        },
+        {
+          "id": "IV-9",
+          "label": "問9",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "correctAnswer": "E",
+          "points": 3,
+          "explanation": "段落5では、ナイジェリアのイボ族がボールパイソンを尊重する伝統とは対照的に、現代文化が人々を「消費者向けの物」として扱い、欲望に応じて変え、次のファッションのために捨てることを奨励していると述べている。これは(E)「ボールパイソンは、私たちが自然を売買されるべき対象として扱い、十分な敬意を払わない方法の一例を提供している」という内容と一致する。"
+        },
+        {
+          "id": "IV-10",
+          "label": "問10",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "correctAnswer": "A",
+          "points": 3,
+          "explanation": "本文全体は、ボールパイソンの品種改良の流行を例にとり、それが人間の娯楽や欲望のために自然を改変するという、人間と自然との間の問題のある関係性を浮き彫りにしていることを論じている。したがって、(A)「ボールパイソンの流行の裏側：その人気はいかにして我々の問題ある自然との関係を示すか」が最も適切なタイトルである。"
+        }
+      ]
+    },
+    {
+      "id": "V",
+      "label": "大問V",
+      "questions": [
+        {
+          "id": "V-ア",
+          "label": "(ア)",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "correctAnswer": "B",
+          "points": 2,
+          "explanation": "ガーディアンが「Greetings, human」と挨拶した直後の発言。マヤが「Guardians? Who are you?」と尋ねていることから、その前に自己紹介、あるいは少なくとも何者かを示唆する発言があったと考えられる。(B)「私はガーディアンの一人だ」が最も自然な流れを作る。"
+        },
+        {
+          "id": "V-イ",
+          "label": "(イ)",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "correctAnswer": "C",
+          "points": 2,
+          "explanation": "ガーディアンが「...waiting for the day when you would be ready to reclaim your power」と言った後の発言。マヤが「Reclaim? どういう意味？」と聞き返すのが最も自然な会話の流れ。よって(C)が適切。"
+        },
+        {
+          "id": "V-ウ",
+          "label": "(ウ)",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "correctAnswer": "A",
+          "points": 2,
+          "explanation": "マヤが「人類が再び立ち上がる時が来た」と聞き、「私たちがかつてこれ以上のものであったという話は本当なのですか？」と確認した後、ガーディアンが「そうだ」と肯定した。しかし、マヤは機械の力を知っているので、「しかし、どうやって？機械は強力すぎる」と疑問を呈するのが自然な流れ。よって(A)が適切。"
+        },
+        {
+          "id": "V-エ",
+          "label": "(エ)",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "correctAnswer": "E",
+          "points": 2,
+          "explanation": "ガーディアンが「我々は知識と技術を与えよう」と言った後の発言。この協力の申し出に対し、「共に、我々は新しい自由の時代を切り開くだろう」という前向きな言葉が続くのが最も文脈に合う。よって(E)が適切。"
+        },
+        {
+          "id": "V-オ",
+          "label": "(オ)",
+          "type": "selection",
+          "options": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ],
+          "correctAnswer": "D",
+          "points": 2,
+          "explanation": "物語の最後に「This is the real history on which our theme park ride is based.」とあり、これがテーマパークのアトラクションの元になった話だと明かされる。その後の「Welcome to...」はアトラクションの名前が入るのが自然。(D)「Resurgence: The Theme-Park Experience」（復活：テーマパーク体験）が最もふさわしい。"
+        }
+      ]
+    }
+  ]
+}

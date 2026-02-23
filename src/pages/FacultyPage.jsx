@@ -1,13 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getUniversities } from '../data/examRegistry';
 
 const FacultyPage = () => {
     const { universityId, facultyId } = useParams();
     const navigate = useNavigate();
-    const universities = getUniversities();
-    const university = universities.find(u => u.id.toString() === universityId);
-    const faculty = university?.faculties?.find(f => f.id === facultyId);
+    const [university, setUniversity] = useState(null);
+    const [faculty, setFaculty] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchFaculty = async () => {
+            const data = await getUniversities();
+            const u = data.find(u => u.id.toString() === universityId);
+            const f = u?.faculties?.find(fac => fac.id === facultyId);
+
+            setUniversity(u || null);
+            setFaculty(f || null);
+            setLoading(false);
+        };
+        fetchFaculty();
+    }, [universityId, facultyId]);
+
+    if (loading) {
+        return <div className="container" style={{ textAlign: 'center', padding: '2rem' }}>読み込み中...</div>;
+    }
 
     if (!university || !faculty) {
         return <div className="container">Faculty not found</div>;
@@ -26,26 +43,28 @@ const FacultyPage = () => {
             <div style={{ display: 'grid', gap: '1rem' }}>
                 {faculty.exams && faculty.exams.map((exam, index) => (
                     <div key={exam.id || index} className="glass-panel" style={{ padding: '1.5rem' }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <div>
-                                <h3 style={{ fontSize: '1.2rem', marginBottom: '0.25rem' }}>
+                        <div className="mobile-stack" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem' }}>
+                            <div style={{ flex: 1 }}>
+                                <h3 style={{ fontSize: '1.1rem', marginBottom: '0.4rem' }}>
                                     {exam.year}年 {exam.subject}
                                 </h3>
                                 {exam.type === 'pdf' && (
                                     <span style={{
-                                        fontSize: '0.8rem',
+                                        fontSize: '0.75rem',
                                         background: '#e0f2fe',
                                         color: '#0369a1',
                                         padding: '0.2rem 0.6rem',
-                                        borderRadius: '12px'
+                                        borderRadius: '12px',
+                                        fontWeight: '600'
                                     }}>
                                         PDF採点対応
                                     </span>
                                 )}
                             </div>
-                            <div style={{ display: 'flex', gap: '0.5rem' }}>
+                            <div style={{ display: 'flex', gap: '0.5rem' }} className="btn-mobile-full">
                                 <button
                                     className="btn btn-secondary"
+                                    style={{ flex: 1, whiteSpace: 'nowrap', fontSize: '0.85rem' }}
                                     onClick={() => {
                                         if (exam.type === 'pdf' && exam.pdfPath) {
                                             window.open(exam.pdfPath, '_blank');
@@ -54,10 +73,11 @@ const FacultyPage = () => {
                                         }
                                     }}
                                 >
-                                    問題を表示
+                                    問題
                                 </button>
                                 <button
                                     className="btn btn-primary"
+                                    style={{ flex: 1, whiteSpace: 'nowrap', fontSize: '0.85rem' }}
                                     onClick={() => navigate(`/exam/${university.id}-${faculty.id}-${index}`, {
                                         state: {
                                             exam,

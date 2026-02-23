@@ -1,0 +1,421 @@
+{
+  "id": "meiji-law-2025",
+  "university": "明治大学",
+  "universityId": 1001,
+  "faculty": "法学部",
+  "facultyId": "faculty",
+  "year": 2025,
+  "subject": "英語",
+  "subjectEn": "english",
+  "type": "pdf",
+  "pdfPath": "/exam_data/aigradingapp meiji-hougakubu-2025eigo.pdf",
+  "maxScore": 150,
+  "detailedAnalysis": "### 大問I 長文読解\n\nこの長文は、Deborah Lauferという障害を持つ女性が、ホテルのウェブサイトにアクセシビリティ情報が不足しているとして多数の訴訟を起こした事例に関するニュース記事です。法的な論点が含まれており、法学部受験生にとっては興味深い内容でしょう。\n\n#### 本文読解と思考プロセス\n\n**第1・2段落：問題提起とLaufer氏の行動**\nまず第1段落では、Lauferさんが車椅子で利用できるホテルを探すのに苦労し、時には車中泊を余儀なくされたという個人的な経験が語られます。「she slept in her car after arriving at a hotel to find she could not access the property.」という一文は、彼女の直面した困難の深刻さを物語っています。この時点では、一個人の体験談という印象です。\n\nしかし第2段落に進むと、話のスケールが一変します。彼女の行動は個人的な不満解消のためではなく、「on behalf of the broader disabled community」（より広範な障害者コミュニティのため）であるとされます。そして核心部分、「filed hundreds of disability discrimination lawsuits against hotels she never planned to visit.」（訪れる予定すらないホテルに対し、何百もの訴訟を起こした）に至ります。ここから、彼女の活動が社会制度の不備を問う「テスター」としての活動であることが明確になります。\n\n**第3・4段落：賛成論と反対論の対立構造**\n第3段落は、彼女の支持者の意見です。「They draw parallels to Black civil rights advocates who intentionally rode segregated buses...」とあります。これは、彼女の行動を歴史的な公民権運動になぞらえ、その正当性を主張する強力な論拠です。公民権運動というアメリカ社会の重要な文脈に接続することで、彼女の行動の意義を強調しているわけです。\n\nしかし、第4段落の冒頭に「But」という逆接のマーカーがあります。ここから反対意見が始まると予測できますね。ホテル側の弁護士は、「unlike the in-person work of civil rights advocates... Laufer was never directly interacting with the property owners」と反論します。つまり、公民権運動家が物理的に現場で差別に立ち向かったのに対し、Lauferさんの行動はオンライン上のもので直接的な接触がない、という違いを問題にしているのです。この対立を通じて、「オンラインでの調査活動に訴訟を起こす資格（standing）があるのか」という法的な争点が浮かび上がります。\n\n**第5段落以降：複雑化する状況と背景**\n第5段落の「Even the Biden administration has not fully embraced either side.」という一文は重要です。「Even」（～でさえ）という言葉から、障害者の権利を擁護する立場と思われる政権ですら、単純に彼女を支持しているわけではない、という複雑な状況がわかります。訟務長官は「予約なしにサイトを見ただけでは訴訟資格はない」という見解を示しており、単純な賛成・反対の二項対立ではないことが示されます。\n\n以降の段落では、Lauferさんの個人的な背景や、訴訟の根拠となるADA法（障害を持つアメリカ人法）の現状、そして訴えられたホテル経営者側の事情が描かれ、この問題が持つ多面性が示されて締めくくられます。\n\n#### 設問解説\n\n**(問1) 下線部の意味に最も近いものを選ぶ問題**\n\n(ア) 「on behalf of the broader disabled community」は「より広範な障害者コミュニティを代表して／のために」という意味です。\n   - 選択肢2「for the benefit of people with various difficulties」（様々な困難を抱える人々の利益のために）が、この文脈に最も合致します。他の選択肢は、1「近所での地位」、3「すべてのコミュニティ」、4「オンライン予約をする旅行者」といずれも対象がずれています。\n\n(イ) 「now before the Supreme Court」は、法的な文脈で「現在、最高裁判所で審理中である」という意味を表す定型表現です。\n   - 選択肢4「the case is presently being decided by the Supreme Court」（その訴訟は現在、最高裁判所によって審理されている）が、この意味と一致します。2のように物理的に「建物の前」と解釈するのは誤りです。\n\n(ウ) 「gives her standing」は法律用語で「彼女に（訴訟を起こすための）当事者適格を与える」という意味です。直後に「or the right to sue in federal court」（連邦裁判所で訴訟を起こす権利）と言い換えられているのが決定的なヒントです。\n   - 選択肢3「qualifies her to initiate a federal case」（彼女に連邦の訴訟を開始する資格を与える）が、この言い換えと完全に一致します。1のように物理的に「立つ」と考えるのは誤りです。\n\n(エ) 「an \"unethical extortionate scheme\"」は「非倫理的な恐喝の企て」と訳せます。「extortionate」は金銭を不当に得ようとする「恐喝的な」という意味合いを持ちます。\n   - 選択肢1「a morally unacceptable attempt at getting money from the business」（そのビジネスから金銭を得ようとする、道徳的に受け入れがたい試み）が、この「非倫理的」「金銭目的」というニュアンスを最もよく表しています。\n\n(オ) 「one」が指すものを特定する問題です。直前の文「an allegation Laufer vigorously denies, but one that led in part to her request...」の構造を見ると、代名詞「one」は先行する名詞「an allegation」（主張、申し立て）を指していることがわかります。\n   - したがって、正解は選択肢1の「an allegation」です。\n\n(カ) 「either side」は「どちらか一方の側」という意味で、ここでは対立する二つの立場を指します。この訴訟は、原告であるLauferさんと、彼女が訴えているホテル側との間で争われています。\n   - 選択肢2「Laufer's side or the side of the hotels which Laufer is filing lawsuits against」（Lauferの側、または彼女が訴訟を起こしているホテル側の側）が、この対立構造を正しく示しています。\n\n**(問2) 本文の内容に関する質問**\n\n(A) Lauferが車で眠らなければならなかった理由を問うています。第1段落に「she slept in her car after arriving at a hotel to find she could not access the property.」（ホテルに着いてから、施設に入れないとわかり車で寝た）と明記されています。\n   - 選択肢4「Because the facility turned out to be inaccessible to her.」（施設が彼女にとってアクセス不可能だと判明したから）が本文の記述と一致します。\n\n(B) Lauferのような「テスター」が何をするかを問うています。第2段落に「She surfed the web to see which hotels included accessibility information required by law」（法律で義務付けられたアクセシビリティ情報が含まれているかウェブサイトを調べた）とあります。\n   - 選択肢4「They visit businesses' websites to inspect their policies.」（彼らは企業の方針を調査するためにウェブサイトを訪れる）がこの行動を正しく説明しています。\n\n(C) メイン州のホテル訴訟に関する法専門家の懸念を問うています。第4段落に「The case ... could weaken ADA protections and have broader ramifications for the enforcement of other civil rights laws」（その訴訟はADAの保護を弱め、他の公民権法の施行に広範な影響を及ぼす可能性がある）とあります。\n   - 選択肢3「It could weaken the effect of the ADA and potentially affect other civil rights laws.」がこの記述と一致します。\n\n(D) 訟務長官（solicitor general）の見解を問うています。第5段落に「Laufer does not have standing to sue because she merely viewed the hotel website without making a reservation.」（予約せずにウェブサイトを見ただけなので、訴訟を起こす当事者適格がない）とあります。\n   - 選択肢3「She may not have a right to file a formal complaint unless she reserves a hotel room.」（ホテルの部屋を予約しない限り、彼女は正式な訴えを起こす権利がないかもしれない）が、この内容を正しく反映しています。\n\n(E) 多発性硬化症を患った後、Lauferが何を考えたかを問うています。第6段落の彼女の発言「to be treated like less than a person」（人として劣るものとして扱われること）から、彼女が障害を持つ人々が社会の一員として正当に扱われていないと感じていることがわかります。\n   - 選択肢4「Those with disabilities are not being treated as full members of society.」（障害を持つ人々は社会の完全な一員として扱われていない）が、この心情を最もよく表しています。\n\n**(問3) 本文の内容に最も近いものを選ぶ問題**\n\n(A)\n- 選択肢3が正解です。第3段落に、Lauferの弁護士たちが彼女の行動を「Black civil rights movement」（黒人公民権運動）になぞらえていると明確に記述されています。\n- 1は「satisfied」（満足した）が本文の不満と矛盾します。4はバイデン政権が「not fully embraced」（完全には支持していない）とあるので誤りです。\n\n(B)\n- 選択肢3が正解です。第2段落の「hotels she never planned to visit」から、滞在する意図なく宿泊施設を調査したことがわかります。\n- 2は発症から17年とあるので「40年近く」は誤りです。4は「disability rights advocates」（障害者の権利擁護者）は彼女を支持しているので誤りです。\n\n(C)\n- 選択肢1が正解です。第7段落に、ADA法があっても、ウェブサイトの情報が不十分なため、障害を持つ人々がホテル到着後に困難に直面し続けている状況が描かれています。\n- 2のサーバーの問題や、4の地域の慣習についての記述はありません。\n\n(D)\n- 選択肢3が正解です。最終段落で、ホテル経営者のAchesonが「If you're in hospitality, you love your guests and making them happy.」（ホスピタリティ業界にいれば、お客様を愛し、お客様を幸せにすることを楽しむものです）と述べており、この選択肢の内容と一致します。\n- 2は彼女が訴えられてからすぐにウェブサイトを更新したとあるので、連絡を待っていたわけではなく誤りです。\n\n---\n\n### 大問II 長文読解\n\nこの文章は、筆者がエジプトのアレクサンドリアから西部の砂漠地帯へ向かい、ベドウィンのコミュニティを訪れる様子を描いたエッセイです。情景描写と筆者の心情の変化を丁寧に追っていきましょう。\n\n#### 本文読解と思考プロセス\n\n**第1・2段落：都市から砂漠へ**\n文章はアレクサンドリアの都会的な風景から始まりますが、徐々に郊外の生活感あふれる景色へと移り変わります。そして、交通の難所である「a tiny bridge」を渡ることで、風景は一変します。橋を渡った先は、もはや整然とした都市ではありません。悪臭のする湖岸を過ぎ、いよいよ砂漠地帯に入ります。\n\nしかし、筆者はこの砂漠が一般的なイメージの砂漠ではないことを「This is not the impressive stark sand desert...」と強調します。続く「Rather」という対比のマーカーに注目です。ここにあるのは、「a flat, dusty place... dotted with factories and open-air storage areas」、つまり都市化の影響が色濃く残る、産業的な風景の砂漠なのです。西へ進むにつれて、ようやくそうした「都市の兆候（signs of the encroaching metropolis）」が薄れ、ベドウィンの集落が見えてきます。\n\n**第3段落：コミュニティへの到着と筆者の心情**\n筆者がフィールドリサーチで滞在したコミュニティへ帰る場面です。「Returning from the crowded and noisy streets..., I often felt relieved to see the open spaces, to note the silence.」という一文に、筆者の心情がはっきりと表れています。都市の喧騒を離れ、砂漠の静けさと開放感に安らぎを感じているのです。\n\n到着時の描写は非常に興味深いものです。女性たちの出迎え方が、男性客の有無によって変わるのです。「unless male guests were sitting out front.」という記述が重要です。男性客がいる場合は、女性たちは直接姿を見せず、「out of sight of the men」（男性たちの視界から外れて）家の中で待っている。この描写から、このコミュニティの文化的な慣習や、男女間の空間意識がうかがえます。\n\n**最終段落：コミュニティの特性分析**\n筆者が滞在したコミュニティは、伝統的でありながらも、現代社会の変化に深く関わっている集団でした。重要なのは「What changes in lifestyle they had made were voluntary adaptations to shifting conditions.」という一文です。彼らは変化を強いられたのではなく、「自発的に適応した」のです。政府の援助を利用しつつも、土地は自分たちで購入し、学校建設を要請するなど、主体的に外部社会と関わりながらも、独自の道徳観とアイデンティティを維持していました。\n\n#### 設問解説\n\n**(問1) 下線部の意味に最も近いものを選ぶ問題**\n\n(ア) 「Only the pedestrians cross in a steady stream」は「歩行者だけが絶え間ない流れで渡る」という意味です。直前の車の渋滞との対比がポイントです。\n   - 選択肢2「People on foot can proceed without interruption while carts and cars on the bridge are stuck in a traffic jam.」がこの対比を最も正確に説明しています。\n\n(イ) 「tall reeds herald the marshy shores」の「herald」は「～の到来を告げる、前兆となる」という動詞です。\n   - 選択肢2「tall reeds indicate that the marshy shores are approaching」（アシが湿地帯の岸が近づいていることを示している）がこの意味に最も近いです。\n\n(ウ) 「their catches」は、直前の「Fishermen」（漁師）の獲物、つまり「漁獲物」を指します。\n   - 選択肢4「what the locals fish at the lake」（地元の人々が湖で釣るもの）が最も適切です。\n\n(エ) 「these signs of the encroaching metropolis thin out」は「これらの忍び寄る大都市のしるしが、次第にまばらになる」です。「these signs」とは工場や貯蔵エリアのことです。\n   - 選択肢3「these reminders of the expanding urban area gradually decrease」（拡大する都市部を思い起こさせるこれらのものが徐々に減少する）がこの内容を正しく言い換えています。\n\n(オ) 「to retard soil erosion」は「土壌侵食を遅らせる（防ぐ）」という意味です。\n   - 選択肢3「to prevent the wearing away of earth by wind and water」（風や水による土の浸食を防ぐため）が、土壌侵食の定義そのものであり、完全に一致します。\n\n(カ) 「out of sight of the men」は「男性たちの視界から外れて」という意味です。\n   - 選択肢2「once I go in and the men cannot see what's going on there」（私が中に入り、男性たちがそこで何が起きているか見えなくなると）が、この状況を最も正確に説明しています。\n\n(キ) 「What changes... were voluntary adaptations...」は「生活様式の変化は...自発的な適応だった」という意味です。\n   - 選択肢3「They managed to keep their own moral standards and identity while utilizing the changing society around them.」（彼らは周りの変化する社会を利用しつつ、自分たち自身の道徳基準とアイデンティティを維持した）が、この「自発的な適応」のニュアンスを最もよく表しています。\n\n**(問2) 本文の内容に関する質問**\n\n(A) 橋を渡った後に筆者が見たものを問うています。第2段落に「a flat, dusty place... dotted with factories and open-air storage areas」と具体的に描写されています。\n   - 選択肢2「flat dusty desert land with factories and storage areas」がこの記述と一致します。\n\n(B) 筆者が暮らした人々の社会的状況を問うています。最終段落から、彼らが西方のより貧しい集団より裕福であり、政府から土地を買い取って自分たちの土地を守ったことがわかります。\n   - 選択肢4「They were richer than the people farther west and successfully prevented the government from taking their land.」がこの内容を正しくまとめています。\n\n(C) 都市と比較した西部の砂漠の印象を問うています。第3段落冒頭に「relieved to see the open spaces, to note the silence」（開けた空間と静けさに安堵した）とあります。\n   - 選択肢1「After the crowds and noises of cities, the quiet and open space in the Western Desert were relaxing.」がこの心情を的確に表しています。\n\n**(問3) 空欄補充**\n空欄(ク)を含む文は「They had requested that a government school (ク) built nearby...」です。「request that S (should) V原形」という構文です。主語「a government school」は「建てられる」側なので、受動態の「be built」とする必要があります。\n- したがって、空欄には「be」が入ります。\n\n**(問4) 記述問題**\n筆者がコミュニティを訪れた際の女性たちの対応を50字以内でまとめる問題です。第3段落の記述から、男性客の有無で対応が変わることが最大のポイントです。\n- 男性客がいない場合：戸口で出迎える。\n- 男性客がいる場合：男性の視界を避け、家の中の戸口で待っている。\nこれらの要素を簡潔にまとめます。\n- **解答例：男性客がいない場合は出迎え、いる場合は男性の目から隠れて戸口の内側で身を寄せ合い待っていた。（49字）**",
+  "structure": [
+    {
+      "id": "I",
+      "label": "大問I",
+      "questions": [
+        {
+          "id": "I-1-ア",
+          "label": "(問1)(ア)",
+          "type": "selection",
+          "options": [
+            "by virtue of her position in the neighborhood",
+            "for the benefit of people with various difficulties",
+            "in the interests of all communities",
+            "on account of travelers using online reservation systems"
+          ],
+          "correctAnswer": "2",
+          "points": 5,
+          "explanation": "下線部(ア)の 'on behalf of the broader disabled community' は「より広範な障害者コミュニティを代表して、またはその利益のために」という意味です。本文では、Lauferが自身の経験から、より広い障害を持つ人々のために訴訟を起こすことを決意した文脈で使われています。選択肢2の 'for the benefit of people with various difficulties' は「様々な困難を抱える人々の利益のために」という意味で、この文脈に最も合致します。他の選択肢は、1「近所での彼女の地位によって」、3「全てのコミュニティの利益のために」、4「オンライン予約システムを使う旅行者のために」となり、文脈から外れるため不正解です。"
+        },
+        {
+          "id": "I-1-イ",
+          "label": "(問1)(イ)",
+          "type": "selection",
+          "options": [
+            "Laufer's lawyers are trying to win the case before it is decided by the Supreme Court",
+            "testers such as Laufer are gathering in front of the Supreme Court building",
+            "the case is currently out of the hands of the Supreme Court",
+            "the case is presently being decided by the Supreme Court"
+          ],
+          "correctAnswer": "4",
+          "points": 5,
+          "explanation": "下線部(イ)の 'now before the Supreme Court' は、法的な文脈で「現在、最高裁判所で審理中である」という意味を表します。この表現は、案件が裁判所の議題に上がっている状態を示します。選択肢4の 'the case is presently being decided by the Supreme Court' は「その訴訟は現在、最高裁判所によって審理されている」という意味であり、下線部の内容と一致します。選択肢1は「最高裁が決定する前に勝訴しようとしている」、2は「最高裁の建物の前に集まっている」、3は「最高裁の手を離れている」となり、いずれも意味が異なるため誤りです。"
+        },
+        {
+          "id": "I-1-ウ",
+          "label": "(問1)(ウ)",
+          "type": "selection",
+          "options": [
+            "allows her to continue standing in the court located in the federal building",
+            "grants her the right to ask questions to the judges about her experiences",
+            "qualifies her to initiate a federal case",
+            "refuses her the right to initiate a lawsuit"
+          ],
+          "correctAnswer": "3",
+          "points": 5,
+          "explanation": "下線部(ウ)の 'gives her standing' は、法律用語で「彼女に（訴訟を起こすための）当事者適格を与える」という意味です。本文では、この語の直後に 'or the right to sue in federal court'（連邦裁判所で訴訟を起こす権利）という同格表現で意味が補足されています。このことから、選択肢3の 'qualifies her to initiate a federal case'「彼女に連邦の訴訟を開始する資格を与える」が最も適切な言い換えとなります。選択肢1は'standing'を物理的に「立っていること」と誤解しており、2は「質問する権利」、4は「訴訟を起こす権利を拒否する」で正反対の意味であり、いずれも不正解です。"
+        },
+        {
+          "id": "I-1-エ",
+          "label": "(問1)(エ)",
+          "type": "selection",
+          "options": [
+            "a morally unacceptable attempt at getting money from the business",
+            "an illegal framework to force others to throw away their rights",
+            "an unlawful procedure that would bring inconveniences to others",
+            "a plan to do harm to people in the disabled community without violating laws"
+          ],
+          "correctAnswer": "1",
+          "points": 5,
+          "explanation": "下線部(エ)の 'an \"unethical extortionate scheme\"' は「非倫理的な恐喝の企て」と訳せます。'extortionate' は「恐喝的な、法外な」を意味し、金銭を不当に得ようとする行為を指します。本文では、ホテル側がLauferの訴訟をこのように非難している文脈です。選択肢1の 'a morally unacceptable attempt at getting money from the business'「そのビジネスから金銭を得ようとする、道徳的に受け入れがたい試み」がこの意味に最も近いです。他の選択肢は、2「権利を放棄させる違法な枠組み」、3「他者に不便をもたらす不法な手続き」、4「法を犯さずに障害者コミュニティの人々に害をなす計画」となり、下線部の「恐喝」というニュアンスからずれるため不適切です。"
+        },
+        {
+          "id": "I-1-オ",
+          "label": "(問1)(オ)",
+          "type": "selection",
+          "options": [
+            "an allegation",
+            "a court",
+            "a judge",
+            "a scheme"
+          ],
+          "correctAnswer": "1",
+          "points": 5,
+          "explanation": "下線部(オ)の 'one' が指すものを特定する問題です。直前の文 'an allegation Laufer vigorously denies, but one that led in part to her request...' を見ると、'one' は先行する名詞 'an allegation'（主張、申し立て）を指していることがわかります。したがって、正解は選択肢1の 'an allegation' です。文法的には、'one' が代名詞として先行する名詞を繰り返す用法です。他の選択肢2「裁判所」、3「裁判官」、4「企て」は文脈上、'one' が指す対象ではないため不正解です。"
+        },
+        {
+          "id": "I-1-カ",
+          "label": "(問1)(カ)",
+          "type": "selection",
+          "options": [
+            "Laufer's side or the side of the American with Disabilities Act advocates",
+            "Laufer's side or the side of the hotels which Laufer is filing lawsuits against",
+            "the Maryland hotel's side or the high court's side",
+            "the solicitor general's side or the tester's side"
+          ],
+          "correctAnswer": "2",
+          "points": 5,
+          "explanation": "下線部(カ)の 'either side' は「どちらか一方の側」という意味で、ここでは対立する二つの立場を指します。文脈は、バイデン政権がこの訴訟におけるどちらの側も完全には支持していない、というものです。この訴訟の対立構造は、原告であるLauferと、彼女が訴えているホテル側です。したがって、選択肢2の 'Laufer's side or the side of the hotels which Laufer is filing lawsuits against'「Lauferの側、または彼女が訴訟を起こしているホテル側の側」が、対立する両者を正しく示しています。他の選択肢は、対立構造を誤って捉えているため不正解です。"
+        },
+        {
+          "id": "I-2-A",
+          "label": "(問2)(A)",
+          "type": "selection",
+          "options": [
+            "Because she did not know that the hotel had gone out of business.",
+            "Because she found out that the hotel had no public access.",
+            "Because she realized that she lacked permission to access the property.",
+            "Because the facility turned out to be inaccessible to her."
+          ],
+          "correctAnswer": "4",
+          "points": 5,
+          "explanation": "この質問は、Lauferが車で眠らなければならなかった理由を問うています。本文の第1段落に 'she slept in her car after arriving at a hotel to find she could not access the property.' とあります。これは「ホテルに到着した後、その施設に入れないことがわかり、車で眠った」という意味です。'could not access the property' は施設が利用不可能、つまりアクセスできなかったことを示します。選択肢4の 'Because the facility turned out to be inaccessible to her.' は「その施設が彼女にとってアクセス不可能だと判明したから」という意味で、本文の記述と完全に一致します。他の選択肢は本文に記載がないか、内容が異なります。"
+        },
+        {
+          "id": "I-2-B",
+          "label": "(問2)(B)",
+          "type": "selection",
+          "options": [
+            "They examine hotel financial records.",
+            "They make their own online reservation systems.",
+            "They physically go to a store to make a purchase.",
+            "They visit businesses' websites to inspect their policies."
+          ],
+          "correctAnswer": "4",
+          "points": 5,
+          "explanation": "Lauferのような「テスター」が何をするかを問う問題です。本文の第2段落に 'She surfed the web to see which hotels included accessibility information required by law, and filed hundreds of ... lawsuits' と記述されています。これは、彼女が「法律で義務付けられたアクセシビリティ情報がどのホテルに含まれているかを確認するためにウェブを閲覧し、訴訟を起こした」ことを意味します。したがって、テスターは企業のウェブサイトを訪れて、その方針（ここではアクセシビリティ情報）を調査しています。選択肢4の 'They visit businesses' websites to inspect their policies.' はこの内容と合致するため正解です。他の選択肢は本文に記述がありません。"
+        },
+        {
+          "id": "I-2-C",
+          "label": "(問2)(C)",
+          "type": "selection",
+          "options": [
+            "Defending a weakened ADA could potentially lead to the strengthening of other civil rights laws.",
+            "It could broaden the application of the ADA and potentially eliminate the protections of other civil rights.",
+            "It could weaken the effect of the ADA and potentially affect other civil rights laws.",
+            "Protecting the weakened ADA could potentially expand the validity of other civil rights."
+          ],
+          "correctAnswer": "3",
+          "points": 5,
+          "explanation": "メイン州のホテル訴訟に関する法専門家の懸念を問う問題です。本文の第4段落に 'The case ... could weaken ADA protections and have broader ramifications for the enforcement of other civil rights laws, legal experts say.' とあります。これは「その訴訟はADA（障害を持つアメリカ人法）の保護を弱め、他の公民権法の施行に広範な影響を及ぼす可能性がある、と法専門家は言う」という意味です。選択肢3の 'It could weaken the effect of the ADA and potentially affect other civil rights laws.' はこの記述と完全に一致します。したがって、これが正解です。他の選択肢は内容を誤って解釈しているか、正反対のことを述べています。"
+        },
+        {
+          "id": "I-2-D",
+          "label": "(問2)(D)",
+          "type": "selection",
+          "options": [
+            "Her claims are reasonable and compatible with the present law.",
+            "Looking at a website gives her a ground to bring a lawsuit.",
+            "She may not have a right to file a formal complaint unless she reserves a hotel room.",
+            "She is an obstacle for the government to pass the bill."
+          ],
+          "correctAnswer": "3",
+          "points": 5,
+          "explanation": "Lauferの訴訟に関する訟務長官（solicitor general）の見解を問う問題です。本文の第5段落に 'The solicitor general ... says Laufer does not have standing to sue because she merely viewed the hotel website without making a reservation.' とあります。これは「訟務長官は、Lauferはホテルのウェブサイトを予約せずに閲覧しただけなので、訴訟を起こす当事者適格がない、と述べている」という意味です。つまり、予約という具体的な行動がなければ訴訟の権利はないかもしれないという見解です。選択肢3の 'She may not have a right to file a formal complaint unless she reserves a hotel room.'「ホテルの部屋を予約しない限り、彼女は正式な訴えを起こす権利がないかもしれない」は、この内容を正しく反映しています。したがって、これが正解です。"
+        },
+        {
+          "id": "I-2-E",
+          "label": "(問2)(E)",
+          "type": "selection",
+          "options": [
+            "Handicapped people should be given discounted hotel rates.",
+            "She personally started research on a cure for the disease.",
+            "She refused to stop practicing martial arts.",
+            "Those with disabilities are not being treated as full members of society."
+          ],
+          "correctAnswer": "4",
+          "points": 5,
+          "explanation": "多発性硬化症を患った後、Lauferが何を考えたかを問う問題です。彼女が訴訟を起こす動機について述べた第6段落の最後の部分 'Omitting the required information online caused harm ... by sending the message that disabled guests are not welcome.' や、彼女のインタビューでの発言 'they didn't value me as a person, as a customer. It's very hurtful ... to be treated like less than a person' に注目します。これらの記述から、彼女が障害を持つ人々が社会の一員として正当に扱われていない、歓迎されていないと感じていることがわかります。選択肢4の 'Those with disabilities are not being treated as full members of society.' は、この心情を最もよく表しているため正解です。他の選択肢に関する記述は本文中にありません。"
+        },
+        {
+          "id": "I-3-A",
+          "label": "(問3)(A)",
+          "type": "selection",
+          "options": [
+            "Laufer liked traveling and was satisfied with her actual experiences in hotels.",
+            "Laufer made a lot of online hotels reservations and did not show up without cancelling them.",
+            "Laufer's lawyers state that her actions have similarities to the Black civil rights movement.",
+            "President Biden supported Laufer's standpoint because of his liberal political views."
+          ],
+          "correctAnswer": "3",
+          "points": 5,
+          "explanation": "本文の内容と最も一致する選択肢を選ぶ問題です。本文の第3段落に 'They draw parallels to Black civil rights advocates who intentionally rode segregated buses to spark litigation...' とあります。これは、Lauferの弁護士たちが、彼女の行動を、かつて黒人の公民権運動家が行った抗議行動になぞらえていることを示しています。選択肢3はこの内容と一致します。一方、選択肢1はLauferが旅行で不満を抱えていたことと矛盾します。選択肢2は、彼女が「訪れる予定のない」ホテルのサイトを見ていたとあるので、予約したとは書かれていません。選択肢4は、バイデン政権が彼女の側を「完全には支持していない」とあるので誤りです。"
+        },
+        {
+          "id": "I-3-B",
+          "label": "(問3)(B)",
+          "type": "selection",
+          "options": [
+            "Laufer couldn't find any hotels with facilities to support physically challenged people.",
+            "Laufer has suffered from multiple sclerosis for nearly 40 years.",
+            "Laufer has checked the accommodations without intent to stay.",
+            "Laufer's behavior was not supported by disability rights advocates."
+          ],
+          "correctAnswer": "3",
+          "points": 5,
+          "explanation": "本文の内容と最も近い選択肢を選ぶ問題です。本文第2段落に、Lauferが 'filed hundreds of disability discrimination lawsuits against hotels she never planned to visit.' とあります。これは彼女が「訪れる予定のないホテル」に対して訴訟を起こしたことを意味し、滞在する意図なく宿泊施設を調査したことを示しています。選択肢3の 'Laufer has checked the accommodations without intent to stay.' はこの行動を正しく述べています。選択肢1は「ホテルを全く見つけられなかった」と断定しており、本文の「情報を見つけるのに苦労した」というニュアンスとは異なります。選択肢2は、発症から17年とあるので「40年近く」は誤りです。選択肢4は、彼女の弁護士や「障害者の権利擁護者」が彼女の活動を必要だと述べているため、正反対です。"
+        },
+        {
+          "id": "I-3-C",
+          "label": "(問3)(C)",
+          "type": "selection",
+          "options": [
+            "Disabled people continue to face difficulties after arriving at hotels due to insufficient information provided on hotel websites, despite the ADA.",
+            "Hotel guests routinely had trouble visiting hotel websites because their servers were often inaccessible.",
+            "There were Justice Department rules implementing the ADA, but their requirements did not define \"any details\" about the required accessibility features.",
+            "While the ADA has become effective thanks to the rules set by the Justice Department, local customs kept disabled guests from accessing hotels' facilities."
+          ],
+          "correctAnswer": "1",
+          "points": 5,
+          "explanation": "本文の内容に最も近いものを選ぶ問題です。本文の第7段落に 'But people with disabilities still frequently find websites with insufficient information ... and routinely arrive at their destinations to discover the room they reserved is not available or not as advertised.' とあります。これは「しかし、障害を持つ人々は依然として不十分な情報しか掲載されていないウェブサイトを頻繁に見つけ、目的地に到着して予約した部屋が利用できない、または宣伝通りでないことを知る」という内容です。選択肢1は、この記述を正確に要約しています。選択肢2はサーバーの問題には言及されていません。選択肢3は、司法省の規則が '\"enough detail\"' を求めているとあり、'any details'を定義しなかったとは書かれていません。選択肢4の地域の慣習については言及がありません。"
+        },
+        {
+          "id": "I-3-D",
+          "label": "(問3)(D)",
+          "type": "selection",
+          "options": [
+            "Acheson's grandparents encouraged her to operate hotels in New England.",
+            "Julianna Acheson would have added the information if the disabled people had contacted her.",
+            "People working in hospitality business, according to Acheson, should be happy to make their customers happy.",
+            "The solicitor general encouraged Julianna Acheson to care even more about disabled people."
+          ],
+          "correctAnswer": "3",
+          "points": 5,
+          "explanation": "本文の内容と最も一致する選択肢を選びます。本文の最終段落で、ホテル経営者のAchesonが '\"If you're in hospitality, you love your guests and making them happy.\"' と述べています。これは「ホスピタリティ業界にいれば、お客様を愛し、お客様を幸せにすることを楽しむものです」という意味です。選択肢3は、このAchesonの発言の趣旨を正しく捉えています。選択肢1は祖父母がホテルを経営していたとはありますが、彼女に経営を勧めたとは書かれていません。選択肢2は、彼女が訴えられて間違いに気づくとすぐにウェブサイトを更新したとあるため、連絡を待っていたわけではありません。選択肢4は訟務長官がAchesonを励ましたという記述はなく、Lauferの訴訟資格に言及しているだけです。"
+        }
+      ]
+    },
+    {
+      "id": "II",
+      "label": "大問II",
+      "questions": [
+        {
+          "id": "II-1-ア",
+          "label": "(問1)(ア)",
+          "type": "selection",
+          "options": [
+            "Cars and carts cross the bridge so smoothly that it looks like the flow of a fast river.",
+            "People on foot can proceed without interruption while carts and cars on the bridge are stuck in a traffic jam.",
+            "Some people give up the idea of crossing the river by the crowded bridge and walk through the water to reach the other side.",
+            "Those who drive cars, trucks and taxies over the bridge may have to pay a fee but those who walk can cross it free of charge."
+          ],
+          "correctAnswer": "2",
+          "points": 5,
+          "explanation": "下線部(ア) 'Only the pedestrians cross in a steady stream' は「歩行者だけが途切れることのない流れで渡る」という意味です。この文の直前には、車や荷車が橋を渡る順番を待って長い列を作っている状況が描かれています。この対比から、車が渋滞している一方で、歩行者はスムーズに進めるという状況を読み取ることができます。選択肢2の 'People on foot can proceed without interruption while carts and cars on the bridge are stuck in a traffic jam.' はこの状況を正確に説明しているため正解です。他の選択肢は本文の記述と異なります。"
+        },
+        {
+          "id": "II-1-イ",
+          "label": "(問1)(イ)",
+          "type": "selection",
+          "options": [
+            "tall reeds block the view of the muddy shore",
+            "tall reeds indicate that the marshy shores are approaching",
+            "tall reeds protect the beautiful shore from erosion",
+            "tall reeds come into full view as the marshy shores disappear"
+          ],
+          "correctAnswer": "2",
+          "points": 5,
+          "explanation": "下線部(イ) 'tall reeds herald the marshy shores' の 'herald' は「～の到来を告げる、～の前兆となる」という意味の動詞です。したがって、この文は「背の高いアシが、湿地の岸が近いことを告げている」と解釈できます。選択肢2の 'tall reeds indicate that the marshy shores are approaching' は「背の高いアシは湿地の岸が近づいていることを示している」という意味で、下線部の内容と一致します。他の選択肢は 'herald' の意味を正しく捉えておらず、文脈に合わないため不正解です。"
+        },
+        {
+          "id": "II-1-ウ",
+          "label": "(問1)(ウ)",
+          "type": "selection",
+          "options": [
+            "artificial baits to lure fish",
+            "handy instruments picked up by chance",
+            "traditional arts and crafts people sold for cash",
+            "what the locals fish at the lake"
+          ],
+          "correctAnswer": "4",
+          "points": 5,
+          "explanation": "下線部(ウ) 'their catches' は、文脈上、直前に出てくる 'Fishermen'（漁師たち）が捕らえたものを指します。漁師が捕らえるものといえば魚です。したがって、これは「彼らの獲物（魚）」を意味します。選択肢4の 'what the locals fish at the lake' は「地元の人々が湖で釣るもの」という意味であり、漁師たちの獲物を正しく説明しています。選択肢1「魚をおびき寄せるための人工の餌」、2「偶然拾った便利な道具」、3「現金で売られる伝統工芸品」は文脈に合わないため誤りです。"
+        },
+        {
+          "id": "II-1-エ",
+          "label": "(問1)(エ)",
+          "type": "selection",
+          "options": [
+            "these images of skyscrapers in a big city overwhelm its dwellers",
+            "these ruins of an ancient civilization start to disappear",
+            "these reminders of the expanding urban area gradually decrease",
+            "these symptoms begin to remind you of stressful city life"
+          ],
+          "correctAnswer": "3",
+          "points": 5,
+          "explanation": "下線部(エ) 'these signs of the encroaching metropolis thin out' は「これらの忍び寄る大都市のしるしが、次第にまばらになる」という意味です。'these signs' が指すのは、直前に述べられている工場や野外貯蔵エリアなど、都市化の兆候です。'thin out' は「少なくなる、まばらになる」という意味です。選択肢3 'these reminders of the expanding urban area gradually decrease' は「拡大する都市部を思い起こさせるこれらのものが徐々に減少する」という意味で、下線部の内容と最も近いです。他の選択肢は文脈から外れています。"
+        },
+        {
+          "id": "II-1-オ",
+          "label": "(問1)(オ)",
+          "type": "selection",
+          "options": [
+            "to enhance the nutrients in the fruits and vegetable around the area",
+            "to make the earth of the neighboring orchards more fertile",
+            "to prevent the wearing away of earth by wind and water",
+            "to protect the neighborhood from pollution caused by nearby factories"
+          ],
+          "correctAnswer": "3",
+          "points": 5,
+          "explanation": "下線部(オ) 'to retard soil erosion' は「土壌侵食を遅らせる（防ぐ）」という意味です。'retard' は「遅らせる」、'soil erosion' は「土壌侵食」を指し、これは風や水によって土が削り取られる現象です。政府が木を植えた目的がこれであると述べられています。選択肢3の 'to prevent the wearing away of earth by wind and water' は「風や水による土の浸食を防ぐため」という意味で、'soil erosion' の定義そのものであり、下線部の意味と完全に一致します。他の選択肢は目的が異なるため不正解です。"
+        },
+        {
+          "id": "II-1-カ",
+          "label": "(問1)(カ)",
+          "type": "selection",
+          "options": [
+            "after the men left the house to gather water",
+            "once I go in and the men cannot see what's going on there",
+            "since the men are not interested in women's activities",
+            "when the men suddenly entered the house and saw what was going on"
+          ],
+          "correctAnswer": "2",
+          "points": 5,
+          "explanation": "下線部(カ) 'out of sight of the men' は「男性たちの視界から外れて」という意味です。文脈では、筆者が家の中に入り、外にいる男性客から見えない場所で、その家の女性たちに会う場面が描かれています。選択肢2の 'once I go in and the men cannot see what's going on there' は「私が中に入り、男性たちがそこで何が起きているか見えなくなると」という意味で、この状況を最も正確に説明しています。他の選択肢は、文脈と異なる状況設定をしているため誤りです。"
+        },
+        {
+          "id": "II-1-キ",
+          "label": "(問1)(キ)",
+          "type": "selection",
+          "options": [
+            "They were in need of the government's support because they lacked their own source of income.",
+            "They envied the urban style of living so much that they wanted to forsake their desert life and settle in Alexandria for good.",
+            "They managed to keep their own moral standards and identity while utilizing the changing society around them.",
+            "They were forced to lose their own identity and traditional lifestyle in order to survive in the changing modern world."
+          ],
+          "correctAnswer": "3",
+          "points": 5,
+          "explanation": "下線部(キ)の文は「彼らが行った生活様式の変化は、変わりゆく状況への自発的な適応だった」という意味です。これは、彼らが外部からの強制ではなく、自分たちの価値観を維持しながら主体的に変化に対応したことを示唆しています。続く文で、政府の援助を利用しつつも自分たちで家を建て、土地を購入した具体例が挙げられています。選択肢3 'They managed to keep their own moral standards and identity while utilizing the changing society around them.' は「彼らは周りの変化する社会を利用しつつ、自分たち自身の道徳基準とアイデンティティを維持することに成功した」となり、この自主的な適応のニュアンスを最もよく表しています。選択肢4は「強制された」とあり、正反対です。1と2は本文の内容と異なります。"
+        },
+        {
+          "id": "II-2-A",
+          "label": "(問2)(A)",
+          "type": "selection",
+          "options": [
+            "a vast impressive sand desert of the North African inland",
+            "flat dusty desert land with factories and storage areas",
+            "the large buildings and busy streets of Alexandria",
+            "white sandy beaches along the Mediterranean coast"
+          ],
+          "correctAnswer": "2",
+          "points": 5,
+          "explanation": "筆者が橋を渡り、道を進んだ後に何を見たかを問う問題です。本文第2段落に 'One continues on ... and comes to the beginning of the desert.' とあり、その砂漠がどのようなものかについて 'it is a flat, dusty place of packed earth, a limestone plateau dotted with factories and open-air storage areas' と具体的に説明されています。これは「平らで、ほこりっぽく、固められた土の場所で、工場や野外貯蔵エリアが点在する石灰岩の高原」という意味です。選択肢2は、この記述と完全に一致します。選択肢1、3、4は、本文中で否定されているか、別の場所の描写であるため不正解です。"
+        },
+        {
+          "id": "II-2-B",
+          "label": "(問2)(B)",
+          "type": "selection",
+          "options": [
+            "Looking down on the life in town as corrupted and immoral, they thoroughly avoided their involvement in changing old Bedouin ways of life.",
+            "The bonds within this community became weak after the government's reform in the 1950s despite the core families' support and leadership.",
+            "They persuaded the government to provide them with the houses and lands to settle for free.",
+            "They were richer than the people farther west and successfully prevented the government from taking their land."
+          ],
+          "correctAnswer": "4",
+          "points": 5,
+          "explanation": "筆者が共に暮らした人々の社会的状況についての問題です。本文には 'The particular group of people with whom I lived was ... more involved in the major transformations ... than poorer and more isolated groups living farther west.' とあり、彼らが西方のより貧しい集団より裕福であったことが示唆されます。また、最終段落には 'when the government claimed all Western Desert lands, they had arranged for the purchase of their traditional land.' とあり、政府が土地を要求した際に、彼らがそれを購入したことで、事実上土地を守ったことが分かります。選択肢4は、これらの内容を正しくまとめています。他の選択肢は、本文の記述と矛盾するか、記載がありません。"
+        },
+        {
+          "id": "II-2-C",
+          "label": "(問2)(C)",
+          "type": "selection",
+          "options": [
+            "After the crowds and noises of cities, the quiet and open space in the Western Desert were relaxing.",
+            "Garments on the clothesline dried faster in the heated towns of Cairo and Alexandria than in the Western Desert.",
+            "People in town lived in solidly built houses, but in the Western Desert most people still used traditional tents of woven wool and summer tents of burlap sacks.",
+            "The roads in Alexandria were nicely paved and full of cars and trucks, while those in the Western Desert were often buried in sand dunes."
+          ],
+          "correctAnswer": "1",
+          "points": 5,
+          "explanation": "アレクサンドリアのような都市と比較した際の、西部の砂漠に対する筆者の印象を問う問題です。本文の第3段落冒頭に 'Returning from the crowded and noisy streets of Cairo or Alexandria, I often felt relieved to see the open spaces, to note the silence.' とあります。これは「カイロやアレクサンドリアの混雑し騒がしい通りから戻ると、私は開けた空間を見て、静けさに気づき、しばしば安堵した」という意味です。選択肢1は、この安堵感を 'relaxing' と表現しており、筆者の印象を最も正確に反映しています。他の選択肢は、本文の記述と異なるか、比較の焦点がずれています。"
+        },
+        {
+          "id": "II-3",
+          "label": "(問3)",
+          "type": "text",
+          "correctAnswer": "be",
+          "points": 5,
+          "explanation": "空欄(ク)に入る単語を答える問題です。文は 'They had requested that a government school (ク) built nearby...' となっています。'request that S (should) V原形' の構文（要求・提案などを表す動詞に続くthat節内では動詞の原形またはshould+原形が使われる）が適用されます。ここでは 'a government school' が主語なので、受動態の 'be built' となるのが文法的に正しいです。したがって、空欄には 'be' が入ります。"
+        },
+        {
+          "id": "II-4",
+          "label": "(問4)",
+          "type": "text",
+          "correctAnswer": "男性客がいない場合は出迎え、いる場合は男性の目から隠れて戸口の内側で身を寄せ合い待っていた。",
+          "points": 20,
+          "explanation": "筆者がコミュニティを訪れた際の女性たちの対応を50字以内でまとめる問題です。本文第3段落の後半に、'the women would have come to meet me, unless male guests were sitting out front. If men were there, I would greet them politely and hurry into the house. Just inside, out of sight of the men, I might find the women and girls, arms around each other, crowding the entrance.' とあります。この記述から、男性客の有無で対応が異なることが重要です。いない時は戸口で出迎え、いる時は男性の目がない家の中の戸口で、親密な様子で待っていたことが分かります。これらの要素を簡潔にまとめる必要があります。",
+          "gradingCriteria": {
+            "keywords": [
+              "男性客",
+              "いない",
+              "いる",
+              "出迎え",
+              "戸口",
+              "内側",
+              "隠れ"
+            ],
+            "elements": [
+              {
+                "description": "男性客の有無によって対応が異なることに言及しているか。",
+                "points": 8
+              },
+              {
+                "description": "男性客がいない場合の対応（出迎えること）に具体的に触れているか。",
+                "points": 6
+              },
+              {
+                "description": "男性客がいる場合の対応（男性の目を避けて家の中で待つこと）に具体的に触れているか。",
+                "points": 6
+              }
+            ],
+            "elementCount": 3,
+            "description": "以下の3つの要素が含まれているかを基準に採点する。1. 男性客の有無で対応が変わる点。2. 男性客がいない時の行動（出迎え）。3. 男性客がいる時の行動（家の中、人目を避けて待つ）。50字の字数制限を満たしていることも必須条件とする。"
+          }
+        }
+      ]
+    }
+  ]
+}
