@@ -145,20 +145,21 @@ const fileToBase64 = (file) => {
 
 export const generateExamMasterData = async (apiKey, subjectType, questionFiles, answerFiles, extraInfo) => {
   try {
+    const trimmedKey = apiKey?.trim();
     console.log("[AdminGeminiService] Using model:", MODELS.PRIMARY);
-    console.log("[AdminGeminiService] API Key check:", apiKey ? "Set (length: " + apiKey.length + ")" : "Not found");
+    console.log("[AdminGeminiService] API Key check:", trimmedKey ? `Set (length: ${trimmedKey.length}, starts with: ${trimmedKey.substring(0, 7)}...)` : "Not found (missing or empty)");
 
-    if (!apiKey) {
-      console.error("[AdminGeminiService] CRITICAL: apiKey parameter is missing");
-      throw new Error("Gemini API Key is not set. Please check your .env file and restart the dev server.");
+    if (!trimmedKey) {
+      console.error("[AdminGeminiService] CRITICAL: apiKey parameter is empty or undefined");
+      throw new Error("Gemini API Key is not set. .env.localファイルを確認し、開発サーバーを再起動（Ctrl+Cして npm run dev）してください。");
     }
 
     let genAI;
     try {
-      genAI = new GoogleGenerativeAI(apiKey);
+      genAI = new GoogleGenerativeAI(trimmedKey);
     } catch (err) {
       console.error("[AdminGeminiService] Failed to initialize GoogleGenerativeAI:", err);
-      throw new Error("Gemini APIの初期化に失敗しました。APIキーが正しくない可能性があります。");
+      throw new Error("Gemini APIの初期化に失敗しました。APIキーの形式が正しくない可能性があります。");
     }
 
     let model;
