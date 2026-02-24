@@ -147,7 +147,7 @@ export const generateExamMasterData = async (apiKey, subjectType, questionFiles,
   try {
     const trimmedKey = apiKey?.trim();
     console.log("[AdminGeminiService] Using model:", MODELS.PRIMARY);
-    console.log("[AdminGeminiService] API Key check:", trimmedKey ? `Set (length: ${trimmedKey.length}, starts with: ${trimmedKey.substring(0, 7)}...)` : "Not found (missing or empty)");
+    console.log("[AdminGeminiService] API Key check:", trimmedKey ? `Set (length: ${trimmedKey.length}, starts with: ${trimmedKey.substring(0, 7)}..., ends with: ...${trimmedKey.substring(trimmedKey.length - 4)})` : "Not found (missing or empty)");
 
     if (!trimmedKey) {
       console.error("[AdminGeminiService] CRITICAL: apiKey parameter is empty or undefined");
@@ -552,7 +552,9 @@ G. この時点で解ける設問があれば、
 
 export const regenerateQuestionExplanation = async (apiKey, questionData, questionFiles = [], answerFiles = []) => {
   try {
-    console.log("[AdminGeminiService] Explanation - API Key check:", apiKey ? "Set" : "Not found");
+    const trimmedKey = apiKey?.trim();
+    console.log("[AdminGeminiService] Explanation - Using model:", MODELS.PRIMARY);
+    console.log("[AdminGeminiService] API Key check:", trimmedKey ? `Set (length: ${trimmedKey.length}, starts with: ${trimmedKey.substring(0, 7)}..., ends with: ...${trimmedKey.substring(trimmedKey.length - 4)})` : "Not found");
 
     if (!apiKey) {
       throw new Error("Gemini API Key is not set.");
@@ -560,7 +562,7 @@ export const regenerateQuestionExplanation = async (apiKey, questionData, questi
 
     let genAI;
     try {
-      genAI = new GoogleGenerativeAI(apiKey);
+      genAI = new GoogleGenerativeAI(trimmedKey);
     } catch (err) {
       throw new Error("Gemini APIの初期化に失敗しました。");
     }
