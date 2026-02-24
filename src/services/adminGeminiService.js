@@ -56,14 +56,17 @@ export const sanitizeJson = (jsonString) => {
 };
 
 // --- RETRY UTILITY FOR 429 ERRORS ---
-const withRetry = async (fn, maxRetries = 3, initialDelay = 2000) => {
+const withRetry = async (fn, maxRetries = 5, initialDelay = 3000) => {
   let attempt = 0;
   while (attempt < maxRetries) {
     try {
       return await fn();
     } catch (error) {
       attempt++;
-      const isRateLimit = error.message?.includes("429") || error.message?.includes("Resource exhausted");
+      // Check for 429 in various formats
+      const isRateLimit = (error.status === 429) ||
+        (error.message?.includes("429")) ||
+        (error.message?.includes("Resource exhausted"));
 
       if (isRateLimit && attempt < maxRetries) {
         const delay = initialDelay * Math.pow(2, attempt - 1);
@@ -243,6 +246,12 @@ E．論述問題（長・30字以上）：配点 最高
     for (let i = 0; i < overviewData.sections.length; i++) {
       const s = overviewData.sections[i];
       console.log(`[Step 2/3] Extracting details for Section ${s.id} (${i + 1}/${overviewData.sections.length})...`);
+
+      // Add a mandatory delay between sections to avoid hitting RPM (Requests Per Minute) limits
+      if (i > 0) {
+        console.log(`[Step 2/3] Waiting 2s to stay within rate limits...`);
+        await new Promise(resolve => setTimeout(resolve, 2000));
+      }
 
       const step1bPrompt = `
 添付されたファイルを再度分析し、「大問 ${s.id} （${s.label}）」に含まれるすべての小問について、正解、配点、簡潔な解説のみを抽出してください。
