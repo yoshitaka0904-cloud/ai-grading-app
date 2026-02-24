@@ -56,7 +56,7 @@ export const sanitizeJson = (jsonString) => {
 };
 
 // --- RETRY UTILITY FOR 429 ERRORS ---
-const withRetry = async (fn, maxRetries = 5, initialDelay = 3000) => {
+const withRetry = async (fn, maxRetries = 10, initialDelay = 5000) => {
   let attempt = 0;
   while (attempt < maxRetries) {
     try {
@@ -66,11 +66,13 @@ const withRetry = async (fn, maxRetries = 5, initialDelay = 3000) => {
       // Check for 429 in various formats
       const isRateLimit = (error.status === 429) ||
         (error.message?.includes("429")) ||
-        (error.message?.includes("Resource exhausted"));
+        (error.message?.includes("Resource exhausted")) ||
+        (error.message?.includes("Too many requests"));
 
       if (isRateLimit && attempt < maxRetries) {
+        // Exponential backoff: 5s, 10s, 20s, 40s...
         const delay = initialDelay * Math.pow(2, attempt - 1);
-        console.warn(`[GeminiService] Rate limit hit (429). Retrying in ${delay}ms... (Attempt ${attempt}/${maxRetries})`);
+        console.warn(`[GeminiService] Rate limit hit (429/TooManyRequests). Retrying in ${delay}ms... (Attempt ${attempt}/${maxRetries})`);
         await new Promise(resolve => setTimeout(resolve, delay));
         continue;
       }
@@ -249,8 +251,8 @@ E．論述問題（長・30字以上）：配点 最高
 
       // Add a mandatory delay between sections to avoid hitting RPM (Requests Per Minute) limits
       if (i > 0) {
-        console.log(`[Step 2/3] Waiting 2s to stay within rate limits...`);
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        console.log(`[Step 2/3] Waiting 5s to stay within rate limits...`);
+        await new Promise(resolve => setTimeout(resolve, 5000));
       }
 
       const step1bPrompt = `
