@@ -419,26 +419,24 @@ ${subjectSpecificRules}
 #### 本文読解と思考プロセス
 
 **第1・2段落：問題提起**
-まず第1段落では、Lauferさんが車椅子で利用できるホテルを探すのに苦労し、時には車中泊を余儀なくされたという個人的な経験が語られます。\\\`she slept in her car after arriving at a hotel to find she could not access the property.\\\`という一文は、彼女の絶望感と、問題の深刻さを物語っています。
+まず第1段落では、Lauferさんが車椅子で利用できるホテルを探すのに苦労し、時には車中泊を余儀なくされたという個人的な経験が語られます。\`she slept in her car after arriving at a hotel to find she could not access the property.\`という一文は、彼女の絶望感と、問題の深刻さを物語っています。
 
-続く第2段落で、彼女の具体的な行動が説明されます。\\\`filed hundreds of disability discrimination lawsuits against hotels she never planned to visit.\\\`とあります。これは、個人的な旅行のためではなく、社会制度を問うための行動、いわゆる「テスター」としての活動なのだと理解できます。
+続く第2段落で、彼女の具体的な行動が説明されます。\`filed hundreds of disability discrimination lawsuits against hotels she never planned to visit.\`とあります。これは、個人的な旅行のためではなく、社会制度を問うための行動、いわゆる「テスター」としての活動なのだと理解できます。
 
 **第3・4段落：賛成論と反対論**
-第3段落は、彼女の支持者の意見です。\\\`They draw parallels to Black civil rights advocates who intentionally rode segregated buses...\\\`とあります。これは、彼女の行動を歴史的な公民権運動になぞらえ、その正当性を主張する強力な論拠です。
+第3段落は、彼女の支持者の意見です。\`They draw parallels to Black civil rights advocates who intentionally rode segregated buses...\`とあります。これは、彼女の行動を歴史的な公民権運動になぞらえ、その正当性を主張する強力な論拠です。
 
-しかし、第4段落の冒頭に\\\`But\\\`という逆接のマーカーがあります。ここから反対意見が始まると予測できますね。ホテル側の弁護士は、\\\`unlike the in-person work of civil rights advocates... Laufer was never directly interacting with the property owners\\\`と反論します。オンラインでの調査と、物理的に現場に赴く行動との違いを問題にしているわけです。
+しかし、第4段落の冒頭に\`But\`という逆接のマーカーがあります。ここから反対意見が始まると予測できますね。ホテル側の弁護士は、\`unlike the in-person work of civil rights advocates... Laufer was never directly interacting with the property owners\`と反論します。オンラインでの調査と、物理的に現場に赴く行動との違いを問題にしているわけです。
 
 #### 設問解説
 
-**問1 (1) 正解: 3**
-設問は、Lauferさんがなぜ多くの訴訟を起こしたのかを問うています。
-選択肢1は「個人的な利益のため」とありますが、第2段落で彼女の目的は権利擁護だと示唆されているため不適切です。
-選択肢3の「法律の不遵守に注意を喚起するため」が、第2段落の活動内容と合致します。」
+**(問1)(ア)** 下線部\`on behalf of the broader disabled community\`は「より広範な障害者コミュニティを代表して／のために」という意味です。選択肢2の\`for the benefit of people with various difficulties\`が最も意味が近いです。選択肢1は「近所での地位」、3は「すべてのコミュニティ」、4は「オンライン予約をする旅行者」に言及しており、文脈から外れています。このように、まず句の基本的な意味を理解し、各選択肢を文脈と照らし合わせることで正解を導き出します。」
 
 【対象とする試験構造】
 ${JSON.stringify(structureData, null, 2)}
 
-出力は解説の本文（マークダウン）のみにしてください。JSONなどのコードブロックは不要です。
+【重要】上記の「良い例」のような、詳細で論理的な解説を執筆してください。
+出力は解説の本文（マークダウン）のみにして下さい。JSONなどのコードブロックは不要です。
 `;
 
       const result2 = await withRetry(() => model.generateContent([
