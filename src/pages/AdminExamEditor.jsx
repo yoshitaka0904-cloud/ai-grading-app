@@ -72,12 +72,12 @@ function AdminExamEditor() {
         setGenerating(true);
         try {
             console.log("[AdminDebug] Available Env Keys:", Object.keys(import.meta.env).filter(k => k.startsWith('VITE_')));
-            const apiKey = import.meta.env.VITE_GEMINI_API_KEY_V2;
+            const apiKey = import.meta.env.VITE_GEMINI_API_KEY_V2 || import.meta.env.VITE_GEMINI_API_KEY || import.meta.env.VITE_GEMINI_API_KEY;
 
             if (!apiKey || apiKey === 'YOUR_GEMINI_API_KEY_HERE') {
                 alert('【エラー】Gemini APIキーが設定されていません。\n\n' +
-                    'ローカル環境の場合: .env.local に VITE_GEMINI_API_KEY_V2 を記述して再起動してください。\n' +
-                    'Vercel環境の場合: VercelのSettings > Environment Variables に VITE_GEMINI_API_KEY_V2 を設定し、Redeployしてください。');
+                    'ローカル環境の場合: .env.local に VITE_GEMINI_API_KEY または VITE_GEMINI_API_KEY_V2 を記述して再起動してください。\n' +
+                    'Vercel環境の場合: Settings > Environment Variables に値を設定し、Redeployしてください。');
                 setGenerating(false);
                 return;
             }
@@ -246,7 +246,7 @@ function AdminExamEditor() {
         handleStructureChange(sIdx, qIdx, 'explanation', '再生成中...');
 
         try {
-            const apiKey = import.meta.env.VITE_GEMINI_API_KEY_V2;
+            const apiKey = import.meta.env.VITE_GEMINI_API_KEY_V2 || import.meta.env.VITE_GEMINI_API_KEY;
             const newExplanation = await regenerateQuestionExplanation(
                 apiKey,
                 q,
