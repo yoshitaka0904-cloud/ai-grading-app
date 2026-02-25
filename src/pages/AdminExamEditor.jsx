@@ -71,6 +71,7 @@ function AdminExamEditor() {
 
         setGenerating(true);
         try {
+            console.log("[AdminDebug] Available Env Keys:", Object.keys(import.meta.env).filter(k => k.startsWith('VITE_')));
             const apiKey = import.meta.env.VITE_GEMINI_API_KEY_V2;
 
             if (!apiKey || apiKey === 'YOUR_GEMINI_API_KEY_HERE') {
