@@ -203,12 +203,43 @@ E．論述問題（長・30字以上）：配点 最高
     const answerInlineData = answerFileDataArray.map(fd => ({ inlineData: { mimeType: fd.mimeType, data: fd.data } }));
     const outputId = extraInfo.id;
 
-    // --- STEP 1a: OVERVIEW EXTRACTION ---
+    // --- STAGE 0: FULL OCR TRANSCRIPTION (The Foundation) ---
+    console.log(`[Stage 0] Transcribing all documents to text...`);
+    const ocrPrompt = `
+あなたはプロのデータ入力スペシャリスト兼入試分析官です。
+提供されたすべての画像（問題と解答）を詳細に読み取り、試験内容を「欠落なく、正確に」マークダウン形式のテキストとして書き出してください。
+
+【出力要件】
+1. ページの順序を守り、ページ番号または「第1問」「問題」などの見出しで区切ること。
+2. 小問の記号（問1、(a)、1..等）や選択肢の内容を正確に書き起こすこと。
+3. 表や特殊な配置も、可能な限りテキストで理解できるように記述すること。
+4. 本文、設問、解答のすべてを含めること。
+5. 出力はテキストのみとしてください（Markdown形式が好ましい）。
+
+このテキストは、以降のすべての詳細解析の「唯一のソース」となります。
+`;
+
+    const ocrResult = await withRetry(() => model.generateContent({
+      contents: [{
+        role: 'user', parts: [
+          ...questionInlineData.map(d => ({ inlineData: d.inlineData })),
+          ...answerInlineData.map(d => ({ inlineData: d.inlineData })),
+          { text: ocrPrompt }
+        ]
+      }]
+    }));
+
+    const transcribedText = ocrResult.response.text();
+    console.log(`[Stage 0] Transcription complete. Length: ${transcribedText.length} characters.`);
+
+    // --- STEP 1a: OVERVIEW EXTRACTION (Using transcribed text) ---
     console.log(`[Step 1/3] Extracting high-level exam structure for ${outputId}...`);
     const step1aPrompt = `
-あなたは大学入試のデータ解析エキスパートです。
-添付されたファイルを分析し、試験の全体構造（大問のIDとラベルのみ）と、公表されている「満点」を抽出してください。
+以下の試験内容（テキストデータ）を分析し、試験の全体構造（大問のIDとラベルのみ）と、公表されている「満点」を抽出してください。
 また、各社の大手予備校の推測配点や一般的な配点配分に基づき、各大問に合計何点を配分すべきかを推測してください。
+
+【解析対象データ】
+${transcribedText}
 
 【厳格ルール】
 1. JSON形式のみを出力してください。
@@ -229,24 +260,14 @@ ${subjectSpecificRules}
 }
 `;
 
-    const result1a = await withRetry(() => model.generateContent({
-      contents: [{
-        role: 'user', parts: [
-          ...questionInlineData.map(d => ({ inlineData: d.inlineData })),
-          ...answerInlineData.map(d => ({ inlineData: d.inlineData })),
-          { text: step1aPrompt }
-        ]
-      }],
-      generationConfig: { responseMimeType: "application/json" }
-    }));
+    const result1a = await withRetry(() => model.generateContent(step1aPrompt), 5, 3000);
 
     const overviewText = result1a.response.text();
     const overviewData = JSON.parse(sanitizeJson(overviewText));
     console.log(`[Step 1a] Structure found: ${overviewData.sections.length} sections. Total points: ${overviewData.maxScore}`);
 
-    // Add a mandatory delay before starting details to avoid hitting RPM/TPM limits
-    console.log(`[Step 1b] Waiting 8s before starting detailed extraction...`);
-    await new Promise(resolve => setTimeout(resolve, 8000));
+    // Add a small delay between text-only requests
+    await new Promise(resolve => setTimeout(resolve, 2000));
 
     // --- STEP 1b: DETAILED SECTION-BY-SECTION EXTRACTION ---
     const fullSections = [];
@@ -261,7 +282,10 @@ ${subjectSpecificRules}
       }
 
       const step1bPrompt = `
-添付されたファイルを再度分析し、「大問 ${s.id} （${s.label}）」に含まれるすべての小問について、正解、配点、簡潔な解説のみを抽出してください。
+以下の試験内容（テキストデータ）から、「大問 ${s.id} （${s.label}）」に含まれるすべての小問について、正解、配点、簡潔な解説のみを抽出してください。
+
+【解析対象データ】
+${transcribedText}
 
 【厳格ルール】
 1. この大問には「合計 ${s.allocatedPoints} 点」を割り振る必要があります。小問ごとの配点の合計が必ず ${s.allocatedPoints} になるように調整してください。
@@ -280,7 +304,7 @@ ${subjectSpecificRules}
     "options": ["a", "b", "c", "d"],
     "correctAnswer": "正解",
     "points": 5,
-    "explanation": "この問題の解き方を、以下の要素を全て含めて4-6文で詳しく説明してください：\\n1. なぜその答えになるのか（根拠となる本文の記述を具体的に引用）\\n2. 他の選択肢がなぜ間違っているか（消去法の思考プロセス）\\n3. 受験生が再現できる解法の手順\\n※ 単語だけの羅列や、1-2文の簡潔すぎる説明は不可。論理的な文章として記述すること。",
+    "explanation": "この問題の解き方を、以下の要素を全て含めて4-6文で詳しく説明してください：\\n1. なぜその答えになるのか（根拠となる本文の記述を具体的に引用）\\n2. 他の選択肢がなぜ間違っていますか（消去法の思考プロセス）\\n3. 受験生が再現できる解法の手順\\n※ 単語だけの羅列や、1-2文の簡潔すぎる説明は不可。論理的な文章として記述すること。",
     "gradingCriteria": { // 記述式のみ
       "keywords": ["必須語1"],
       "elements": ["採点要素1"],
@@ -291,16 +315,7 @@ ${subjectSpecificRules}
 ]
 `;
 
-      const result1b = await withRetry(() => model.generateContent({
-        contents: [{
-          role: 'user', parts: [
-            ...questionInlineData.map(d => ({ inlineData: d.inlineData })),
-            ...answerInlineData.map(d => ({ inlineData: d.inlineData })),
-            { text: step1bPrompt }
-          ]
-        }],
-        generationConfig: { responseMimeType: "application/json" }
-      }));
+      const result1b = await withRetry(() => model.generateContent(step1bPrompt), 5, 3000);
 
       const sectionDataRaw = result1b.response.text();
       const sectionDataSanitized = sanitizeJson(sectionDataRaw);
@@ -516,10 +531,7 @@ G. この時点で解ける設問があれば、
 出力は解説の本文（マークダウン）のみにして下さい。JSONなどのコードブロックは不要です。
 `;
 
-      const result2 = await withRetry(() => model.generateContent([
-        ...questionInlineData,
-        { text: step2Prompt }
-      ]));
+      const result2 = await withRetry(() => model.generateContent(step2Prompt), 5, 5000);
 
       detailedAnalysis = result2.response.text().trim();
       if (!detailedAnalysis) throw new Error("Step 2 analysis content represents empty string.");
