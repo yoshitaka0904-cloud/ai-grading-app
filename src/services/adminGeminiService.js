@@ -269,71 +269,75 @@ ${subjectSpecificRules}
     // Add a small delay between text-only requests
     await new Promise(resolve => setTimeout(resolve, 2000));
 
-    // --- STEP 1b: DETAILED SECTION-BY-SECTION EXTRACTION ---
-    const fullSections = [];
-    for (let i = 0; i < overviewData.sections.length; i++) {
-      const s = overviewData.sections[i];
-      console.log(`[Step 2/3] Extracting details for Section ${s.id} (${i + 1}/${overviewData.sections.length})...`);
+    // --- STEP 1b: ALL SECTIONS IN ONE REQUEST ---
+    // Instead of sending one request per section (which causes 429 rate limit errors),
+    // we send a single request asking the AI to extract all sections at once.
+    await new Promise(resolve => setTimeout(resolve, 3000));
+    console.log(`[Step 2/3] Extracting ALL ${overviewData.sections.length} sections in a single request...`);
 
-      // Add a mandatory delay between sections to avoid hitting RPM (Requests Per Minute) limits
-      if (i > 0) {
-        console.log(`[Step 2/3] Waiting 7s to stay within rate limits...`);
-        await new Promise(resolve => setTimeout(resolve, 7000));
-      }
+    const sectionsSummary = overviewData.sections.map(s =>
+      `- 大問 ${s.id}（${s.label}）: 合計 ${s.allocatedPoints} 点`
+    ).join('\n');
 
-      const step1bPrompt = `
-以下の試験内容（テキストデータ）から、「大問 ${s.id} （${s.label}）」に含まれるすべての小問について、正解、配点、簡潔な解説のみを抽出してください。
+    const step1bPrompt = `
+以下の試験内容（テキストデータ）を分析し、すべての大問・小問について、正解、配点、解説を抽出してください。
 
 【解析対象データ】
 ${transcribedText}
 
+【大問一覧と配点指示】
+${sectionsSummary}
+
 【厳格ルール】
-1. この大問には「合計 ${s.allocatedPoints} 点」を割り振る必要があります。小問ごとの配点の合計が必ず ${s.allocatedPoints} になるように調整してください。
+1. 各大問の小問配点の合計は、上記で指定した点数と一致させること。
 2. 客観式問題には "gradingCriteria" を含めないでください。
-3. 記述式問題にのみ "gradingCriteria" を作成してください。
+3. 記述式問題にのみ "gradingCriteria" を含めてください。
 4. アスタリスク（*）記号を絶対に使用しないでください。
-5. JSONの配列のみ（[ ... ]）を出力してください。
+5. 以下のJSON構造のみを出力してください（コードブロックなし）。
 ${subjectSpecificRules}
 
 【出力構造】
 [
   {
-    "id": "小問ID",
-    "label": "小問ラベル",
-    "type": "selection | text",
-    "options": ["a", "b", "c", "d"],
-    "correctAnswer": "正解",
-    "points": 5,
-    "explanation": "この問題の解き方を、以下の要素を全て含めて4-6文で詳しく説明してください：\\n1. なぜその答えになるのか（根拠となる本文の記述を具体的に引用）\\n2. 他の選択肢がなぜ間違っていますか（消去法の思考プロセス）\\n3. 受験生が再現できる解法の手順\\n※ 単語だけの羅列や、1-2文の簡潔すぎる説明は不可。論理的な文章として記述すること。",
-    "gradingCriteria": { // 記述式のみ
-      "keywords": ["必須語1"],
-      "elements": ["採点要素1"],
-      "elementCount": 1,
-      "description": "採点基準"
-    }
+    "id": "I",
+    "label": "大問ラベル",
+    "allocatedPoints": 40,
+    "questions": [
+      {
+        "id": "小問ID",
+        "label": "小問ラベル",
+        "type": "selection",
+        "options": ["a", "b", "c", "d"],
+        "correctAnswer": "正解",
+        "points": 5,
+        "explanation": "この問題の解き方を、以下の要素を全て含めて4-6文で詳しく説明してください：\n1. なぜその答えになるのか（根拠となる本文の記述を具体的に引用）\n2. 他の選択肢がなぜ間違っているか（消去法の思考プロセス）\n3. 受験生が再現できる解法の手順\n※ 単語だけの羅列や、1-2文の簡潔すぎる説明は不可。論理的な文章として記述すること。"
+      }
+    ]
   }
 ]
 `;
 
-      const result1b = await withRetry(() => model.generateContent(step1bPrompt), 5, 3000);
+    const result1b = await withRetry(() => model.generateContent(step1bPrompt), 10, 5000);
+    const allSectionsRaw = result1b.response.text();
+    const allSectionsSanitized = sanitizeJson(allSectionsRaw);
 
-      const sectionDataRaw = result1b.response.text();
-      const sectionDataSanitized = sanitizeJson(sectionDataRaw);
-
-      let sectionQuestions;
-      try {
-        sectionQuestions = JSON.parse(sectionDataSanitized);
-      } catch (err) {
-        console.error(`[AdminGeminiService] Failed to parse questions for Section ${s.id}`);
-        console.error(`[AdminGeminiService] Sanitized Content:`, sectionDataSanitized);
-        throw new Error(`大問 ${s.id} の解析に失敗しました。AIの回答が正しくありません。`);
-      }
-
-      fullSections.push({
-        ...s,
-        questions: sectionQuestions
-      });
+    let parsedSections;
+    try {
+      parsedSections = JSON.parse(allSectionsSanitized);
+    } catch (err) {
+      console.error('[AdminGeminiService] Failed to parse all sections:', allSectionsSanitized.substring(0, 500));
+      throw new Error('全セクションの解析に失敗しました。AIの回答が正しいJSON形式ではありません。');
     }
+
+    console.log(`[Step 2/3] Successfully extracted ${parsedSections.length} sections.`);
+
+    // Support both flat (old) and the new sections-with-questions format
+    const fullSections = parsedSections.map(sec => ({
+      id: sec.id,
+      label: sec.label,
+      allocatedPoints: sec.allocatedPoints,
+      questions: sec.questions || []
+    }));
 
     const structureData = {
       maxScore: overviewData.maxScore,
