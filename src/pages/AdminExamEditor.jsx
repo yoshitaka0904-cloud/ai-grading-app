@@ -75,8 +75,8 @@ function AdminExamEditor() {
 
             if (!apiKey || apiKey === 'YOUR_GEMINI_API_KEY_HERE') {
                 alert('【エラー】Gemini APIキーが設定されていません。\n\n' +
-                    'ローカル環境の場合: .env.local に VITE_GEMINI_API_KEY を記述して再起動してください。\n' +
-                    'Vercel環境の場合: VercelのSettings > Environment Variables に設定し、Redeployしてください。');
+                    'ローカル環境の場合: .env.local に VITE_GEMINI_API_KEY_V2 を記述して再起動してください。\n' +
+                    'Vercel環境の場合: VercelのSettings > Environment Variables に VITE_GEMINI_API_KEY_V2 を設定し、Redeployしてください。');
                 setGenerating(false);
                 return;
             }
