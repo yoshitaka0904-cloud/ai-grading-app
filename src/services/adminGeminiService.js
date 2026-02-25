@@ -147,12 +147,6 @@ export const generateExamMasterData = async (apiKey, subjectType, questionFiles,
   try {
     const trimmedKey = apiKey?.trim();
     console.log("[AdminGeminiService] Using model:", MODELS.PRIMARY);
-    console.log("[AdminDebugSvc] Key Trace:", {
-      provided: apiKey ? "YES" : "NO",
-      length: apiKey?.length,
-      fallbackUsed: !apiKey && !!import.meta.env.VITE_GEMINI_API_KEY,
-      finalSuffix: trimmedKey ? trimmedKey.substring(trimmedKey.length - 4) : "NONE"
-    });
 
     if (!trimmedKey) {
       console.error("[AdminGeminiService] CRITICAL: apiKey parameter is empty or undefined");
@@ -250,6 +244,10 @@ ${subjectSpecificRules}
     const overviewData = JSON.parse(sanitizeJson(overviewText));
     console.log(`[Step 1a] Structure found: ${overviewData.sections.length} sections. Total points: ${overviewData.maxScore}`);
 
+    // Add a mandatory delay before starting details to avoid hitting RPM/TPM limits
+    console.log(`[Step 1b] Waiting 8s before starting detailed extraction...`);
+    await new Promise(resolve => setTimeout(resolve, 8000));
+
     // --- STEP 1b: DETAILED SECTION-BY-SECTION EXTRACTION ---
     const fullSections = [];
     for (let i = 0; i < overviewData.sections.length; i++) {
@@ -258,8 +256,8 @@ ${subjectSpecificRules}
 
       // Add a mandatory delay between sections to avoid hitting RPM (Requests Per Minute) limits
       if (i > 0) {
-        console.log(`[Step 2/3] Waiting 5s to stay within rate limits...`);
-        await new Promise(resolve => setTimeout(resolve, 5000));
+        console.log(`[Step 2/3] Waiting 7s to stay within rate limits...`);
+        await new Promise(resolve => setTimeout(resolve, 7000));
       }
 
       const step1bPrompt = `
