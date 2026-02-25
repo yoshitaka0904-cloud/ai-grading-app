@@ -147,7 +147,12 @@ export const generateExamMasterData = async (apiKey, subjectType, questionFiles,
   try {
     const trimmedKey = apiKey?.trim();
     console.log("[AdminGeminiService] Using model:", MODELS.PRIMARY);
-    console.log("[AdminGeminiService] API Key check:", trimmedKey ? `Set (length: ${trimmedKey.length}, starts with: ${trimmedKey.substring(0, 7)}..., ends with: ...${trimmedKey.substring(trimmedKey.length - 4)})` : "Not found (missing or empty)");
+    console.log("[AdminDebugSvc] Key Trace:", {
+      provided: apiKey ? "YES" : "NO",
+      length: apiKey?.length,
+      fallbackUsed: !apiKey && !!import.meta.env.VITE_GEMINI_API_KEY,
+      finalSuffix: trimmedKey ? trimmedKey.substring(trimmedKey.length - 4) : "NONE"
+    });
 
     if (!trimmedKey) {
       console.error("[AdminGeminiService] CRITICAL: apiKey parameter is empty or undefined");
