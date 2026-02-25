@@ -71,7 +71,7 @@ function AdminExamEditor() {
 
         setGenerating(true);
         try {
-            const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+            const apiKey = import.meta.env.VITE_GEMINI_API_KEY_V2;
 
             if (!apiKey || apiKey === 'YOUR_GEMINI_API_KEY_HERE') {
                 alert('【エラー】Gemini APIキーが設定されていません。\n\n' +
@@ -245,7 +245,7 @@ function AdminExamEditor() {
         handleStructureChange(sIdx, qIdx, 'explanation', '再生成中...');
 
         try {
-            const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+            const apiKey = import.meta.env.VITE_GEMINI_API_KEY_V2;
             const newExplanation = await regenerateQuestionExplanation(
                 apiKey,
                 q,
