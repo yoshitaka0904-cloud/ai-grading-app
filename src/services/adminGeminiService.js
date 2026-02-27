@@ -475,20 +475,18 @@ export const regenerateQuestionExplanation = async (apiKey, questionData, questi
       aDataArray.forEach(fd => imageParts.push({ inlineData: { mimeType: fd.mimeType, data: fd.data } }));
     }
 
-    const prompt = `
-      あなたは大学入試の専門講師です。
-      以下の特定の問題について、受験生が納得できる詳細でわかりやすい解説を執筆してください。
+    const prompt = `あなたは大学入試の専門講師です。以下の問題の解説を、簡潔に2〜3文で書いてください。
 
 【対象の問題データ】
 ${JSON.stringify(questionData, null, 2)}
 
 【要件】
-1. なぜその答えになるのか、論理的なプロセスを解説すること。
-2. 選択問題であれば、正解以外の選択肢がなぜ間違っているのかも明確にすること。
-3. 添付した問題画像・PDFの参照が必要な場合は、画像/PDFから該当箇所を探して解説に含めること。
-4. アスタリスク（*）記号は一切使用禁止。マークダウン（# など）は見やすく使って構いません。
+1. なぜその答えになるのか、根拠（本文の該当箇所など）を1文で示すこと。
+2. 選択問題の場合、誤りの選択肢が間違っている理由を1〜2文で簡潔に加えること。
+3. アスタリスク（*）記号は使用禁止。マークダウンは使ってよい。
+4. 长すぎる解説は不要。受験生が「なるほど」と思える最小限の説明で十分。
 
-出力は解説の本文（マークダウン）のみにしてください。
+出力は解説本文のみ（マークダウン）。
 `;
 
     // Use non-streaming for better error reporting and to avoid stream parsing issues
