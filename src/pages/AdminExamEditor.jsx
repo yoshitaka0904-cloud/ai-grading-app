@@ -392,9 +392,19 @@ function AdminExamEditor() {
                 {examData && (
                     <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 shadow-sm">
                         <h2 className="text-base font-bold text-blue-800 mb-3">📥 解説のCSV一括インポート／エクスポート</h2>
-                        <p className="text-sm text-blue-700 mb-4">
-                            外部AI（ChatGPT・Claudeなど）で作成した解説をCSVファイルで一括登録できます。
-                        </p>
+                        <div className="text-sm text-blue-700 mb-4 space-y-1">
+                            <p className="font-semibold">【使い方】</p>
+                            <ol className="list-decimal list-inside space-y-1 ml-1">
+                                <li>下の <strong>「CSVをエクスポート」</strong> を押してCSVファイルをダウンロード</li>
+                                <li>ChatGPT（GPT-4o）またはClaudeを開く</li>
+                                <li><strong>試験のPDFファイル</strong> と <strong>ダウンロードしたCSVファイル</strong> を両方アップロード</li>
+                                <li>以下のプロンプトを送信：<br />
+                                    <code className="block bg-blue-100 rounded p-2 mt-1 text-xs whitespace-pre-wrap">{`添付した2つのファイルを使ってください。\n・PDFファイル：大学入試の問題と解答\n・CSVファイル：各小問の構造データ\n\nCSVの「explanation」列を日本語で埋めてください。\n条件：2〜3文で簡潔に、なぜその正解になるか根拠を示すこと。\nCSVファイルをそのまま返してください。`}</code>
+                                </li>
+                                <li>AIが返したCSVをダウンロード → 下の <strong>「解説入りCSVをインポート」</strong> でアップロード</li>
+                                <li>必ず <strong>「保存」</strong> ボタンを押してDBに反映</li>
+                            </ol>
+                        </div>
                         <div className="flex flex-wrap gap-3">
                             <button
                                 onClick={handleCsvExport}
@@ -407,7 +417,6 @@ function AdminExamEditor() {
                                 <input type="file" accept=".csv" className="hidden" onChange={handleCsvImport} />
                             </label>
                         </div>
-                        <p className="text-xs text-blue-500 mt-3">※ インポート後は必ず「保存」ボタンを押してDBに反映してください。</p>
                     </div>
                 )}
 
