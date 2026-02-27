@@ -317,7 +317,10 @@ ${subjectSpecificRules}
 ]
 `;
 
-    const result1b = await withRetry(() => model.generateContent(step1bPrompt), 10, 5000);
+    const result1b = await withRetry(() => model.generateContent({
+      contents: [{ role: 'user', parts: [{ text: step1bPrompt }] }],
+      generationConfig: { responseMimeType: "application/json" }
+    }), 10, 5000);
     const allSectionsRaw = result1b.response.text();
     const allSectionsSanitized = sanitizeJson(allSectionsRaw);
 
@@ -325,8 +328,10 @@ ${subjectSpecificRules}
     try {
       parsedSections = JSON.parse(allSectionsSanitized);
     } catch (err) {
-      console.error('[AdminGeminiService] Failed to parse all sections:', allSectionsSanitized.substring(0, 500));
-      throw new Error('全セクションの解析に失敗しました。AIの回答が正しいJSON形式ではありません。');
+      console.error('[AdminGeminiService] Failed to parse all sections. Raw length:', allSectionsSanitized.length);
+      console.error('[AdminGeminiService] First 1000 chars:', allSectionsSanitized.substring(0, 1000));
+      console.error('[AdminGeminiService] Last 200 chars:', allSectionsSanitized.slice(-200));
+      throw new Error(`全セクションの解析に失敗しました。AIの回答が正しいJSON形式ではありません。(解析: ${err.message})`);
     }
 
     console.log(`[Step 2/3] Successfully extracted ${parsedSections.length} sections.`);
