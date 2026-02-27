@@ -284,6 +284,92 @@ function AdminExamEditor() {
         setExamData({ ...examData, structure: newStructure });
     };
 
+    // --- CSV Export: download current structure as CSV for external AI to fill ---
+    const handleCsvExport = () => {
+        if (!examData?.structure?.length) {
+            alert('先にAIでデータを生成してください。');
+            return;
+        }
+        const rows = [['section_id', 'section_label', 'question_id', 'question_label', 'type', 'correct_answer', 'points', 'explanation']];
+        examData.structure.forEach(sec => {
+            sec.questions.forEach(q => {
+                rows.push([
+                    sec.id,
+                    sec.label,
+                    q.id,
+                    q.label,
+                    q.type || 'selection',
+                    q.correctAnswer || '',
+                    q.points || 0,
+                    (q.explanation || '').replace(/"/g, '""') // escape quotes
+                ]);
+            });
+        });
+        const csv = rows.map(r => r.map(c => `"${c}"`).join(',')).join('\n');
+        const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${examId || 'exam'}_explanations.csv`;
+        a.click();
+        URL.revokeObjectURL(url);
+    };
+
+    // --- CSV Import: read CSV and map explanations back into questions ---
+    const handleCsvImport = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+            try {
+                const text = ev.target.result;
+                const lines = text.split('\n').filter(l => l.trim());
+                // Skip header row
+                const dataLines = lines.slice(1);
+                const updates = {}; // key: `${section_id}__${question_id}` -> explanation
+                dataLines.forEach(line => {
+                    // Simple CSV parse (handles quoted fields)
+                    const cols = [];
+                    let cur = '';
+                    let inQuote = false;
+                    for (let i = 0; i < line.length; i++) {
+                        const ch = line[i];
+                        if (ch === '"') {
+                            if (inQuote && line[i + 1] === '"') { cur += '"'; i++; }
+                            else { inQuote = !inQuote; }
+                        } else if (ch === ',' && !inQuote) {
+                            cols.push(cur); cur = '';
+                        } else {
+                            cur += ch;
+                        }
+                    }
+                    cols.push(cur);
+                    const [sec_id, , q_id, , , , , explanation] = cols;
+                    if (sec_id && q_id) {
+                        updates[`${sec_id.trim()}__${q_id.trim()}`] = (explanation || '').trim();
+                    }
+                });
+
+                const newStructure = examData.structure.map(sec => ({
+                    ...sec,
+                    questions: sec.questions.map(q => {
+                        const key = `${sec.id}__${q.id}`;
+                        if (updates[key] !== undefined) {
+                            return { ...q, explanation: updates[key] };
+                        }
+                        return q;
+                    })
+                }));
+                setExamData({ ...examData, structure: newStructure });
+                alert(`CSVのインポートが完了しました。\n解説が更新された問題: ${Object.keys(updates).length}問\n\n忘れずに「保存」ボタンを押してください！`);
+            } catch (err) {
+                alert('CSVの読み込みに失敗しました。形式を確認してください。\n' + err.message);
+            }
+        };
+        reader.readAsText(file, 'UTF-8');
+        e.target.value = ''; // reset input
+    };
+
     const totalAllocatedPoints = examData?.structure?.reduce((acc, section) => {
         return acc + section.questions.reduce((qAcc, q) => qAcc + (parseInt(q.points) || 0), 0);
     }, 0) || 0;
@@ -301,6 +387,29 @@ function AdminExamEditor() {
                         戻る
                     </button>
                 </div>
+
+                {/* CSV Import/Export Panel */}
+                {examData && (
+                    <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 shadow-sm">
+                        <h2 className="text-base font-bold text-blue-800 mb-3">📥 解説のCSV一括インポート／エクスポート</h2>
+                        <p className="text-sm text-blue-700 mb-4">
+                            外部AI（ChatGPT・Claudeなど）で作成した解説をCSVファイルで一括登録できます。
+                        </p>
+                        <div className="flex flex-wrap gap-3">
+                            <button
+                                onClick={handleCsvExport}
+                                className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
+                            >
+                                📤 CSVをエクスポート（外部AIに渡す用）
+                            </button>
+                            <label className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm font-medium hover:bg-green-700 transition-colors cursor-pointer">
+                                📥 解説入りCSVをインポート
+                                <input type="file" accept=".csv" className="hidden" onChange={handleCsvImport} />
+                            </label>
+                        </div>
+                        <p className="text-xs text-blue-500 mt-3">※ インポート後は必ず「保存」ボタンを押してDBに反映してください。</p>
+                    </div>
+                )}
 
                 {/* ID命名ルール */}
                 <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r shadow-sm">
