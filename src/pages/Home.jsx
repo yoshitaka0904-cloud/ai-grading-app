@@ -170,7 +170,8 @@ const Home = () => {
             <div className="grid-responsive" style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
-                gap: '1.5rem'
+                gap: '1.5rem',
+                paddingBottom: '350px' // Spacer to prevent sticky banner from covering bottom content
             }}>
                 {loadingUniversities ? (
                     <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '2rem', color: '#888' }}>
