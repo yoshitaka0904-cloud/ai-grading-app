@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getAdminExamById, saveAdminExam, uploadExamPdf } from '../services/adminExamService';
-import { generateExamMasterData, regenerateQuestionExplanation } from '../services/adminGeminiService';
+import { generateExamMasterData, regenerateQuestionExplanation, regenerateDetailedAnalysis } from '../services/adminGeminiService';
 
 function AdminExamEditor() {
     const { id } = useParams();
@@ -10,6 +10,7 @@ function AdminExamEditor() {
 
     const [loading, setLoading] = useState(!isNew);
     const [generating, setGenerating] = useState(false);
+    const [generatingDetailed, setGeneratingDetailed] = useState(false);
     const [saving, setSaving] = useState(false);
 
     // Form states
@@ -29,7 +30,12 @@ function AdminExamEditor() {
     const [answerFiles, setAnswerFiles] = useState([]);
 
     // JSON Data
-    const [examData, setExamData] = useState(null);
+    const [examData, setExamData] = useState(isNew ? {
+        max_score: 100,
+        detailed_analysis: '',
+        structure: [],
+        pdf_path: ''
+    } : null);
 
 
     useEffect(() => {
@@ -256,6 +262,44 @@ function AdminExamEditor() {
         } catch (error) {
             alert('解説の再生成に失敗しました:\n' + error.message);
             handleStructureChange(sIdx, qIdx, 'explanation', oldExplanation || '');
+        }
+    };
+
+    const handleRegenerateDetailedAnalysis = async () => {
+        if (!examData) {
+            alert('マスターデータが存在しません。');
+            return;
+        }
+        if (questionFiles.length === 0 && answerFiles.length === 0) {
+            alert('全体詳細解説をAIで生成するには、問題または解答のファイルを少なくとも1つアップロードしてください。');
+            return;
+        }
+        if (!confirm('全体詳細解説をAIで再生成しますか？\n（内容が上書きされます）')) return;
+
+        setGeneratingDetailed(true);
+        try {
+            const apiKey = import.meta.env.VITE_GEMINI_API_KEY_V2 || import.meta.env.VITE_GEMINI_API_KEY;
+
+            if (!apiKey || apiKey === 'YOUR_GEMINI_API_KEY_HERE') {
+                alert('【エラー】Gemini APIキーが設定されていません。');
+                setGeneratingDetailed(false);
+                return;
+            }
+
+            const newAnalysis = await regenerateDetailedAnalysis(
+                apiKey,
+                subjectEn,
+                examData,
+                questionFiles,
+                answerFiles
+            );
+
+            setExamData(prev => ({ ...prev, detailed_analysis: newAnalysis }));
+            alert('全体詳細解説を再生成しました！確認して保存してください。');
+        } catch (error) {
+            alert('解説の再生成に失敗しました:\n' + error.message);
+        } finally {
+            setGeneratingDetailed(false);
         }
     };
 
@@ -530,7 +574,7 @@ function AdminExamEditor() {
                                 保存ボタンを押すと、選択したPDF（問題用紙）が自動的にセキュアサーバー（Supabase Storage）にアップロードされ、生徒のテスト画面で表示されるようになります。
                             </p>
                         </div>
-                        <div className="flex justify-between items-center border-b pb-2 mb-4">
+                        <div className="sticky top-0 z-50 bg-white/95 backdrop-blur py-4 flex justify-between items-center border-b mb-6 shadow-sm px-4 -mx-4">
                             <h2 className="text-xl font-bold">マスターデータ編集</h2>
                             <div className="flex gap-4">
                                 <button
@@ -663,8 +707,25 @@ function AdminExamEditor() {
                             ))}
                         </div>
 
-                        <div className="mt-8">
-                            <label className="block text-sm font-bold text-gray-700 mb-2">全体詳細解説 (Markdown)</label>
+                        <div className="mt-8 border-t pt-8">
+                            <div className="flex justify-between items-center mb-4">
+                                <label className="block text-sm font-bold text-gray-700">全体詳細解説 (Markdown)</label>
+                                <button
+                                    onClick={handleRegenerateDetailedAnalysis}
+                                    disabled={generatingDetailed}
+                                    className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow transition-colors disabled:opacity-50 text-sm flex items-center gap-2"
+                                >
+                                    {generatingDetailed ? (
+                                        <>
+                                            <svg className="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                            </svg>
+                                            生成中...
+                                        </>
+                                    ) : '全体詳細解説をAIで生成する'}
+                                </button>
+                            </div>
                             <textarea
                                 value={examData.detailed_analysis}
                                 onChange={e => setExamData({ ...examData, detailed_analysis: e.target.value })}
