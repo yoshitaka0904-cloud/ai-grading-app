@@ -78,8 +78,14 @@ export const deleteAdminExam = async (id) => {
 
 export const uploadExamPdf = async (file, examId) => {
     // Unique filename using examId and timestamp to prevent collisions
-    const fileExt = file.name.split('.').pop();
-    const fileName = `${examId}_${Date.now()}.${fileExt}`;
+    const fileExt = file.name.split('.').pop().toLowerCase();
+    // Sanitize examId: convert full-width numbers/letters to ASCII, strip any remaining invalid chars
+    const sanitizedId = examId
+        .normalize('NFKC')                // converts １ → 1, Ａ → A, etc.
+        .replace(/[^\w\-]/g, '_')         // replace anything not alphanumeric/-/_ with _
+        .replace(/_+/g, '_')              // collapse multiple underscores
+        .replace(/^_|_$/g, '');           // trim leading/trailing underscores
+    const fileName = `${sanitizedId}_${Date.now()}.${fileExt}`;
     const filePath = `public/${fileName}`;
 
     const { data, error } = await supabase.storage
