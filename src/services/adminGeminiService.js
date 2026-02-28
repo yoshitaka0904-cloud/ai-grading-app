@@ -506,3 +506,200 @@ ${JSON.stringify(questionData, null, 2)}
     throw error;
   }
 };
+
+export const regenerateDetailedAnalysis = async (apiKey, subjectType, examData, questionFiles = [], answerFiles = []) => {
+  try {
+    const trimmedKey = apiKey?.trim();
+    console.log("[AdminGeminiService] Detailed Analysis - Using model:", MODELS.PRIMARY);
+
+    if (!trimmedKey) {
+      throw new Error("Gemini API Key is not set.");
+    }
+
+    let genAI;
+    try {
+      genAI = new GoogleGenerativeAI(trimmedKey);
+    } catch (err) {
+      throw new Error("Gemini APIの初期化に失敗しました。");
+    }
+
+    let model;
+    try {
+      model = genAI.getGenerativeModel({ model: MODELS.PRIMARY });
+    } catch (err) {
+      throw new Error(`モデル "${MODELS.PRIMARY}" の読み出しに失敗しました。`);
+    }
+
+    const imageParts = [];
+    if (questionFiles && questionFiles.length > 0) {
+      const qDataArray = await Promise.all(questionFiles.map(file => fileToBase64(file)));
+      qDataArray.forEach(fd => imageParts.push({ inlineData: { mimeType: fd.mimeType, data: fd.data } }));
+    }
+    if (answerFiles && answerFiles.length > 0) {
+      const aDataArray = await Promise.all(answerFiles.map(file => fileToBase64(file)));
+      aDataArray.forEach(fd => imageParts.push({ inlineData: { mimeType: fd.mimeType, data: fd.data } }));
+    }
+
+    let prompt = "";
+
+    if (subjectType === 'english') {
+      prompt = `あなたは、難関大学入試（早稲田・慶應レベル）の英語長文問題を解く専門家である。
+目的は「答え」ではなく、受験生が同じやり方を再現できるレベルで、
+設問準備・読解・解答の思考プロセスを口語体でなく文語体で完全に言語化することである。
+
+────────────────
+【最重要前提】
+
+・設問準備 → 読解 → 設問処理は分離されていない
+・解説は「実際に問題を解いている時系列」で書く
+・本文解説では、必ず英文を引用しながら進める
+・日本語の解説は、必ず直前に引用した英文に対応させる
+・箇条書き・矢印・処理ログ風の書き方は禁止
+・受験生が「英文 ↔ 解説」を往復できる文章にする
+
+────────────────
+【0. 入力】
+
+以下が与えられる：
+・本文（段落番号つき推奨）※添付画像を参照
+・設問（番号つき・選択肢つき）※添付画像及び以下の構造データを参照
+・（任意）ユーザー指定の正解 ※以下の構造データを参照
+
+【試験データ構造】
+${JSON.stringify({ maxScore: examData.max_score, structure: examData.structure }, null, 2)}
+
+────────────────
+【1. 内部実行ルール（※出力しないが必ず実行）】
+
+### 1-1. 設問準備（読む前）
+
+本文を読む前に、全設問を確認し、各設問について次のみを行う：
+
+・設問タイプの把握（傍線部説明／定義／NOT／比喩／理由 など）
+・「どの段落まで読めば解けるか」の見通し
+・読解中に意識すべき観点（But／抽象→具体／評価語 など）
+
+重要：
+・この段階では答えを作らない
+・やるのは「読み方の設計」だけ
+
+### 1-2. 読解（解きながら読む）
+
+各段落について、必ず以下の流れで処理する：
+
+A. 段落に入る前に、今どの設問を意識しているかを確認  
+B. 英文を **一文ずつ引用** する  
+C. その英文を読んだ瞬間に頭の中で行っている判断を、日本語の文章で説明する  
+D. 次の英文で、理解がどう修正・更新されたかを書く  
+E. But／疑問文／言い換え／抽象↔具体が出た場合は、必ず意味づけを言語化する  
+F. 段落を読み終えた時点で、
+   ・段落の趣旨
+   ・本文全体における役割
+   を文章でまとめる
+G. この時点で解ける設問があれば、
+   「ここまで読めばこの設問に必要な情報はそろっている」
+   という自然な日本語で示す
+
+重要：
+・いきなり段落要約から入らない
+・必ず「英文 → 思考 → 英文 → 思考」の流れを守る
+
+### 1-3. 選択肢処理
+
+選択肢問題は、正解探しではなく「誤りの言語化」で処理する。
+
+・各誤選択肢について、
+  - 本文のどこがズレているか
+  - ズレの種類（言い過ぎ／範囲ズレ／主語述語ズレ／抽象化しすぎ等）
+を短い文章で明確に説明する。
+
+────────────────
+【2. 出力順（絶対厳守）】
+
+以下の順番を必ず守る。
+
+① 解答一覧  
+② 設問準備フェーズ（文章で）  
+③ 読みながら解くプロセス（段落ごと・英文引用必須）  
+④ 設問ごとの解答プロセス  
+⑤ 本文全文和訳  
+⑥ 完全解説（①〜④を統合した時系列の最終版）
+
+────────────────
+【3. 各出力の詳細】
+
+①【解答一覧】
+・ユーザー指定の解答をそのまま列挙
+・理由は書かない
+
+②【設問準備フェーズ】
+・箇条書きは禁止
+・各設問について
+  「この設問は何を聞いており、どこをどう読めば解けそうか」
+  を文章で説明する
+
+③【読みながら解くプロセス】
+・必ず英文を引用しながら進める
+・一文ごとに
+  「この文を読んだ時点ではこう理解する」
+  「次の文でこの理解がこう変わる」
+  を書く
+・設問との接続は自然な文章で行う
+
+④【設問ごとの解答プロセス】
+・どの段落・どの英文を根拠にしたかを明示
+・他の選択肢がなぜ違うかを本文ベースで説明
+
+⑤【本文全文和訳】
+・自然な日本語
+・逐語訳ではないが情報は落とさない
+・解説は入れない
+
+⑥【完全解説】
+・設問準備 → 読解 → 解答が
+  実際の頭の中でどう往復しているかを、
+  一続きの文章として再構成する
+・時系列を絶対に崩さない
+
+────────────────
+【4. 禁止事項】
+
+・箇条書き中心の解説
+・処理ログ風の羅列
+・英文を示さずに日本語だけで説明すること
+・参考書的なまとめ先行の解説
+・「なんとなく」「感覚的に」などの曖昧表現
+
+以上のルールに従い、すべてMarkdownで記述し、コードブロック(\`\`\`markdown など)で全体を囲まず、直接本文のみを出力してください。
+`;
+    } else {
+      prompt = `あなたは大学入試の専門講師です。提供された問題と解答のファイル、および抽出された構造データをもとに、試験の「全体詳細解説（Markdown形式）」を作成してください。
+
+【試験データ構造】
+${JSON.stringify({ maxScore: examData.max_score, structure: examData.structure }, null, 2)}
+
+【要件】
+1. 受験生が復習する際に役立つよう、大問ごとに丁寧な解説を記述すること。
+2. マークダウン形式（見出し、箇条書き、太字等）を用いて読みやすく構造化すること。
+3. コードブロック表記（\`\`\`markdown など）で全体を囲まないこと。本文のみを出力すること。
+
+出力は解説本文（Markdown）のみを返してください。
+`;
+    }
+
+    const result = await withRetry(() => model.generateContent([
+      prompt,
+      ...imageParts
+    ]));
+
+    const text = result.response.text();
+    console.log("[AdminGeminiService] Raw Detailed Analysis length:", text.length);
+
+    const cleanedText = text.replace(/```markdown\n?|```\n?|```/g, '').trim();
+    return cleanedText;
+  } catch (error) {
+    console.error("Error regenerating detailed analysis:", error);
+    throw error;
+  }
+};
+
