@@ -13,8 +13,6 @@ function AdminExamEditor() {
     const [generating, setGenerating] = useState(false);
     const [generatingDetailed, setGeneratingDetailed] = useState(false);
     const [regeneratingPoints, setRegeneratingPoints] = useState(false);
-    const [generatingExplanations, setGeneratingExplanations] = useState(false);
-    const [explanationProgress, setExplanationProgress] = useState('');
     const [saving, setSaving] = useState(false);
 
     // Form states
@@ -398,63 +396,6 @@ function AdminExamEditor() {
         setExamData({ ...examData, structure: newStructure });
     };
 
-    const handleGenerateAllExplanations = async () => {
-        if (!examData || !examData.structure) return;
-        if (!confirm('解説（explanation）が空欄のすべての小問に対して、AIで一括生成しますか？\n（APIエラー回避のため、1問ずつ数秒間隔で処理します。完了までページを閉じないでください）')) return;
-
-        setGeneratingExplanations(true);
-        let errorCount = 0;
-        let generatedCount = 0;
-
-        const questionsToGenerate = [];
-        examData.structure.forEach((sec, sIdx) => {
-            sec.questions.forEach((q, qIdx) => {
-                if (!q.explanation || q.explanation.trim() === '') {
-                    questionsToGenerate.push({ sIdx, qIdx, q, secLabel: sec.id });
-                }
-            });
-        });
-
-        if (questionsToGenerate.length === 0) {
-            alert('すべての問題に既に解説が入力されています。');
-            setGeneratingExplanations(false);
-            return;
-        }
-
-        const apiKey = import.meta.env.VITE_GEMINI_API_KEY_V2 || import.meta.env.VITE_GEMINI_API_KEY;
-        let currentStructure = [...examData.structure];
-
-        for (let i = 0; i < questionsToGenerate.length; i++) {
-            const { sIdx, qIdx, q, secLabel } = questionsToGenerate[i];
-            setExplanationProgress(`${i + 1} / ${questionsToGenerate.length} 問目を生成中... (大問${secLabel} - ${q.label || q.id})`);
-
-            try {
-                const newExplanation = await regenerateQuestionExplanation(
-                    apiKey,
-                    q,
-                    questionFiles,
-                    answerFiles
-                );
-                currentStructure[sIdx].questions[qIdx].explanation = newExplanation;
-                setExamData(prev => ({ ...prev, structure: currentStructure }));
-                generatedCount++;
-
-                if (i < questionsToGenerate.length - 1) {
-                    await new Promise(r => setTimeout(r, 2000)); // Rate limit 対策 (2秒待機)
-                }
-            } catch (error) {
-                console.error(error);
-                errorCount++;
-                currentStructure[sIdx].questions[qIdx].explanation = "⚠️ 生成失敗";
-                setExamData(prev => ({ ...prev, structure: currentStructure }));
-            }
-        }
-
-        setGeneratingExplanations(false);
-        setExplanationProgress('');
-        alert(`一括生成が完了しました！\n成功: ${generatedCount}問\n失敗: ${errorCount}問\n\nエラーがあった場合は個別の「解説を再生成」ボタンから再試行してください。\n※最後に必ず「保存」ボタンを押してください！`);
-    };
-
     // --- CSV Export: download current structure as CSV for external AI to fill ---
     const handleCsvExport = () => {
         if (!examData?.structure?.length) {
@@ -562,40 +503,6 @@ function AdminExamEditor() {
                 {/* Explanation Generation Panel */}
                 {examData && (
                     <div className="space-y-6 mb-8 mt-6">
-                        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-6 shadow-sm">
-                            <h2 className="text-lg font-bold text-indigo-900 mb-3 flex items-center gap-2">
-                                <span className="text-2xl">🤖</span> 小問解説の一括自動生成（アプリ内完結）
-                            </h2>
-                            <p className="text-sm text-indigo-800 mb-5 font-medium leading-relaxed">
-                                マスターデータ上に <span className="bg-yellow-200 px-1 rounded">空欄の解説</span> がある場合、AIが1問ずつ順番に解説を作成し、自動で埋めていきます。<br />
-                                <span className="text-sm text-pink-600 font-bold bg-pink-50 px-2 py-0.5 rounded mt-2 inline-block">
-                                    ※ API上限エラー回避のため、1問につき数秒待機しながら処理します。全問完了まで数分かかるためページを閉じないでください。
-                                </span>
-                            </p>
-                            <div>
-                                <button
-                                    onClick={handleGenerateAllExplanations}
-                                    disabled={generatingExplanations || saving}
-                                    className="px-6 py-3 bg-indigo-600 text-white rounded-lg text-sm font-bold shadow-md hover:bg-indigo-700 hover:shadow-lg transition-all disabled:opacity-50 flex items-center gap-3 w-fit"
-                                >
-                                    {generatingExplanations ? (
-                                        <>
-                                            <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                            </svg>
-                                            <span>{explanationProgress}</span>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                                            空欄の解説をすべて生成する
-                                        </>
-                                    )}
-                                </button>
-                            </div>
-                        </div>
-
                         {/* CSV Import/Export Panel (Fallback) */}
                         <details className="bg-gray-50 border border-gray-200 rounded-xl p-4 shadow-sm group">
                             <summary className="text-sm font-bold text-gray-700 cursor-pointer select-none flex items-center gap-2 list-none">
