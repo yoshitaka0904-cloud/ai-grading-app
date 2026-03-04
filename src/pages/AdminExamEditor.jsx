@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getAdminExamById, saveAdminExam, uploadExamPdf } from '../services/adminExamService';
-import { generateExamMasterData, regenerateQuestionExplanation, regenerateDetailedAnalysis } from '../services/adminGeminiService';
+import { generateExamMasterData, regenerateQuestionExplanation, regenerateDetailedAnalysis, regeneratePointsAllocation } from '../services/adminGeminiService';
 
 function AdminExamEditor() {
     const { id } = useParams();
@@ -11,6 +11,9 @@ function AdminExamEditor() {
     const [loading, setLoading] = useState(!isNew);
     const [generating, setGenerating] = useState(false);
     const [generatingDetailed, setGeneratingDetailed] = useState(false);
+    const [regeneratingPoints, setRegeneratingPoints] = useState(false);
+    const [generatingExplanations, setGeneratingExplanations] = useState(false);
+    const [explanationProgress, setExplanationProgress] = useState('');
     const [saving, setSaving] = useState(false);
 
     // Form states
@@ -303,6 +306,40 @@ function AdminExamEditor() {
         }
     };
 
+    const handleRegeneratePoints = async () => {
+        if (!examData) {
+            alert('マスターデータが存在しません。');
+            return;
+        }
+        if (!confirm('大問・小問の構造を維持したまま、配点（points）だけをAIで再計算・再割り当てしますか？\n（指定した満点に合わせて、厳密な科目別ルールに基づき再生成されます）')) return;
+
+        setRegeneratingPoints(true);
+        try {
+            const apiKey = import.meta.env.VITE_GEMINI_API_KEY_V2 || import.meta.env.VITE_GEMINI_API_KEY;
+
+            if (!apiKey || apiKey === 'YOUR_GEMINI_API_KEY_HERE') {
+                alert('【エラー】Gemini APIキーが設定されていません。');
+                setRegeneratingPoints(false);
+                return;
+            }
+
+            const newStructure = await regeneratePointsAllocation(
+                apiKey,
+                subjectEn,
+                examData,
+                questionFiles,
+                answerFiles
+            );
+
+            setExamData(prev => ({ ...prev, structure: newStructure }));
+            alert('配点の再生成が完了しました！内容を確認して保存してください。');
+        } catch (error) {
+            alert('配点の再生成に失敗しました:\n' + error.message);
+        } finally {
+            setRegeneratingPoints(false);
+        }
+    };
+
     const handleAddQuestion = (sectionIdx) => {
         const newStructure = [...examData.structure];
         const questionsLength = newStructure[sectionIdx].questions.length;
@@ -326,6 +363,63 @@ function AdminExamEditor() {
         const newStructure = [...examData.structure];
         newStructure[sectionIdx].questions.splice(qIdx, 1);
         setExamData({ ...examData, structure: newStructure });
+    };
+
+    const handleGenerateAllExplanations = async () => {
+        if (!examData || !examData.structure) return;
+        if (!confirm('解説（explanation）が空欄のすべての小問に対して、AIで一括生成しますか？\n（APIエラー回避のため、1問ずつ数秒間隔で処理します。完了までページを閉じないでください）')) return;
+
+        setGeneratingExplanations(true);
+        let errorCount = 0;
+        let generatedCount = 0;
+
+        const questionsToGenerate = [];
+        examData.structure.forEach((sec, sIdx) => {
+            sec.questions.forEach((q, qIdx) => {
+                if (!q.explanation || q.explanation.trim() === '') {
+                    questionsToGenerate.push({ sIdx, qIdx, q, secLabel: sec.id });
+                }
+            });
+        });
+
+        if (questionsToGenerate.length === 0) {
+            alert('すべての問題に既に解説が入力されています。');
+            setGeneratingExplanations(false);
+            return;
+        }
+
+        const apiKey = import.meta.env.VITE_GEMINI_API_KEY_V2 || import.meta.env.VITE_GEMINI_API_KEY;
+        let currentStructure = [...examData.structure];
+
+        for (let i = 0; i < questionsToGenerate.length; i++) {
+            const { sIdx, qIdx, q, secLabel } = questionsToGenerate[i];
+            setExplanationProgress(`${i + 1} / ${questionsToGenerate.length} 問目を生成中... (大問${secLabel} - ${q.label || q.id})`);
+
+            try {
+                const newExplanation = await regenerateQuestionExplanation(
+                    apiKey,
+                    q,
+                    questionFiles,
+                    answerFiles
+                );
+                currentStructure[sIdx].questions[qIdx].explanation = newExplanation;
+                setExamData(prev => ({ ...prev, structure: currentStructure }));
+                generatedCount++;
+
+                if (i < questionsToGenerate.length - 1) {
+                    await new Promise(r => setTimeout(r, 2000)); // Rate limit 対策 (2秒待機)
+                }
+            } catch (error) {
+                console.error(error);
+                errorCount++;
+                currentStructure[sIdx].questions[qIdx].explanation = "⚠️ 生成失敗";
+                setExamData(prev => ({ ...prev, structure: currentStructure }));
+            }
+        }
+
+        setGeneratingExplanations(false);
+        setExplanationProgress('');
+        alert(`一括生成が完了しました！\n成功: ${generatedCount}問\n失敗: ${errorCount}問\n\nエラーがあった場合は個別の「解説を再生成」ボタンから再試行してください。\n※最後に必ず「保存」ボタンを押してください！`);
     };
 
     // --- CSV Export: download current structure as CSV for external AI to fill ---
@@ -432,35 +526,70 @@ function AdminExamEditor() {
                     </button>
                 </div>
 
-                {/* CSV Import/Export Panel */}
+                {/* Explanation Generation Panel */}
                 {examData && (
-                    <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 shadow-sm">
-                        <h2 className="text-base font-bold text-blue-800 mb-3">📥 解説のCSV一括インポート／エクスポート</h2>
-                        <div className="text-sm text-blue-700 mb-4 space-y-1">
-                            <p className="font-semibold">【使い方】</p>
-                            <ol className="list-decimal list-inside space-y-1 ml-1">
-                                <li>下の <strong>「CSVをエクスポート」</strong> を押してCSVファイルをダウンロード</li>
-                                <li>ChatGPT（GPT-4o）またはClaudeを開く</li>
-                                <li><strong>試験のPDFファイル</strong> と <strong>ダウンロードしたCSVファイル</strong> を両方アップロード</li>
-                                <li>以下のプロンプトを送信：<br />
-                                    <code className="block bg-blue-100 rounded p-2 mt-1 text-xs whitespace-pre-wrap">{`添付した2つのファイルを使ってください。\n・PDFファイル：大学入試の問題と解答\n・CSVファイル：各小問の構造データ\n\nCSVの「explanation」列を日本語で埋めてください。\n条件：2〜3文で簡潔に、なぜその正解になるか根拠を示すこと。\nCSVファイルをそのまま返してください。`}</code>
-                                </li>
-                                <li>AIが返したCSVをダウンロード → 下の <strong>「解説入りCSVをインポート」</strong> でアップロード</li>
-                                <li>必ず <strong>「保存」</strong> ボタンを押してDBに反映</li>
-                            </ol>
+                    <div className="space-y-6 mb-8 mt-6">
+                        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-6 shadow-sm">
+                            <h2 className="text-lg font-bold text-indigo-900 mb-3 flex items-center gap-2">
+                                <span className="text-2xl">🤖</span> 小問解説の一括自動生成（アプリ内完結）
+                            </h2>
+                            <p className="text-sm text-indigo-800 mb-5 font-medium leading-relaxed">
+                                マスターデータ上に <span className="bg-yellow-200 px-1 rounded">空欄の解説</span> がある場合、AIが1問ずつ順番に解説を作成し、自動で埋めていきます。<br />
+                                <span className="text-sm text-pink-600 font-bold bg-pink-50 px-2 py-0.5 rounded mt-2 inline-block">
+                                    ※ API上限エラー回避のため、1問につき数秒待機しながら処理します。全問完了まで数分かかるためページを閉じないでください。
+                                </span>
+                            </p>
+                            <div>
+                                <button
+                                    onClick={handleGenerateAllExplanations}
+                                    disabled={generatingExplanations || saving}
+                                    className="px-6 py-3 bg-indigo-600 text-white rounded-lg text-sm font-bold shadow-md hover:bg-indigo-700 hover:shadow-lg transition-all disabled:opacity-50 flex items-center gap-3 w-fit"
+                                >
+                                    {generatingExplanations ? (
+                                        <>
+                                            <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                            </svg>
+                                            <span>{explanationProgress}</span>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                            空欄の解説をすべて生成する
+                                        </>
+                                    )}
+                                </button>
+                            </div>
                         </div>
-                        <div className="flex flex-wrap gap-3">
-                            <button
-                                onClick={handleCsvExport}
-                                className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
-                            >
-                                📤 CSVをエクスポート（外部AIに渡す用）
-                            </button>
-                            <label className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm font-medium hover:bg-green-700 transition-colors cursor-pointer">
-                                📥 解説入りCSVをインポート
-                                <input type="file" accept=".csv" className="hidden" onChange={handleCsvImport} />
-                            </label>
-                        </div>
+
+                        {/* CSV Import/Export Panel (Fallback) */}
+                        <details className="bg-gray-50 border border-gray-200 rounded-xl p-4 shadow-sm group">
+                            <summary className="text-sm font-bold text-gray-700 cursor-pointer select-none flex items-center gap-2 list-none">
+                                <span className="group-open:rotate-90 transition-transform">▶</span>
+                                <span className="text-xl">🛠️</span> 外部AI（ChatGPT等）を使って解説を作る場合（CSVファイル）
+                            </summary>
+                            <div className="mt-4 border-t pt-4">
+                                <div className="text-xs text-gray-600 mb-4 space-y-1">
+                                    <p className="font-semibold">【使い方】</p>
+                                    <ol className="list-decimal list-inside space-y-1 ml-1">
+                                        <li>下の「CSVをエクスポート」でファイルをダウンロード</li>
+                                        <li>ChatGPT等にPDFとCSVをアップロードし「explanation列を日本語で埋めてCSVを返して」と指示</li>
+                                        <li>AIが返したCSVを下の「解説入りCSVをインポート」からアップロード</li>
+                                        <li>最後に必ず「保存」ボタンをクリック</li>
+                                    </ol>
+                                </div>
+                                <div className="flex flex-wrap gap-3">
+                                    <button onClick={handleCsvExport} className="px-4 py-2 bg-gray-600 text-white rounded-lg text-xs font-medium hover:bg-gray-700 transition-colors">
+                                        📤 CSVをエクスポート
+                                    </button>
+                                    <label className="px-4 py-2 bg-green-600 text-white rounded-lg text-xs font-medium hover:bg-green-700 transition-colors cursor-pointer">
+                                        📥 解説入りCSVをインポート
+                                        <input type="file" accept=".csv" className="hidden" onChange={handleCsvImport} />
+                                    </label>
+                                </div>
+                            </div>
+                        </details>
                     </div>
                 )}
 
@@ -541,27 +670,28 @@ function AdminExamEditor() {
                         </div>
                     </div>
 
-                    <div className="mt-4 flex items-center justify-between border-t pt-4">
-                        <div className="flex items-center">
-                            <input
-                                id="generateDetailed"
-                                type="checkbox"
-                                checked={generateDetailed}
-                                onChange={(e) => setGenerateDetailed(e.target.checked)}
-                                className="h-4 w-4 text-navy-blue focus:ring-navy-blue border-gray-300 rounded"
-                            />
-                            <label htmlFor="generateDetailed" className="ml-2 block text-sm text-gray-900 font-medium">
-                                Step2詳細解説 (英語長文等) をAIで生成する (時間がかかります)
-                            </label>
-                        </div>
-
+                    <div className="mt-6 flex flex-col items-center justify-center border-t border-accent-gold/20 pt-6">
                         <button
                             onClick={handleGenerate}
                             disabled={generating}
-                            className="bg-accent-gold hover:bg-yellow-600 text-white font-bold py-2 px-6 rounded shadow transition-colors disabled:opacity-50"
+                            className="bg-accent-gold hover:bg-yellow-600 text-white font-bold py-3 px-8 rounded-lg shadow-md transition-all disabled:opacity-50 text-lg flex items-center gap-2"
                         >
-                            {generating ? '生成中...' : 'AIで生成する'}
+                            {generating ? (
+                                <>
+                                    <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    </svg>
+                                    画像解析・構造構築中...
+                                </>
+                            ) : (
+                                <>
+                                    <span className="bg-yellow-600 text-xs px-2 py-1 rounded">ステップ 1</span>
+                                    <span>問題構造・配点・正解のみを自動生成する</span>
+                                </>
+                            )}
                         </button>
+                        <p className="text-sm text-gray-500 mt-3 font-medium">※ 解説は構造生成後に別途行います（APIエラー防止のため）</p>
                     </div>
                 </div>
 
@@ -604,10 +734,26 @@ function AdminExamEditor() {
                                     className="block w-32 rounded-md border-gray-300 shadow-sm p-2 border"
                                 />
                             </div>
-                            <div className="pb-2">
+                            <div className="pb-2 flex items-center gap-4">
                                 <span className={`text-sm font-bold ${totalAllocatedPoints !== parseInt(examData.max_score) ? 'text-red-600' : 'text-green-600'}`}>
                                     現在の割当合計: {totalAllocatedPoints} 点
                                 </span>
+                                <button
+                                    onClick={handleRegeneratePoints}
+                                    disabled={regeneratingPoints}
+                                    className="bg-purple-100 text-purple-700 hover:bg-purple-200 font-bold py-1.5 px-3 rounded shadow-sm text-sm border border-purple-300 transition-colors disabled:opacity-50 flex items-center gap-1"
+                                    title="科目ごとの厳密なルールに基づいて、指定した満点になるよう配点（points）のみを再割り当てします。"
+                                >
+                                    {regeneratingPoints ? (
+                                        <>
+                                            <svg className="animate-spin h-3.5 w-3.5 text-purple-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                            </svg>
+                                            生成中...
+                                        </>
+                                    ) : '🤖 配点をAIで再生成'}
+                                </button>
                             </div>
                         </div>
 

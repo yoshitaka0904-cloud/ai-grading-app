@@ -774,3 +774,259 @@ ${JSON.stringify({ maxScore: examData.max_score, structure: examData.structure }
   }
 };
 
+export const regeneratePointsAllocation = async (apiKey, subjectType, examData, questionFiles = [], answerFiles = []) => {
+  try {
+    const trimmedKey = apiKey?.trim();
+    console.log("[AdminGeminiService] Points Reallocation - Using model:", MODELS.PRIMARY);
+
+    if (!trimmedKey) {
+      throw new Error("Gemini API Key is not set.");
+    }
+
+    let genAI;
+    try {
+      genAI = new GoogleGenerativeAI(trimmedKey);
+    } catch (err) {
+      throw new Error("Gemini APIの初期化に失敗しました。");
+    }
+
+    let model;
+    try {
+      model = genAI.getGenerativeModel({
+        model: MODELS.PRIMARY,
+      });
+    } catch (err) {
+      throw new Error(`モデル "${MODELS.PRIMARY}" の読み出しに失敗しました。`);
+    }
+
+    const isEnglish = subjectType === 'english';
+    const isSocial = subjectType === 'social';
+
+    let subjectSpecificRules = "";
+    if (isEnglish) {
+      subjectSpecificRules = `
+【英語科目 採点・配点設計ルール（絶対固定）】
+
+【最重要前提】
+ • 採点は AIが自動で行うこと を前提とする
+ • 「総合判断」「感覚的評価」は禁止
+ • 設問タイプごとに、配点が異なる理由を必ず言語化すること
+ • 配点は 満点からの減点方式のみ を用いる
+
+⸻
+【0. 問題タイプの定義（絶対固定）】
+本プロンプトでは、英語長文中の設問を以下のように定義する。
+この定義は以後すべての配点設計の前提とする。
+
+① 内容一致問題（最重要）
+以下をすべて満たす問題を 内容一致問題 と定義する。
+ • 選択肢が 完全な英文 である
+ • 「本文全体」または「複数段落を統合した内容理解」を問う
+ • 一部の語句理解では解けず、本文の論旨・主張・評価を把握していないと判断できない
+※ 完全な英文とは「主語・述語を持ち、一文として意味の不足がない英文」を指す。
+
+② 説明問題
+以下を満たす問題を 説明問題 と定義する。
+ • 選択肢が 完全な英文 である
+ • 傍線部説明・理由説明・言い換えなど
+ • 基本的には 局所的な本文理解 に基づいて解ける
+※ 本文全体の主張理解を必須としない点で、内容一致問題と区別する。
+
+③ 非完全英文選択肢問題・長文外大問（低優先）
+以下を満たす問題をまとめて、低優先問題と定義する。
+ • 単語挿入問題
+ • 接続詞挿入問題
+ • 空所補充で、選択肢が句・語レベル
+ • 主語・述語を持たず、単独では意味が完結しない選択肢
+ • 長文問題以外の大問（文法・語法・発音等）
+
+⸻
+【1. 配点優先順位（絶対遵守）】
+配点の重みは、必ず以下の順で高く設定せよ。
+ 1. 内容一致問題
+ 2. 説明問題
+ 3. 非完全英文選択肢問題・長文外大問
+この優先順位を逆転させる配点設計は禁止とする。
+
+※ 重要: 本システムでは最終出力として必ず指定された JSON フォーマットが必要です。
+この厳密なルールに基づいて配点（points）を再計算し、JSONの各設問の配点データに反映してください。
+`;
+    } else if (isSocial) {
+      subjectSpecificRules = `
+【社会科目 採点・配点設計ルール（絶対固定）】
+
+あなたは、難関大学入試（早稲田・慶應レベル）の社会問題において、配点設計および採点構造を運用する専門担当者である。
+ただし、設問パターンの分類・配点の序列・論述の採点原理は、すでにユーザーによって厳密に定義されている。
+あなたの役割は、以下に示すユーザー定義を一切変更・補正・一般化せず、そのまま適用することである。
+
+⸻
+【0. ユーザー定義（絶対固定）】
+① 設問の大分類（2種）：選択問題（マーク）、記述問題（自力記入）
+② 設問の小分類（5パターン）
+A．選択問題（1つ選択）
+B．選択問題（2つ選択）
+C．記述問題（歴史用語）
+D．論述問題（短・20字以内）
+E．論述問題（長・30字以上）
+
+③ 配点の序列（小 → 大）
+配点は必ず以下の順序関係を保つこと：
+ 1. 選択問題（1つ選択） [低]
+ 2. 記述問題（歴史用語）
+ 3. 選択問題（2つ選択）
+ 4. 論述問題（短）
+ 5. 論述問題（長） [高]
+※ この大小関係は絶対に逆転させてはならない。
+
+④ 論述問題の採点原理（固定）
+・模範回答は複数の「要素」に分解される。各要素は同価値。
+・要素充足のみを基準とし比例配点を行う。表現の巧拙は評価対象としない。
+
+⸻
+【内部実行ルール】
+・2-1設問分類: 各設問をA〜Eのいずれかに必ず分類。
+・2-2配点割当: ③で定義された序列を絶対条件として割り振る。同一タイプ内での微調整は可だが、タイプ間の配点逆転は禁止。
+
+※ 重要: 本システムでは最終出力として必ず指定された JSON フォーマットが必要です。
+この厳密なルールに基づいて配点（points）を再計算し、JSONの各設問の配点データに反映してください。
+`;
+    } else {
+      subjectSpecificRules = `
+一般的な科目として、設問の難易度や形式に応じて常識的な配点を行ってください。
+ただし、最終的な合計点は全体で指定された満点（maxScore）と一致するよう調整すること。
+`;
+    }
+
+    // Prepare inputs
+    const imageParts = [];
+    if (questionFiles && questionFiles.length > 0) {
+      const qDataArray = await Promise.all(questionFiles.map(file => fileToBase64(file)));
+      qDataArray.forEach(fd => imageParts.push({ inlineData: { mimeType: fd.mimeType, data: fd.data } }));
+    }
+    if (answerFiles && answerFiles.length > 0) {
+      const aDataArray = await Promise.all(answerFiles.map(file => fileToBase64(file)));
+      aDataArray.forEach(fd => imageParts.push({ inlineData: { mimeType: fd.mimeType, data: fd.data } }));
+    }
+
+    // Clean up current structure to send to AI
+    const currentStructure = examData.structure.map(sec => ({
+      id: sec.id,
+      label: sec.label,
+      questions: sec.questions.map(q => ({
+        id: q.id,
+        label: q.label,
+        type: q.type,
+        options: q.options,
+        correctAnswer: q.correctAnswer,
+        points: parseInt(q.points) || 0
+      }))
+    }));
+
+    const maxScore = parseInt(examData.max_score) || 100;
+
+    const prompt = `あなたは大学入試の配点設計の専門家です。
+現在入力されている試験の大問・小問構造データに対し、以下の【厳格ルール】に従って「配点（points）」だけを再計算し、更新されたJSON構造を返してください。既存の設問の定義（id, label, type, etc...）や並び順は一切変更せず、大問・小問の構造を完全に維持したまま返してください。
+
+【厳格ルール】
+${subjectSpecificRules}
+3. 再計算後のすべての大問・小問の \`points\` の合計が、必ず指定された満点（${maxScore}点）と完全に一致するように調整してください。
+4. JSONのみを出力してください。Markdownのコードブロック（\`\`\`json など）は除外し、純粋なJSON文字列だけにすること。
+
+【現在の構造データ（修正前）】
+${JSON.stringify(currentStructure, null, 2)}
+`;
+
+    // Execute generation with retry logic (using JSON mime type structure to enforce schema if possible, or just parse response)
+    const result = await withRetry(() => model.generateContent([
+      prompt,
+      ...imageParts
+    ]));
+
+    const text = result.response.text();
+    const sanitizedText = sanitizeJson(text);
+
+    let newStructure;
+    try {
+      newStructure = JSON.parse(sanitizedText);
+    } catch (err) {
+      console.error("[AdminGeminiService] Failed to parse reallocated points JSON:", err);
+      throw new Error("配点の再生成結果（JSON）のパースに失敗しました。");
+    }
+
+    // --- STEP 1.5: MATH NORMALIZATION FOR POINTS (Safety check) ---
+    // Ensure the AI actually summed it to maxScore exactly
+    let currentTotal = 0;
+    newStructure.forEach(sec => {
+      sec.questions.forEach(q => {
+        currentTotal += (parseInt(q.points) || 0);
+      });
+    });
+
+    const targetTotal = maxScore;
+
+    if (currentTotal > 0 && currentTotal !== targetTotal) {
+      console.log(`[Points Reallocation] Normalizing points. AI Total: ${currentTotal}, Target: ${targetTotal}`);
+      const ratio = targetTotal / currentTotal;
+      let newTotal = 0;
+
+      // First pass: proportional multiplication
+      newStructure.forEach(sec => {
+        sec.questions.forEach(q => {
+          let orig = parseInt(q.points) || 0;
+          let newVal = Math.round(orig * ratio);
+          if (newVal === 0 && orig > 0) newVal = 1;
+          q.points = newVal;
+          newTotal += newVal;
+        });
+      });
+
+      // Second pass: distribute the remaining difference
+      let diff = targetTotal - newTotal;
+      if (diff !== 0) {
+        let flatQs = [];
+        newStructure.forEach(sec => sec.questions.forEach(q => flatQs.push(q)));
+        flatQs.sort((a, b) => b.points - a.points); // sort desc
+
+        let i = 0;
+        let safeguards = 0;
+        while (diff > 0 && safeguards < 1000) {
+          flatQs[i % flatQs.length].points += 1;
+          diff--;
+          i++;
+          safeguards++;
+        }
+
+        i = 0; safeguards = 0;
+        while (diff < 0 && safeguards < 1000) {
+          if (flatQs[i % flatQs.length].points > 1) {
+            flatQs[i % flatQs.length].points -= 1;
+            diff++;
+          }
+          i++;
+          safeguards++;
+        }
+      }
+      console.log(`[Points Reallocation] Normalization complete.`);
+    }
+
+    // Merge new points back into the original structural data to preserve explanation strings etc.
+    const mergedStructure = examData.structure.map((origSec, secIdx) => {
+      const newSec = newStructure[secIdx] || origSec;
+      return {
+        ...origSec,
+        questions: origSec.questions.map((origQ, qIdx) => {
+          const newQ = newSec.questions ? newSec.questions[qIdx] : null;
+          return {
+            ...origQ,
+            points: newQ ? newQ.points : origQ.points
+          };
+        })
+      };
+    });
+
+    return mergedStructure;
+  } catch (error) {
+    console.error("Error regenerating point allocation:", error);
+    throw error;
+  }
+};
