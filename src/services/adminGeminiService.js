@@ -440,8 +440,7 @@ ${subjectSpecificRules}
       structureData.structure.forEach(sec => {
         sec.questions.forEach(q => {
           let orig = parseInt(q.points) || 0;
-          let newVal = Math.round(orig * ratio);
-          if (newVal === 0 && orig > 0) newVal = 1; // Never round down to 0 points completely
+          let newVal = Math.max(1, Math.round(orig * ratio));
           q.points = newVal;
           newTotal += newVal;
         });
@@ -973,8 +972,7 @@ ${JSON.stringify(currentStructure, null, 2)}
       newStructure.forEach(sec => {
         sec.questions.forEach(q => {
           let orig = parseInt(q.points) || 0;
-          let newVal = Math.round(orig * ratio);
-          if (newVal === 0 && orig > 0) newVal = 1;
+          let newVal = Math.max(1, Math.round(orig * ratio));
           q.points = newVal;
           newTotal += newVal;
         });
