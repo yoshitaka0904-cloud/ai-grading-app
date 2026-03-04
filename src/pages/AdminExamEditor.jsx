@@ -126,7 +126,11 @@ function AdminExamEditor() {
                 subjectEn,
                 questionFiles,
                 answerFiles,
-                { id: examId, university, universityId: parseInt(universityId), faculty, facultyId, year: parseInt(year), subject, generateDetailed }
+                {
+                    id: examId, university, universityId: parseInt(universityId),
+                    faculty, facultyId, year: parseInt(year), subject,
+                    generateDetailed, maxScore: parseInt(examData?.max_score) || 100
+                }
             );
 
             setExamData({
@@ -576,6 +580,10 @@ function AdminExamEditor() {
                                 <option value="science">理科 (science)</option>
                             </select>
                         </div>
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">満点 (合計配点)</label>
+                            <input type="number" value={examData?.max_score || 100} onChange={e => setExamData(prev => ({ ...prev, max_score: parseInt(e.target.value) || 100 }))} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-navy-blue focus:ring-navy-blue sm:text-sm p-2 border" />
+                        </div>
                     </div>
                 </div>
 
@@ -648,37 +656,26 @@ function AdminExamEditor() {
                             </div>
                         </div>
 
-                        <div className="mb-6 flex gap-6 items-end">
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">満点 (合計配点)</label>
-                                <input
-                                    type="number"
-                                    value={examData.max_score}
-                                    onChange={e => setExamData({ ...examData, max_score: e.target.value })}
-                                    className="block w-32 rounded-md border-gray-300 shadow-sm p-2 border"
-                                />
-                            </div>
-                            <div className="pb-2 flex items-center gap-4">
-                                <span className={`text-sm font-bold ${totalAllocatedPoints !== parseInt(examData.max_score) ? 'text-red-600' : 'text-green-600'}`}>
-                                    現在の割当合計: {totalAllocatedPoints} 点
-                                </span>
-                                <button
-                                    onClick={handleRegeneratePoints}
-                                    disabled={regeneratingPoints}
-                                    className="bg-purple-100 text-purple-700 hover:bg-purple-200 font-bold py-1.5 px-3 rounded shadow-sm text-sm border border-purple-300 transition-colors disabled:opacity-50 flex items-center gap-1"
-                                    title="科目ごとの厳密なルールに基づいて、指定した満点になるよう配点（points）のみを再割り当てします。"
-                                >
-                                    {regeneratingPoints ? (
-                                        <>
-                                            <svg className="animate-spin h-3.5 w-3.5 text-purple-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                            </svg>
-                                            生成中...
-                                        </>
-                                    ) : '🤖 配点をAIで再生成'}
-                                </button>
-                            </div>
+                        <div className="mb-6 pb-2 flex items-center justify-between border-b border-gray-200">
+                            <span className={`text-sm font-bold ${totalAllocatedPoints !== parseInt(examData?.max_score) ? 'text-red-600' : 'text-green-600'}`}>
+                                満点: {examData?.max_score} 点 / 現在の割当合計: {totalAllocatedPoints} 点
+                            </span>
+                            <button
+                                onClick={handleRegeneratePoints}
+                                disabled={regeneratingPoints}
+                                className="bg-purple-100 text-purple-700 hover:bg-purple-200 font-bold py-1.5 px-3 rounded shadow-sm text-sm border border-purple-300 transition-colors disabled:opacity-50 flex items-center gap-1"
+                                title="科目ごとの厳密なルールに基づいて、指定した満点になるよう配点（points）のみを再割り当てします。"
+                            >
+                                {regeneratingPoints ? (
+                                    <>
+                                        <svg className="animate-spin h-3.5 w-3.5 text-purple-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                        </svg>
+                                        生成中...
+                                    </>
+                                ) : '🤖 配点をAIで再生成'}
+                            </button>
                         </div>
 
                         <div className="space-y-6">

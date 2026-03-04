@@ -310,8 +310,8 @@ E．論述問題（長・30字以上）
     // --- STEP 1a: OVERVIEW EXTRACTION (Using transcribed text) ---
     console.log(`[Step 1/3] Extracting high-level exam structure for ${outputId}...`);
     const step1aPrompt = `
-以下の試験内容（テキストデータ）を分析し、試験の全体構造（大問のIDとラベルのみ）と、公表されている「満点」を抽出してください。
-また、各社の大手予備校の推測配点や一般的な配点配分に基づき、各大問に合計何点を配分すべきかを推測してください。
+以下の試験内容（テキストデータ）を分析し、試験の全体構造（大問のIDとラベルのみ）を抽出してください。
+満点は事前に「${extraInfo.maxScore}点」と指定されています。各大問に合計何点を配分すべきかを推測してください。
 
 【解析対象データ】
 ${transcribedText}
@@ -319,12 +319,12 @@ ${transcribedText}
 【厳格ルール】
 1. JSON形式のみを出力してください。
 2. アスタリスク（*）記号を絶対に使用しないでください。
-3. 全ての大問の 推測配分 (allocatedPoints) の合計が、必ず 'maxScore' と一致するように調整してください。
+3. 全ての大問の 推測配分 (allocatedPoints) の合計が、必ず指定された満点（${extraInfo.maxScore}点）と一致するように調整してください。
 ${subjectSpecificRules}
 
 【出力構造】
 {
-  "maxScore": 100,
+  "maxScore": ${extraInfo.maxScore},
   "sections": [
     {
       "id": "I",
@@ -434,7 +434,7 @@ ${subjectSpecificRules}
       });
     });
 
-    const targetTotal = parseInt(structureData.maxScore) || 100;
+    const targetTotal = parseInt(extraInfo.maxScore) || 100;
 
     if (currentTotal > 0 && currentTotal !== targetTotal) {
       console.log(`[Step 1.5] Normalizing points. AI Total: ${currentTotal}, Target: ${targetTotal}`);
